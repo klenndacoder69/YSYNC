@@ -25,7 +25,7 @@ body {
     left: 0;
     right: 0;
     position: absolute;
-    background-image: url("YSESgroup.png");
+    background-image: url("../../assets/YSESgroup.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

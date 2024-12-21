@@ -1,9 +1,22 @@
 body {
+    zoom: 80%;
     font-family: 'Segoe UI';
     color: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@keyframes fadeInBottom {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .bg::before {
@@ -20,6 +33,18 @@ body {
     z-index: -1;
 }
 
+@keyframes fadeInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
 .bg::after {
     content: "";
     top: -52px;
@@ -27,7 +52,7 @@ body {
     left: 0;
     right: 0;
     position: absolute;
-    background-image: url("YSESgroup.png");
+    background-image: url("../assets/YSESgroup.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -67,7 +92,9 @@ body {
 
 .logo {
     filter: drop-shadow(0px 4px 4px rgba(19, 43, 65, 0.16));
-    padding: 10px;
+    width: 220px;
+    height: 220px;
+    animation: fadeInBottom 2s ease 0s 1 normal forwards;
 }
 
 .logo-text-container {
@@ -76,6 +103,9 @@ body {
     justify-content: center;
 }
 
+.text {
+    animation: fadeInBottom 2s ease 0s 1 normal forwards;
+}
 .text h1 {
     font-weight: 700;
     font-size: 600%;
@@ -115,4 +145,39 @@ body {
 
 .login p a {
     color: #FFFFFF  
+}
+
+
+.switch.trainee {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+.switch.admin{
+    position: absolute;
+    top: 60;
+    left: 0;
+}
+.switch button{
+    font-size: 80%;
+    padding: 20px 60px;
+    border: none;
+    border-radius: 60px;
+    color: white;
+    background-color: #00A3F0;
+    transition: transform 0.1s ease, filter 0.3s ease;
+    box-shadow: 0 4px 3px rgba(0, 163, 240, 0.2);
+}
+.switch button:hover{
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.switch p {
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+.switch p a{
+    color: #FFFFFF
 }
