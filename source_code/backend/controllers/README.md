@@ -141,3 +141,110 @@ catch (error) {
 
 If something goes wrong in the try block, it jumps to the catch block to handle the error.
 
+#### Making the controller
+
+So what is usually the layout of a controller?
+
+It is typically straight to the point. Put all your necessary functions that will handle the logic from the frontend, and you are done!
+
+```js
+// Put necessary imports here, probably user-made libraries.
+
+const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    await User.findByIdAndDelete(userId);
+    return res.status(200).json({ message: "User successfully deleted", success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error deleting user", success: false });
+  }
+};
+
+// ...other necessary functions here...
+
+
+// Export the functions
+export {
+    deleteUser
+};
+```
+
+### Example controller (userController.js)
+
+Here is an example of how we made our userController in our past CS 100 project.
+
+```js
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/userSchema.js";
+import 'dotenv/config'
+
+const SECRET_KEY = process.env.SECRETKEY;
+
+// FIXME: Update your status codes, especially the use of 401's and 403's
+// Register the users (post)
+const registerUser = async (req, res) => {
+  try {
+    const { firstName, lastName, middleName, userType, email, password } =
+      req.body;
+
+    const doesEmailExist = await User.findOne({ email });
+    if (doesEmailExist) {
+      // If email already exists, then, we immediately return the response
+      return res
+        .status(409)
+        .json({ message: "Email already exists", success: false });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      firstName,
+      lastName,
+      middleName,
+      userType,
+      email,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+    res
+      .status(201)
+      .json({ message: "User created successfully", success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error signing up", success: false });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try{
+    const {userId} = req.body;
+    console.log(req.body);
+    await User.findByIdAndDelete(userId);
+    return res.status(200).json({message: "User successfully deleted", success: true});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error: "Error deleting user", success: false});
+  }
+}
+// Get registered users
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(201).json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Unable to get users" });
+  }
+};
+  //... and many more...
+
+
+export {
+  registerUser,
+  deleteUser,
+  loginUser,
+  getAllUsers
+  //... and many more...
+};
+```
