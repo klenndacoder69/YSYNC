@@ -29,6 +29,9 @@ const deleteUser = async (req, res) => ...
 
 This initializes an asynchronous function called `deleteUser` with parameters `req` (request) and `res` (response).
 
+(Assuming that you have already read into asynchronous in your CS 22 courses, you must already know what this means)
+
+
 ### Requests and Responses
 
 In a server, we have what’s called communication, just like a chat between two people—there’s a sender and a receiver. In CS terms, it’s between a user and a server, and they communicate through requests and responses. Each of these consists of data, usually in a JSON format.
@@ -59,6 +62,7 @@ console.log(person.skills); // Outputs ["JavaScript", "HTML", "CSS"]
 console.log(person.address.street); // Outputs "123 Main St"
 ```
 
+Keep in mind that there are different ways of storing JSON data, such as a `JSON string`, `JSON object`, and a `JSON file`. There are different ways of parsing them. 
 #### Try-Catch Block
 
 The try-catch block ensures that your program continues to run even if an error occurs.
