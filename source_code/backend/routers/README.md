@@ -79,6 +79,7 @@ const userRouter = (app) => {
   app.post("/login", loginUser); // check if valid credentials, then proceed the user to homepage
   app.get("/getShoppingCart", getShoppingCart);
   ... and many more...
+}
 export default userRouter;
 ```
 
