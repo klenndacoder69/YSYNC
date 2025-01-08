@@ -106,6 +106,7 @@
 
 .text {
     animation: fadeInBottom 2s ease 0s 1 normal forwards;
+    margin-top: 25vw
 }
 .text h1 {
     font-weight: 700;
