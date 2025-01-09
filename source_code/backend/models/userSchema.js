@@ -11,4 +11,8 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+User.find()
+    .then(users => console.log(users))
+    .catch(err => console.error(err));
+
 export default User;
