@@ -71,11 +71,13 @@ export default function Register() {
     
             if (res.ok) {
                 alert("Registration successful!");
+                return await res.json();
             } else if (res.status === 400) {
                 alert("User already exists.");
             } else if (res.status === 500) {
                 alert("An error has occurred while registering.");
             }
+            return;
         } catch (err) {
             alert("Failed to respond to the server.");
             console.error("Error:", err); 

@@ -55,20 +55,19 @@ export default function Login() {
       console.log("Response body is: ", res.status)
       if (res.ok) {
         alert("Login successful!");
-        return res.json();
+        return await res.json();
       } else if (res.status === 401) {
         setErrorMessage("Invalid email or password.");
       } else {
         setErrorMessage("An error has occurred while signing in.");
       }
+      return;
     } catch (error) {
       console.error("Error: ", error);
       throw new Error(error);
     }
   }
      
-        
-
   return (
     <>
       <div className="login-page">
