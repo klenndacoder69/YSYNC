@@ -1,12 +1,15 @@
 import express from "express";
 import userRouter from "./routers/userRouter.js";
 import dotenv from "dotenv";
-import { MongoClient, ServerApiVersion } from "mongodb";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
+
 dotenv.config();
 
+const corsOptions = {
+  // Will be modified later...
+};
 async function run() {
   try {
     console.log("Waiting for connection to MongoDB...");

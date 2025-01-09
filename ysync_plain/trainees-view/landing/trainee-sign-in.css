@@ -146,7 +146,7 @@ body {
     border-top-right-radius: 20px;
 }
 
-.error {
+#errorMessage {
     color: red;
 }
 
