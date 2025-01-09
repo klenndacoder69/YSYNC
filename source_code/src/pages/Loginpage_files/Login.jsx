@@ -28,7 +28,7 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // check if fields are valid
@@ -41,32 +41,33 @@ export default function Login() {
     setErrorMessage("");
 
     // Proceed with the fetch request if fields are valid
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          alert("Login successful!");
-          return res.json();
-        } else if (res.status === 401) {
-          setErrorMessage("Invalid email or password.");
-          throw new Error("Invalid credentials");
-        } else {
-          setErrorMessage("An error has occurred while signing in.");
-          throw new Error("An error has occurred while signing in.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
+    try{
+      const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
       });
-  };
+      console.log("Response body is: ", res.status)
+      if (res.ok) {
+        alert("Login successful!");
+        return res.json();
+      } else if (res.status === 401) {
+        setErrorMessage("Invalid email or password.");
+      } else {
+        setErrorMessage("An error has occurred while signing in.");
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+      throw new Error(error);
+    }
+  }
+     
+        
 
   return (
     <>

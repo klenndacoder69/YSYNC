@@ -44,7 +44,7 @@ export default function Register() {
     }
 
     // Handle submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const error = checkValidCredentials();
         if (error) {
@@ -60,26 +60,26 @@ export default function Register() {
             middleName: middleName
         }
 
-        fetch("http://localhost:3000/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        }).then((res) => {
+        try {
+            const res = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            });
+    
             if (res.ok) {
                 alert("Registration successful!");
-            }
-            else if (res.status === 400) {
+            } else if (res.status === 400) {
                 alert("User already exists.");
-            }
-            else if (res.status === 500) {
+            } else if (res.status === 500) {
                 alert("An error has occurred while registering.");
             }
-        }).catch((err) => {
+        } catch (err) {
             alert("Failed to respond to the server.");
-            throw new Error(err);
-        })
+            console.error("Error:", err); 
+        }
     }
 
     return (

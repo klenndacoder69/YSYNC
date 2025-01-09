@@ -14,16 +14,13 @@ async function run() {
   try {
     console.log("Waiting for connection to MongoDB...");
     // mongoose connection (removed callbacks since latest version of Mongoose is no longer accepting callbacks)
-    mongoose
-      .connect(process.env.DB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then((res) => {
-        console.log("Mongoose has successfuly connected to MongoDB.");
-      })
-      .catch((err) => console.error("Mongoose connection error: ", err));
+    await mongoose.connect(process.env.DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Mongoose has successfully connected to MongoDB.");
     const verifyConnection = mongoose.connection;
+    
     // listen for errors
     verifyConnection.on("error", (err) =>
       console.log(`Connection error ${err}`)
@@ -38,10 +35,10 @@ async function run() {
 // initialize the express
 const app = express();
 
-// enable cors for fetching
+// cors configuration; (TODO: we'll specify origin and other options later).
 app.use(cors());
 
-// automatically parses the json (this is crucial, don't remove this)
+// automatically parses the json (this is crucial, don't remove this (unless we use axios))
 app.use(bodyParser.json());
 
 // initialize the routers (these are the things necessary for the endpoints)
