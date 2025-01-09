@@ -1,10 +1,14 @@
 import "./Login.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
+  useEffect(() => {
+    setErrorMessage('')
+  }, [email,password]);
 
   // regex for accepting only upmails
   const isValidEmail = (email) => {

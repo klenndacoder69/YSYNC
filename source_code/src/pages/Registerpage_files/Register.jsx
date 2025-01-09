@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function Register() {
@@ -8,6 +8,11 @@ export default function Register() {
     const [lastName, setLastName] = useState("");
     const [middleName, setMiddleName] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); 
+
+    // clear error message when user is typing a new field value
+    useEffect(() => {
+        setErrorMessage('')
+    }, [email])
 
     // Form validation functions: 
     const handleEmailChange = (event) => {
@@ -103,17 +108,18 @@ export default function Register() {
                     <input type="email" name="email" onChange={handleEmailChange} required/>
                 </label>
                 <br/>
+                <label>Password:
+                    <input type="password" name="password" onChange={handlePasswordChange} required/>
+                </label>
+                <br />
+                <button type="submit">Register</button>
+                <br/>
                 {errorMessage && 
                 <>
                     <span className="error">{errorMessage}</span>
                     <br/>
                 </>
                 }
-                <label>Password:
-                    <input type="password" name="password" onChange={handlePasswordChange} required/>
-                </label>
-                <br />
-                <button type="submit">Register</button>
             </form>
         </>
     )

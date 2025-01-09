@@ -8,7 +8,7 @@ import cors from "cors";
 dotenv.config();
 
 const corsOptions = {
-  // Will be modified later...
+  origin: "http://localhost:3001",
 };
 async function run() {
   try {
@@ -36,7 +36,7 @@ async function run() {
 const app = express();
 
 // cors configuration; (TODO: we'll specify origin and other options later).
-app.use(cors());
+app.use(cors(corsOptions));
 
 // automatically parses the json (this is crucial, don't remove this (unless we use axios))
 app.use(bodyParser.json());
