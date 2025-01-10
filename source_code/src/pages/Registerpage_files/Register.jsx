@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import api from "../../api/axios.js";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -66,26 +66,23 @@ export default function Register() {
         }
 
         try {
-            const res = await fetch("http://localhost:3000/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            });
-    
-            if (res.ok) {
+            const response = await api.post("/register", user);
+            if (response) {
                 alert("Registration successful!");
-                return await res.json();
-            } else if (res.status === 400) {
-                alert("User already exists.");
-            } else if (res.status === 500) {
-                alert("An error has occurred while registering.");
+                return await response.data;
             }
-            return;
-        } catch (err) {
-            alert("Failed to respond to the server.");
-            console.error("Error:", err); 
+        } catch (error) {
+            if (error.response) {
+                console.log("Error response status: ", error.response.status);
+                if (error.response.status === 400) {
+                    setErrorMessage("User already exists.");
+                } else if (error.response.status === 500) {
+                    setErrorMessage("An error has occurred while registering.");
+                }
+            }
+            else{
+                alert("Failed to respond to the server.");
+            }
         }
     }
 

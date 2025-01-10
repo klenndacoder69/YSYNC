@@ -1,5 +1,6 @@
 import "./Login.css";
 import { useEffect, useState } from "react";
+import api from "../../api/axios.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,30 +46,29 @@ export default function Login() {
     setErrorMessage("");
 
     // Proceed with the fetch request if fields are valid
-    try{
-      const res = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+
+    try {
+      const response = await api.post("/login", {
+        email: email,
+        password: password
       });
-      console.log("Response body is: ", res.status)
-      if (res.ok) {
+      if (response){
         alert("Login successful!");
-        return await res.json();
-      } else if (res.status === 401) {
-        setErrorMessage("Invalid email or password.");
-      } else {
-        setErrorMessage("An error has occurred while signing in.");
-      }
-      return;
+        return await response.data;
+      } 
     } catch (error) {
-      console.error("Error: ", error);
-      throw new Error(error);
+      if (error.response) {
+        console.log("Error response status: ", error.response.status);
+        if (error.response.status === 401) {
+          setErrorMessage("Invalid email or password.");
+        } else{
+          setErrorMessage("An error has occurred while signing in.");
+        }
+      }
+      else{
+        console.error("Error message: ", error.message);
+        setErrorMessage("A network error has occurred.");
+      }
     }
   }
      
