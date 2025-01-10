@@ -1,10 +1,10 @@
 
-import { userSignIn, userRegister } from '../controllers/userController.js'
+import { userSignIn, userRegister, getAllUsers } from '../controllers/userController.js'
 
 const userRouter = (app) => {
-    app.get("/", (req, res) => res.send("Hello World!"));
-    app.post('/login', userSignIn);
-    app.post('/register', userRegister);
+    app.post('/api/auth/login', userSignIn);
+    app.post('/api/auth/register', userRegister);
+    app.get('/api/getAllUsers', getAllUsers);
 };
 
 export default userRouter;

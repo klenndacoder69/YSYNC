@@ -66,7 +66,7 @@ export default function Register() {
         }
 
         try {
-            const response = await api.post("/register", user);
+            const response = await api.post("/auth/register", user);
             if (response) {
                 alert("Registration successful!");
                 return await response.data;

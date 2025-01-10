@@ -48,7 +48,7 @@ export default function Login() {
     // Proceed with the fetch request if fields are valid
 
     try {
-      const response = await api.post("/login", {
+      const response = await api.post("/auth/login", {
         email: email,
         password: password
       });
