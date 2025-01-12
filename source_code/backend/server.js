@@ -10,7 +10,12 @@ dotenv.config();
 const corsOptions = {
   origin: "http://localhost:3001",
 };
+
+const uri = process.env.DB_URI;
+console.log(uri)
+
 async function run() {
+
   try {
     console.log("Waiting for connection to MongoDB...");
     // mongoose connection (removed callbacks since latest version of Mongoose is no longer accepting callbacks)
