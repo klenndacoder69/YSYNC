@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-
+import mailer from "./utilities/mailer.js";
 dotenv.config();
 
 const corsOptions = {
@@ -49,6 +49,8 @@ app.use(bodyParser.json());
 // initialize the routers (these are the things necessary for the endpoints)
 userRouter(app);
 
+// initialize utilities
+mailer(app);
 run()
   .then(() => {
     app.listen(process.env.SERVER_PORT, () => {
