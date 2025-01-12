@@ -11,8 +11,9 @@ const residentMemberSchema = new mongoose.Schema({
       required: true
     },
     isMentor: { type: Boolean, required: true },
-    whyYouShouldChooseMe: { type: String, required: function () { return this.isMentor; } },
-    whatToExpect: { type: String, required: function () { return this.isMentor; } },
+    // These fields are optional based on the rendering of data.
+    whyYouShouldChooseMe: { type: String }, 
+    whatToExpect: { type: String },        
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
