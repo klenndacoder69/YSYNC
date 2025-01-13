@@ -6,6 +6,7 @@ import Register from "./pages/Registerpage_files/Register.jsx";
 // import Connect from "./pages/Connectpage_files/Connectpage.jsx";
 // import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
 import AdminReport from "./pages/Adminreport_files/Adminreport.jsx";
+import AdminRequest from "./pages/Adminrequest_files/admin-requests.jsx";
 
 function App() {
   const routes = [
@@ -32,6 +33,11 @@ function App() {
     {
       path: "/report",
       element: <AdminReport/>
+    },
+
+    {
+      path: "/request",
+      element: <AdminRequest/>
     }
   ]
   const router = createBrowserRouter(routes)
