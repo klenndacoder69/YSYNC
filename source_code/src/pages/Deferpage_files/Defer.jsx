@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
 
 export default function Defer() {
-    const [trainee, setTrainee] = useState(null); // Change to null to handle object
-    const [user, setUser] = useState(null);
+    const [trainee, setTrainee] = useState(null); 
+    const [user, setUser] = useState(null); 
     const [deferReason, setDeferReason] = useState(""); // State variable for text input
-    const [isLoading, setIsLoading] = useState(true); // State to track loading status
     
     const [errorMessage, setErrorMessage] = useState("");
     const [submitError, setSubmitError] = useState(""); // State variable for submit error
@@ -17,18 +16,15 @@ export default function Defer() {
                 // Fetching trainee data
                 const traineeResponse = await api.get('trainees/6784d4cee03539058e15680f');
                 setTrainee(traineeResponse.data);
-                console.log("Trainee data:", traineeResponse.data);
 
-                // Fetching user data once trainee is fetched
+                // Fetching user data
                 const userResponse = await api.get(`users/${traineeResponse.data.userId}`);
                 setUser(userResponse.data);
-                console.log("User data:", userResponse.data);
+
             } catch (error) {
                 setErrorMessage("Failed to fetch data.");
                 console.error("Error fetching data:", error);
-            } finally {
-                setIsLoading(false); // Set loading to false after the requests finish
-            }
+            } 
         };
         fetchTraineeData();
         setErrorMessage(''); // Clear any previous error messages
@@ -44,13 +40,11 @@ export default function Defer() {
             setSubmitError("Defer reason is required.");
             return;
         }
-        console.log("Submit button clicked");
-        console.log("Defer reason:", deferReason);
         setSubmitError(""); // Clear any previous submit errors
 
         try {
             const response = await api.post("/auth/defer", {
-                userId: trainee.userId,
+                email: user.email,
                 reason: deferReason
             });
             if (response) {
@@ -75,24 +69,6 @@ export default function Defer() {
         <div>
             <h1>Defer Page</h1>
             {errorMessage && <p className="error">{errorMessage}</p>}
-            {isLoading && <p>Loading...</p>}
-            {trainee && (
-                <div>
-                    <h2>Trainee Info</h2>
-                    <p>ID: {trainee._id}</p>
-                    {trainee.userId && <p>UserID: {trainee.userId}</p>}
-                </div>
-            )}
-            {user && (
-                <div>
-                    <h2>User Info</h2>
-                    <p>ID: {user._id}</p>
-                    <p>Email: {user.email}</p>
-                    <p>First Name: {user.firstName}</p>
-                    <p>Last Name: {user.lastName}</p>
-                    <p>Middle Name: {user.middleName}</p>
-                </div>
-            )}
             <div>
                 <h2>Defer Reason</h2>
                 <textarea

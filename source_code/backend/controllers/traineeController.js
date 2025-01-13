@@ -3,17 +3,17 @@ import DeferTrainee from "../models/deferSchema.js";
 
 const deferRequest = async (req, res) => {
     try {
-        const { userId, reason } = req.body;
+        const { email, reason } = req.body;
         
         // create deferTrainee object
         const deferTrainee = new DeferTrainee({
-            userId: userId,
+            email: email,
             reason: reason,
             deferDate: new Date() // Add any additional fields as needed
         });
 
         // check for existing deferTrainee
-        const existingDeferTrainee = await DeferTrainee.findOne({ userId });
+        const existingDeferTrainee = await DeferTrainee.findOne({ email });
         if (existingDeferTrainee) {
             return res.status(400).json({ error: "DeferTrainee already exists."});
         }
@@ -22,7 +22,7 @@ const deferRequest = async (req, res) => {
         await deferTrainee.save().then(() => {
             res.status(201).json({ message: "Submitted successfully."});
         }).catch((err) => {
-            res.status(500).json({ error: "An error has occured while submission."});
+            res.status(500).json({ error: "An error has occured while submitting."});
         });
     } catch (error) {
         res.status(500).json({ error: "An error has occurred while submitting." });
