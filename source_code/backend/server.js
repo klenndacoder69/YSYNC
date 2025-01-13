@@ -50,7 +50,6 @@ userRouter(app);
 
 // initialize utilities
 mailer(app);
-dashboard(app);
 
 // initialize the socket utility for chat
 const server = connectChat(app);
