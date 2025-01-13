@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
 
 export default function Defer() {
-    const [trainee, setTrainee] = useState(null); 
     const [user, setUser] = useState(null); 
     const [deferReason, setDeferReason] = useState(""); // State variable for text input
     
@@ -15,7 +14,6 @@ export default function Defer() {
             try {
                 // Fetching trainee data
                 const traineeResponse = await api.get('trainees/6784d4cee03539058e15680f');
-                setTrainee(traineeResponse.data);
 
                 // Fetching user data
                 const userResponse = await api.get(`users/${traineeResponse.data.userId}`);
