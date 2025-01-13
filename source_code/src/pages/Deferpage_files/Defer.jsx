@@ -13,7 +13,8 @@ export default function Defer() {
         const fetchTraineeData = async () => {
             try {
                 // Fetching trainee data
-                const traineeResponse = await api.get('trainees/6784d4cee03539058e15680f');
+                // this is still hard coded, we need to change this to dynamic (connected to login)
+                const traineeResponse = await api.get('trainees/6784d4cee03539058e156803');
 
                 // Fetching user data
                 const userResponse = await api.get(`users/${traineeResponse.data.userId}`);
