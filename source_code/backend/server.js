@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 userRouter(app);
 
 // initialize utilities
-// mailer(app);
+mailer(app);
 
 // initialize the routers (these are the things necessary for the endpoints)
 mentorChooseRouter(app);
