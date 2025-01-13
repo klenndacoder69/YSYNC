@@ -4,6 +4,8 @@ import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
 import Chat from "./utilities/Chatbox.jsx";
+import Unauthorized from "./components/Unauthorized.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 function App() {
   const routes = [
     {
@@ -20,7 +22,11 @@ function App() {
     },
     {
       path: "/test",
-      element: <Chat/>
+      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["trainee", "residentMember", "admin"]}/>
+    },
+    {
+      path: "/unauthorized",
+      element: <Unauthorized/>
     }
   ]
   const router = createBrowserRouter(routes)

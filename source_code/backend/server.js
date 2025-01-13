@@ -7,6 +7,7 @@ import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
 import getAllResiRouter from "./routers/resident-membersRouter.js";
+import mentorChooseRouter from "./routers/mentorChooseRouter.js";
 dotenv.config();
 
 const uri = process.env.DB_URI;
@@ -49,6 +50,9 @@ getAllResiRouter(app);
 
 // initialize utilities
 mailer(app);
+
+// initialize the routers (these are the things necessary for the endpoints)
+mentorChooseRouter(app);
 
 // initialize the socket utility for chat
 const server = connectChat(app);
