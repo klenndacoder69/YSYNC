@@ -5,9 +5,9 @@ const postSchema = new mongoose.Schema({
     content: { type: String, required: true },
     hearts: { type: Number, default: 0, required: true },
     comments: { type: Number, default: 0, required: true },
-    isAnnouncement: { type:Boolean, required: true },
-    isPinned: { type:Boolean, required: true },
-    isEvent: { type:Boolean, required: true },
+    isAnnouncement: { type:Boolean, default:true},
+    isPinned: { type:Boolean, default: false},
+    isEvent: { type:Boolean, default: false },
     attachment: { type: String, default: null },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
