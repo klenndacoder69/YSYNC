@@ -18,6 +18,28 @@ const dashboard = (app) => {
         }
     });
 
+    // Add a comment to a post
+    app.post('/api/posts/:id/comment', async (req, res) => {
+        try {
+            const postId = req.params.id;
+            const { userId, text } = req.body;
+    
+            const post = await Posts.findById(postId);
+            if (!post) {
+                return res.status(404).send({ message: 'Post not found' });
+            }
+            
+            post.comments = post.comments.filter(comment => comment.userId && comment.text);
+            const newComment = { userId, text };
+            post.comments.push(newComment);
+            await post.save();
+            res.status(200).send({ message: 'Comment added successfully', data: post });
+        } catch (error) {
+            res.status(400).send({ message: 'Error adding comment', error: error.message });
+        }
+    });
+    
+
     // Get all posts
     app.get('/api/posts', async (req, res) => {
         try {
@@ -61,7 +83,7 @@ const dashboard = (app) => {
             if (!deletedPost) {
                 return res.status(404).send({ message: 'Post not found' });
             }
-            
+
             res.status(200).send({ message: 'Post deleted successfully' });
         } catch (error) {
             res.status(500).send({ message: 'Error deleting post', error });
