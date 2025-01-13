@@ -8,6 +8,7 @@ const postSchema = new mongoose.Schema({
     isAnnouncement: { type:Boolean, default:true},
     isPinned: { type:Boolean, default: false},
     isEvent: { type:Boolean, default: false },
+    eventDate: { type: Date },
     attachment: { type: String, default: null },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
