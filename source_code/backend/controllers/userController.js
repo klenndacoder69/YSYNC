@@ -2,8 +2,8 @@ import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 // sample:
-import ResidentMember from "../models/residentMemberSchema.js";
-import Trainee from "../models/traineeSchema.js";
+// import ResidentMember from "../models/residentMemberSchema.js";
+// import Trainee from "../models/traineeSchema.js";
 const userSignIn = async (req, res) => {
     try{
         console.log("This is the request body", req.body);
@@ -85,6 +85,6 @@ export {
     userSignIn,
     userRegister,
     getAllUsers,
-    testFunction
+    // testFunction
 }
 

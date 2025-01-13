@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
-import mentorChooseRouter from "./routers/mentor-choosingRouter.js";
+import mentorChooseRouter from "./routers/mentorChooseRouter.js";
 dotenv.config();
 
 const uri = process.env.DB_URI;

@@ -1,5 +1,7 @@
 
-import { userSignIn, userRegister, getAllUsers, testFunction } from '../controllers/userController.js'
+import { userSignIn, userRegister, getAllUsers, 
+    // testFunction 
+} from '../controllers/userController.js'
 
 const userRouter = (app) => {
     app.post('/api/auth/login', userSignIn);
