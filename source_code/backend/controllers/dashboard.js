@@ -37,12 +37,54 @@ const addComment = async (req, res) => {
     }
 };
 
+// Toggle reaction to a post
+const toggleHeart = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.body.userId;
+        
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).send({ message: "Invalid Post ID" });
+        }
+
+        const post = await Posts.findById(id);
+
+        if (!post) {
+            return res.status(404).send({ message: 'Post not found' });
+        }
+
+        const heartIndex = post.hearts.indexOf(userId);
+        if (heartIndex === -1) {
+            post.hearts.push(userId);
+        } else {
+            post.hearts.splice(heartIndex, 1);
+        }
+
+        await post.save();
+
+        res.status(200).send({
+            message: heartIndex === -1 ? 'Heart added successfully' : 'Heart removed successfully',
+            hearts: post.hearts.length,
+        });
+    } catch (error) {
+        console.error("Error in toggleHeart:", error.message);
+        res.status(500).send({ message: 'Error toggling heart', error: error.message });
+    }
+};
+
 
 // Get all posts
 const fetchPosts = async (req, res) => {
     try {
+        const userId = req.query.userId;
         const posts = await Posts.find().sort({ createdAt: -1 });
-        res.status(200).send({ message: 'Posts fetched successfully', data: posts });
+
+        const fetchedPosts = posts.map(post => ({
+            ...post.toObject(),
+            hasReacted: post.hearts.includes(userId)
+        }));
+
+        res.status(200).send({ message: 'Posts fetched successfully', data: fetchedPosts });
     } catch (error) {
         res.status(500).send({ message: 'Error fetching posts', error });
     }
@@ -92,6 +134,7 @@ const delPost = async (req, res) => {
 export {
     createPost,
     addComment,
+    toggleHeart,
     fetchPosts,
     updatePost,
     delPost
