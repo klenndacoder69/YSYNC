@@ -1,7 +1,7 @@
 import { getAllResi } from "../controllers/resMemController.js";
 
 const getAllResiRouter = (app) => {
-  app.get("/api/get-all-resident-members", getAllResi);
+  app.get("/api/getAllResidentMembers", getAllResi);
 };
 
 export default getAllResiRouter;
