@@ -11,25 +11,25 @@ export default function connectChat(app) {
     cors: corsOptions
     });
 
-    let activeUsers = 0;
-
+    const users = new Set();
     io.on('connection', (socket) => {
-    activeUsers++;
-    io.emit('user_count', activeUsers);
-
-    console.log('A user connected:', socket.id);
-
-    // Handle incoming messages
-    socket.on('chat_message', (message) => {
-        io.emit('chat_message', { id: socket.id, message });
-    });
-
-    // Handle user disconnect
-    socket.on('disconnect', () => {
-        activeUsers--;
-        io.emit('user_count', activeUsers);
-        console.log('A user disconnected:', socket.id);
-    });
+        console.log('A user connected:', socket.id);
+    
+        socket.on('register_user', (username) => {
+            socket.username = username; // Assign username to the socket
+            console.log(`User registered: ${username}`);
+            io.emit('user_count', io.sockets.sockets.size); // Update user count
+        });
+    
+        socket.on('chat_message', (message) => {
+            // Emit message with username
+            io.emit('chat_message', { username: socket.username, message });
+        });
+    
+        socket.on('disconnect', () => {
+            console.log(`User disconnected: ${socket.username || socket.id}`);
+            io.emit('user_count', io.sockets.sockets.size);
+        });
     });
     console.log("Successfully connected to socket.io server");
     return server;

@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 dotenv.config({
   path: "../.env",
 });
+
 // Database connection URI
 const MONGODB_URI = process.env.DB_URI;
 
@@ -176,7 +177,7 @@ const populateDatabase = async () => {
     await Trainee.insertMany(traineeData);
     console.log("Trainees created.");
 
-    // Assign resident members
+    // Assign resident members (with interests and univBatch inherited from trainees)
     const residentMemberUsers = users.filter(
       (user) => user.userType === "residentMember"
     );
@@ -185,6 +186,8 @@ const populateDatabase = async () => {
         ...resMem,
         userId: residentMemberUsers[index]._id,
         traineeId: traineeUsers[index % traineeUsers.length]._id, // Example mapping
+        interests: traineeData[index % traineeData.length].interests, // Inherited from trainee
+        univBatch: traineeData[index % traineeData.length].univBatch, // Inherited from trainee
       })
     );
     await ResidentMember.insertMany(residentMemberData);
@@ -194,6 +197,45 @@ const populateDatabase = async () => {
     const adminUser = users.find((user) => user.userType === "admin");
     await Admin.create({ userId: adminUser._id });
     console.log("Admin created.");
+
+    const hashedPassword = bcrypt.hashSync("password12", 10); // Dummy password
+
+    // Step 1: Create the user
+    const user = new User({
+      firstName: "Zara",
+      middleName: "L.",
+      lastName: "Williams",
+      email: "zara.williams@up.edu.ph",
+      password: hashedPassword,
+      userType: "residentMember", // Initial user type
+    });
+    console.log("Creating user:", user);
+    await user.save();
+
+    // Step 2: Create the trainee
+    const trainee = new Trainee({
+      userId: user._id, // Reference to the created user
+      interests: ["AI", "Cybersecurity", "UI/UX", "Database"], // Interests
+      univBatch: 2023, // University batch
+    });
+    console.log("Creating trainee:", trainee);
+    await trainee.save();
+
+    // Step 3: Promote the trainee to a resident member
+    const residentMember = new ResidentMember({
+      userId: user._id, // Reference to the same user
+      traineeId: trainee._id, // Reference to the trainee
+      orgBatch: 2024, // Organization batch
+      department: "VL", // Example department
+      status: "active", // Resident member's status
+      isMentor: true, // Mentorship status
+      whyYouShouldChooseMe: "I enjoy teaching.", // Reason for being a mentor
+      whatToExpect: "Hands-on mentorship.", // Expectations from mentorship
+      interests: trainee.interests, // Interests from trainee
+      univBatch: trainee.univBatch, // University batch from trainee
+    });
+    console.log("Creating resident member:", residentMember);
+    await residentMember.save();
 
     console.log("Database setup complete!");
   } catch (error) {
