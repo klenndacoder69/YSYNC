@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
+import dashboard from "./utilities/dashboard.js";
 dotenv.config();
 
 
@@ -49,6 +50,7 @@ userRouter(app);
 
 // initialize utilities
 mailer(app);
+dashboard(app);
 
 // initialize the socket utility for chat
 const server = connectChat(app);
