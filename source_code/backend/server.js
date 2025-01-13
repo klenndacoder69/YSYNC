@@ -7,14 +7,14 @@ import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
 import dashboardRouter from "./routers/dashboardRouter.js";
+import getAllResiRouter from "./routers/resident-membersRouter.js";
+import mentorChooseRouter from "./routers/mentorChooseRouter.js";
 dotenv.config();
 
-
 const uri = process.env.DB_URI;
-console.log(uri)
+console.log(uri);
 
 async function run() {
-
   try {
     console.log("Waiting for connection to MongoDB...");
     // mongoose connection (removed callbacks since latest version of Mongoose is no longer accepting callbacks)
@@ -24,7 +24,7 @@ async function run() {
     });
     console.log("Mongoose has successfully connected to MongoDB.");
     const verifyConnection = mongoose.connection;
-    
+
     // listen for errors
     verifyConnection.on("error", (err) =>
       console.log(`Connection error ${err}`)
@@ -48,9 +48,13 @@ app.use(bodyParser.json());
 // initialize the routers (these are the things necessary for the endpoints)
 userRouter(app);
 dashboardRouter(app);
+getAllResiRouter(app);
 
 // initialize utilities
 mailer(app);
+
+// initialize the routers (these are the things necessary for the endpoints)
+mentorChooseRouter(app);
 
 // initialize the socket utility for chat
 const server = connectChat(app);
@@ -62,5 +66,3 @@ run()
     });
   })
   .catch(console.dir);
-
-
