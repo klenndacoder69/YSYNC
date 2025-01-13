@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
+import traineeRouter from "./routers/traineeRouter.js";
 dotenv.config();
 
 
@@ -46,6 +47,7 @@ app.use(bodyParser.json());
 
 // initialize the routers (these are the things necessary for the endpoints)
 userRouter(app);
+traineeRouter(app);
 
 // initialize utilities
 mailer(app);

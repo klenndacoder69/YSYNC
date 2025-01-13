@@ -50,6 +50,19 @@ const userRegister = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id; // Get user ID from request parameters
+        const user = await User.findById(userId); // Find the user by their ID
+        if (!user) {
+            return res.status(404).json({ error: "User not found." });
+        }
+        res.status(200).json(user); // Send the user data as a JSON response
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while fetching the user data." });
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -62,6 +75,7 @@ const getAllUsers = async (req, res) => {
 export {
     userSignIn,
     userRegister,
+    getUser,
     getAllUsers
 }
 
