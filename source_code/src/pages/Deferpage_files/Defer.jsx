@@ -5,8 +5,9 @@ export default function Defer() {
     const [trainee, setTrainee] = useState(null); // Change to null to handle object
     const [user, setUser] = useState(null);
     const [deferReason, setDeferReason] = useState(""); // State variable for text input
-    const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(true); // State to track loading status
+    
+    const [errorMessage, setErrorMessage] = useState("");
     const [submitError, setSubmitError] = useState(""); // State variable for submit error
 
     // Fetch trainee and user data
@@ -29,8 +30,8 @@ export default function Defer() {
                 setIsLoading(false); // Set loading to false after the requests finish
             }
         };
-
         fetchTraineeData();
+        setErrorMessage(''); // Clear any previous error messages
     }, []); // Runs only once after the initial render
 
     const handleTextChange = (event) => {
@@ -41,7 +42,6 @@ export default function Defer() {
         event.preventDefault();
         if (!deferReason) {
             setSubmitError("Defer reason is required.");
-            alert("Defer reason is required.");
             return;
         }
         console.log("Submit button clicked");
@@ -53,23 +53,20 @@ export default function Defer() {
                 userId: trainee.userId,
                 reason: deferReason
             });
-            if (response.status === 200) {
+            if (response) {
                 alert("Submitted successfully!");
                 return response.data;
             }
         } catch (error) {
             if (error.response) {
                 console.log("Error response status: ", error.response.status);
-                if (error.response.status === 401) {
-                    setErrorMessage("Unauthorized access.");
-                } else if (error.response.status === 404) {
-                    setErrorMessage("Endpoint not found.");
-                } else {
-                    setErrorMessage("An error has occurred while submitting.");
+                if (error.response.status === 400) {
+                    setSubmitError("DeferTrainee already exists.");
+                } else if (error.response.status === 500) {
+                    setSubmitError("An error has occurred while submitting.");
                 }
             } else {
-                console.error("Error message: ", error.message);
-                setErrorMessage("A network error has occurred.");
+                alert("A network error has occurred.");
             }
         }
     };
@@ -105,9 +102,10 @@ export default function Defer() {
                     cols="50"
                     placeholder="State your reasons here..."
                 />
-                {submitError && <p className="error">{submitError}</p>}
             </div>
             <button onClick={handleSubmit}>Submit</button>
+            <br></br>
+            {submitError && <p className="error">{submitError}</p>}
         </div>
     );
 }
