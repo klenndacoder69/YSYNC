@@ -14,7 +14,7 @@ export default function Defer() {
             try {
                 // Fetching trainee data
                 // this is still hard coded, we need to change this to dynamic (connected to login)
-                const traineeResponse = await api.get('trainees/6784d4cee03539058e156803');
+                const traineeResponse = await api.get('trainees/6786827bafa95af7d2de509b');
 
                 // Fetching user data
                 const userResponse = await api.get(`users/${traineeResponse.data.userId}`);
@@ -59,7 +59,8 @@ export default function Defer() {
                     setSubmitError("An error has occurred while submitting.");
                 }
             } else {
-                alert("A network error has occurred.");
+                console.error("Error message: ", error.message);
+                setSubmitError("A network error has occurred.");
             }
         }
     };
@@ -67,6 +68,7 @@ export default function Defer() {
     return (
         <div>
             <h1>Defer Page</h1>
+            <p>Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p>
             {errorMessage && <p className="error">{errorMessage}</p>}
             <div>
                 <h2>Defer Reason</h2>
