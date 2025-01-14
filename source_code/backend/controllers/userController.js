@@ -1,4 +1,5 @@
 import User from "../models/userSchema.js";
+import ReportUser from "../models/reportSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -72,10 +73,40 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+const reportRequest = async (req, res) => {
+    try {
+        const { email, reportedEmail, reason } = req.body;
+        
+        // create reportUser object
+        const reportUser = new ReportUser({
+            email: email,
+            reportedEmail: reportedEmail,
+            reason: reason,
+            reportDate: new Date() // Add any additional fields as needed
+        });
+
+        // check for existing reportUser
+        const existingReportUser = await ReportUser.findOne({ email });
+        if (existingReportUser) {
+            return res.status(400).json({ error: "ReportUser already exists."});
+        }
+
+        // Save the new DeferTrainee document
+        await reportUser.save().then(() => {
+            res.status(201).json({ message: "Submitted successfully."});
+        }).catch((err) => {
+            res.status(500).json({ error: "An error has occured while submitting."});
+        });
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while submitting." });
+    }
+}
+
 export {
     userSignIn,
     userRegister,
     getUser,
-    getAllUsers
+    getAllUsers,
+    reportRequest
 }
 

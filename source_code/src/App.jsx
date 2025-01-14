@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
 import Defer from "./pages/Deferpage_files/Defer.jsx";
+import Report from "./pages/Reportpage_files/Report.jsx";
 import Chat from "./utilities/Chatbox.jsx";
 function App() {
   const routes = [
@@ -22,6 +23,10 @@ function App() {
     {
       path: "/defer",
       element: <Defer/>
+    },
+    {
+      path: "/report",
+      element: <Report/>
     },
     {
       path: "/test",
