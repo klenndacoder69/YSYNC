@@ -69,8 +69,20 @@ export default function Login() {
         const role = response?.data?.role;
 
         setAuth({email, password, accessToken, role});
-        navigate("/test");
-      } 
+
+        if (role === "trainee") {
+          navigate("/test");
+        } else if (role === "residentMember") {
+          navigate("/test");
+        } else if (role === "admin") {
+          navigate("/admin/acc-info");
+        }
+        else{
+          // How did it go here? Well, for some reason, they got a response with an invalid rol
+          console.log("Invalid role: ", role);
+          throw new Error("Invalid role.");
+        }
+      }
     } catch (error) {
       if (error.response) {
         console.log("Error response status: ", error.response.status);
