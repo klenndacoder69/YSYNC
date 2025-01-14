@@ -1,5 +1,5 @@
 import User from "../models/userSchema.js";
-import ReportUser from "../models/reportSchema.js";
+import Report from "../models/reportSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -72,35 +72,29 @@ const getAllUsers = async (req, res) => {
         res.status(500).json({ error: "An error has occurred while retrieving users." });
     }
 }
-
 const reportRequest = async (req, res) => {
     try {
-        const { email, reportedEmail, reason } = req.body;
+        const { reportedID, reportedFirstName, reportedMiddleName, reportedLastName, reason } = req.body;
         
         // create reportUser object
-        const reportUser = new ReportUser({
-            email: email,
-            reportedEmail: reportedEmail,
+        const reportUser = new Report({
+            reportedID: reportedID,
+            reportedFirstName: reportedFirstName,
+            reportedMiddleName: reportedMiddleName, 
+            reportedLastName: reportedLastName, 
             reason: reason,
-            reportDate: new Date() // Add any additional fields as needed
+            createdAt: new Date() // Add any additional fields as needed
         });
 
-        // check for existing reportUser
-        const existingReportUser = await ReportUser.findOne({ email });
-        if (existingReportUser) {
-            return res.status(400).json({ error: "ReportUser already exists."});
-        }
-
-        // Save the new DeferTrainee document
-        await reportUser.save().then(() => {
-            res.status(201).json({ message: "Submitted successfully."});
-        }).catch((err) => {
-            res.status(500).json({ error: "An error has occured while submitting."});
-        });
+        // Save the new ReportUser document
+        await reportUser.save();
+        res.status(201).json({ message: "Submitted successfully."});
     } catch (error) {
+        console.error("Error occurred while submitting report:", error); // Log the error
         res.status(500).json({ error: "An error has occurred while submitting." });
     }
 }
+
 
 export {
     userSignIn,
