@@ -8,6 +8,7 @@ import Register from "./pages/Registerpage_files/Register.jsx";
 import AdminReport from "./pages/Adminreport_files/Adminreport.jsx";
 import AdminRequest from "./pages/Adminrequest_files/admin-request.jsx";
 import MemberSignin from "./pages/Membersignin_files/members-sign-in.jsx";
+import TraineeSignin from "./pages/Traineesignin_files/trainees-sign-in.jsx";
 
 function App() {
   const routes = [
@@ -43,6 +44,10 @@ function App() {
     {
       path: "/member-signin",
       element: <MemberSignin/>
+    },
+    {
+      path: "/trainee-signin",
+      element: <TraineeSignin/>
     }
   ]
   const router = createBrowserRouter(routes)

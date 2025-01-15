@@ -48,7 +48,7 @@ function LoginPage() {
           </div>
           <div className="member-signin-card-container">
             <div className="member-signin-rectangle"></div>
-            <h1>Welcome back member!</h1>
+            <h1>Welcome back, YSER!</h1>
             <form id="email-form" onSubmit={handleSubmit}>
               <input
                 type="email"
