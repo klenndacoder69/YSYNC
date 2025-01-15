@@ -49,61 +49,93 @@ const AdminAccountInfo = () => {
   };
 
 
-  const handleEditUser = async (user) => {
-    // Logic for handling edit
-    // When handling the edit, we must first check if the user is a trainee or not since they have different properties
-    // The server must only receive the json object (user w/ updated details), and the userType for easier processing
+const handleEditUser = async (user) => {
+  // Logic for handling edit
+  // When handling the edit, we must first check if the user is a trainee or not since they have different properties
+  // The server must only receive the json object (user w/ updated details), and the userType for easier processing
 
-    event.preventDefault()
-    console.log("Editing user:", user.userId);
-    if(user.traineeId && user.userId){ // this is a resmem
-      user.traineeId.interests = interests.split(",");
-      user.userId.firstName = firstName;
-      user.userId.middleName = middleName;
-      user.userId.lastName = lastName;
-      user.userId.email = email;
-      user.traineeId.univBatch = batch;
-      console.log("Sending resident member details...: ", user)
-    } else if (user.userId) {
-      user.userId.firstName = firstName;
-      user.userId.middleName = middleName;
-      user.userId.lastName = lastName;
-      user.userId.email = email;
-      user.interests = interests.split(",");
-      console.log("Sending trainee details...: ", user)
-    }
-    else{
-      throw new Error("Invalid user data.");
-    }
-    try {
-      const response = await api.put("/editUser", {
-        user: {...user, updatedAt: new Date()}, 
-        userType: user.traineeId && user.userId ? "residentMember" : "trainee",
-        userId: user._id
-      })
-      if (response) {
-        console.log("User updated successfully.");
-      }
-    } catch (error) {
-      if (error.response) {
-        console.log("Error response status: ", error.response.status);
+  event.preventDefault();
+  console.log("Editing user:", user.userId);
+
+  if (user.traineeId && user.userId) {
+    user.traineeId.interests = interests.split(",");
+    user.userId.firstName = firstName;
+    user.userId.middleName = middleName;
+    user.userId.lastName = lastName;
+    user.userId.email = email;
+    user.traineeId.univBatch = batch;
+    console.log("Sending resident member details...", user);
+  } else if (user.userId) {
+    user.userId.firstName = firstName;
+    user.userId.middleName = middleName;
+    user.userId.lastName = lastName;
+    user.userId.email = email;
+    user.interests = interests.split(",");
+    console.log("Sending trainee details...", user);
+  } else {
+    throw new Error("Invalid user data.");
+  }
+
+  try {
+    const response = await api.put("/editUser", {
+      user: { ...user, updatedAt: new Date() },
+      userType: user.traineeId && user.userId ? "residentMember" : "trainee",
+      userId: user._id,
+    });
+
+    if (response) {
+      console.log("User updated successfully.");
+
+      // Update state with the edited user
+      if (user.traineeId) {
+        getResidentMembers((prev) =>
+          prev.map((member) =>
+            member._id === user._id ? { ...member, ...user } : member
+          )
+        );
       } else {
-        console.log("Cannot retrieve response.");
+        getTrainees((prev) =>
+          prev.map((trainee) =>
+            trainee._id === user._id ? { ...trainee, ...user } : trainee
+          )
+        );
       }
     }
-  };
+  } catch (error) {
+    if (error.response) {
+      console.log("Error response status: ", error.response.status);
+    } else {
+      console.log("Cannot retrieve response.");
+    }
+  }
 
-  const handleDeleteUser = (user) => {
+  hidePopup();
+};
+
+  const handleDeleteUser = async (user) => {
     // Logic for handling delete
-    event.preventDefault()
+    event.preventDefault();
     console.log("Deleting user:", user.userId);
+  
     try {
-      const response = api.post("/deleteUser", {
+      const response = await api.post("/deleteUser", {
         user,
         userType: user.traineeId && user.userId ? "residentMember" : "trainee",
-      })
+      });
+  
       if (response) {
         console.log("User deleted successfully.");
+  
+        // Remove user from the state
+        if (user.traineeId) {
+          getResidentMembers((prev) =>
+            prev.filter((member) => member._id !== user._id)
+          );
+        } else {
+          getTrainees((prev) =>
+            prev.filter((trainee) => trainee._id !== user._id)
+          );
+        }
       }
     } catch (error) {
       if (error.response) {
@@ -111,8 +143,9 @@ const AdminAccountInfo = () => {
       } else {
         console.log("Cannot retrieve response.");
       }
-
     }
+  
+    hidePopup();
   };
 
   const fetchTrainees = async () => {
@@ -142,10 +175,10 @@ const AdminAccountInfo = () => {
     fetchResidentMembers();
   }, []);
   // here everytime changes are made, we refetch the table (this useEffect is kind of inefficient...)
-  useEffect(() => {
-    fetchTrainees();
-    fetchResidentMembers();
-  }, [popup.visible]);
+  // useEffect(() => {
+  //   fetchTrainees();
+  //   fetchResidentMembers();
+  // }, [popup.visible]);
 
   const showPopup = (e, user, action) => {
     setPopup({ visible: true, x: e.clientX - 125, y: e.clientY, user, action });
