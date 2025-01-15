@@ -20,7 +20,7 @@ const AdminDashboard = () => {
             <Link to="reports">Reports</Link>
           </div>
         </nav>
-        <div class="admin-account">
+        <div className="admin-account">
           <p>ADMIN ACCOUNT</p>
         </div>
       </aside>

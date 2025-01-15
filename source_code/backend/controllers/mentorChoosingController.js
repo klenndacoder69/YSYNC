@@ -84,7 +84,7 @@ async function getMentorReco(req, res) {
 //Get all Trainees
 const getAllTrainees = async (req, res) => {
   try {
-    const trainees = await Trainee.find();
+    const trainees = await Trainee.find().populate('userId');
     res.status(200).json(trainees);
   } catch (error) {
     res.status(500).json({
