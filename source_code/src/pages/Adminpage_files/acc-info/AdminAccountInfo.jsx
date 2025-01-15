@@ -52,7 +52,7 @@ const AdminAccountInfo = () => {
   const handleEditUser = async (user) => {
     // Logic for handling edit
     // When handling the edit, we must first check if the user is a trainee or not since they have different properties
-    // The server must only receive the json object (user), and the userType for easier processing
+    // The server must only receive the json object (user w/ updated details), and the userType for easier processing
 
     event.preventDefault()
     console.log("Editing user:", user.userId);
@@ -77,12 +77,19 @@ const AdminAccountInfo = () => {
     }
     try {
       const response = await api.put("/editUser", {
-        ...user, 
-
-        updatedAt: new Date(), 
+        user: {...user, updatedAt: new Date()}, 
+        userType: user.traineeId && user.userId ? "residentMember" : "trainee",
+        userId: user._id
       })
+      if (response) {
+        console.log("User updated successfully.");
+      }
     } catch (error) {
-
+      if (error.response) {
+        console.log("Error response status: ", error.response.status);
+      } else {
+        console.log("Cannot retrieve response.");
+      }
     }
   };
 
@@ -90,6 +97,22 @@ const AdminAccountInfo = () => {
     // Logic for handling delete
     event.preventDefault()
     console.log("Deleting user:", user.userId);
+    try {
+      const response = api.post("/deleteUser", {
+        user,
+        userType: user.traineeId && user.userId ? "residentMember" : "trainee",
+      })
+      if (response) {
+        console.log("User deleted successfully.");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log("Error response status: ", error.response.status);
+      } else {
+        console.log("Cannot retrieve response.");
+      }
+
+    }
   };
 
   const fetchTrainees = async () => {
