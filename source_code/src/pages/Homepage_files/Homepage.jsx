@@ -44,11 +44,6 @@ export default function Homepage() {
                         </p>
                     </div>
                 </div>
-                <div className="switch">
-                    <a href="./members-view/members.html">
-                    <button>Switch to Member's View</button>
-                    </a>
-                </div>
             </div>
 
         </>

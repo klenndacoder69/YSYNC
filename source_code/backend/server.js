@@ -9,6 +9,7 @@ import connectChat from "./utilities/connect_chat.js";
 import dashboardRouter from "./routers/dashboardRouter.js";
 import getAllResiRouter from "./routers/resident-membersRouter.js";
 import mentorChooseRouter from "./routers/mentorChooseRouter.js";
+import adminRouter from "./routers/adminRouter.js";
 dotenv.config();
 
 const uri = process.env.DB_URI;
@@ -49,7 +50,7 @@ app.use(bodyParser.json());
 userRouter(app);
 dashboardRouter(app);
 getAllResiRouter(app);
-
+adminRouter(app);
 // initialize utilities
 mailer(app);
 
