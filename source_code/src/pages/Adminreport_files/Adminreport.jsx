@@ -104,8 +104,8 @@ export default function AdminReport() {
         return data.map((user, index) => (
             <tr key={index}>
                 <td>
-                    <div className="table-align-picture">
-                        <div className="circle"></div>
+                    <div className="admin-report-table-align-picture">
+                        <div className="admin-report-circle"></div>
                         {user.name}
                     </div>
                 </td>
@@ -114,9 +114,9 @@ export default function AdminReport() {
                 <td>{user.reason}</td>
                 {typeFlag === "pending" ? (
                     <td>
-                        <div className="button-div">
-                            <button className="accept-btn">Resolve</button>
-                            <button className="decline-btn">Delete</button>
+                        <div className="admin-report-button-div">
+                            <button className="admin-report-accept-btn">Resolve</button>
+                            <button className="admin-report-decline-btn">Delete</button>
                         </div>
                     </td>
                 ) : (
@@ -127,114 +127,116 @@ export default function AdminReport() {
     };
 
     return (
-        <div className="container">
-            <aside className="sidebar">
-                <div className="logo">
-                    <Link to="/acc-info/admin-acc-info">
-                        <img
-                            className="logo-img"
-                            src="../../assets/logo.png"
-                            alt="YSYNC Logo"
-                        />
-                    </Link>
-                    <h2>YSYNC</h2>
-                </div>
-                <nav className="menu">
-                    <div className="menu-container">
-                        <img
-                            className="menu-img"
-                            src={group}
-                            alt="AccInfo"
-                        />
-                        <Link to="/acc-info/admin-acc-info" className="menu-item">
-                            Account Information
-                        </Link>
-                    </div>
-                    <div className="menu-container">
-                        <img
-                            className="menu-img"
-                            src= {bell}
-                            alt="Requests"
-                        />
-                        <Link to="/requests/admin-requests" className="menu-item">
-                            Requests
-                        </Link>
-                    </div>
-                    <div className="menu-container active">
-                        <img
-                            className="menu-img"
-                            src={flag}
-                            alt="Reports"
-                        />
-                        <Link to="/reports/admin-reports" className="menu-item">
-                            Reports
-                        </Link>
-                    </div>
-                </nav>
-                <div className="admin-account">
-                    <p>ADMIN ACCOUNT</p>
-                </div>
-            </aside>
-
-            <main className="main-content">
-                <header className="header">
-                    <h1>
-                        <span className="header-main-title">Reports</span>
-                        <span className="header-main-secondary">
-                            {typeFlag === "pending" ? "/ Pending" : "/ Resolved"}
-                        </span>
-                    </h1>
-                </header>
-
-                <div className="table-content">
-                    <div className="search-bar">
-                        <div className="search-container">
-                            <input
-                                type="text"
-                                placeholder="Search"
-                                value={searchInput}
-                                onChange={(e) => setSearchInput(e.target.value)}
-                                onKeyUp={handleSearch}
+        <div className="admin-report-main">
+            <div className="admin-report-container">
+                <aside className="admin-report-sidebar">
+                    <div className="admin-report-logo">
+                        <Link to="/acc-info/admin-acc-info">
+                            <img
+                                className="admin-report-logo-img"
+                                src="../../assets/logo.png"
+                                alt="YSYNC Logo"
                             />
-                            <button type="button">
-                                <img
-                                    className="search-img"
-                                    src={search}
-                                    alt="Search"
+                        </Link>
+                        <h2>YSYNC</h2>
+                    </div>
+                    <nav className="admin-report-menu">
+                        <div className="admin-report-menu-container">
+                            <img
+                                className="admin-report-menu-img"
+                                src={group}
+                                alt="AccInfo"
+                            />
+                            <Link to="/acc-info/admin-acc-info" className="admin-report-menu-item">
+                                Account Information
+                            </Link>
+                        </div>
+                        <div className="admin-report-menu-container">
+                            <img
+                                className="admin-report-menu-img"
+                                src= {bell}
+                                alt="Requests"
+                            />
+                            <Link to="/requests/admin-requests" className="admin-report-menu-item">
+                                Requests
+                            </Link>
+                        </div>
+                        <div className="admin-report-menu-container active">
+                            <img
+                                className="admin-report-menu-img"
+                                src={flag}
+                                alt="Reports"
+                            />
+                            <Link to="/reports/admin-reports" className="admin-report-menu-item">
+                                Reports
+                            </Link>
+                        </div>
+                    </nav>
+                    <div className="admin-report-admin-account">
+                        <p>ADMIN ACCOUNT</p>
+                    </div>
+                </aside>
+
+                <main className="admin-report-main-content">
+                    <header className="admin-report-header">
+                        <h1>
+                            <span className="admin-report-header-main-title">Reports</span>
+                            <span className="admin-report-header-main-secondary">
+                                {typeFlag === "pending" ? "/ Pending" : "/ Resolved"}
+                            </span>
+                        </h1>
+                    </header>
+
+                    <div className="admin-report-table-content">
+                        <div className="admin-report-search-bar">
+                            <div className="admin-report-search-container">
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    value={searchInput}
+                                    onChange={(e) => setSearchInput(e.target.value)}
+                                    onKeyUp={handleSearch}
                                 />
+                                <button type="button">
+                                    <img
+                                        className="admin-report-search-img"
+                                        src={search}
+                                        alt="Search"
+                                    />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="admin-report-tabs">
+                            <button
+                                className={`admin-report-tab ${typeFlag === "pending" ? "active" : ""}`}
+                                onClick={() => handleTabSwitch("pending")}
+                            >
+                                Pending
+                            </button>
+                            <button
+                                className={`admin-report-tab ${typeFlag === "resolved" ? "active" : ""}`}
+                                onClick={() => handleTabSwitch("resolved")}
+                            >
+                                Resolved
                             </button>
                         </div>
-                    </div>
 
-                    <div className="tabs">
-                        <button
-                            className={`tab ${typeFlag === "pending" ? "active" : ""}`}
-                            onClick={() => handleTabSwitch("pending")}
-                        >
-                            Pending
-                        </button>
-                        <button
-                            className={`tab ${typeFlag === "resolved" ? "active" : ""}`}
-                            onClick={() => handleTabSwitch("resolved")}
-                        >
-                            Resolved
-                        </button>
+                        <div className="admin-report-table-textfields">
+                            <table className="admin-report-account-table">
+                                <thead>
+                                    <tr>
+                                        {renderTableHeaders().map((header, index) => (
+                                            <th key={index}>{header}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>{renderTableRows()}</tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div className="table-textfields">
-                        <table className="account-table">
-                            <thead>
-                                <tr>
-                                    {renderTableHeaders().map((header, index) => (
-                                        <th key={index}>{header}</th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>{renderTableRows()}</tbody>
-                        </table>
-                    </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
     );
 }
