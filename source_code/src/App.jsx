@@ -6,7 +6,8 @@ import Register from "./pages/Registerpage_files/Register.jsx";
 // import Connect from "./pages/Connectpage_files/Connectpage.jsx";
 // import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
 import AdminReport from "./pages/Adminreport_files/Adminreport.jsx";
-import AdminRequest from "./pages/Adminrequest_files/admin-requests.jsx";
+import AdminRequest from "./pages/Adminrequest_files/admin-request.jsx";
+import MemberSignin from "./pages/Membersignin_files/members-sign-in.jsx";
 
 function App() {
   const routes = [
@@ -38,6 +39,10 @@ function App() {
     {
       path: "/request",
       element: <AdminRequest/>
+    },
+    {
+      path: "/member-signin",
+      element: <MemberSignin/>
     }
   ]
   const router = createBrowserRouter(routes)
