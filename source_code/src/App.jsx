@@ -13,6 +13,7 @@ import AdminAccountInfo from "./pages/Adminpage_files/acc-info/AdminAccountInfo.
 import AdminRequests from "./pages/Adminpage_files/requests/AdminRequests.jsx";
 import AdminReports from "./pages/Adminpage_files/reports/AdminReports.jsx";
 import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
+import ResMem from "./pages/ResMempage_files/Resmem.jsx";
 
 function App() {
   const routes = [
@@ -62,8 +63,12 @@ function App() {
       ]
     },
     {
-      path: "Mentor",
+      path: "/Mentor",
       element: <Mentor/>
+    },
+    {
+      path: "/resmem",
+      element: <ResMem/>
     }
   ]
   const router = createBrowserRouter(routes)
