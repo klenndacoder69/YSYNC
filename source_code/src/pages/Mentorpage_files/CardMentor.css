@@ -1,0 +1,129 @@
+/* para sa card css */
+.mentor-card-maincontainer {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    position: relative;
+    width: 250px;
+    height: 350px;
+    perspective: 1000px; /* 3D effect */
+}
+
+.mentor-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.mentor-card:hover {
+    transform: rotateY(180deg);
+}
+
+.mentor-card-front{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    border-radius: 15px;
+    display: flex;            
+    justify-content: center;  
+    align-items: center;
+    flex-direction: column; 
+}
+
+.mentor-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    background: #D9D9D9;
+    color: #132B41;
+    border-radius: 15px;
+    transform: rotateY(180deg); 
+}
+
+/* para sa front ng card css */
+.mentor-card-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 15px;    
+    border-top-right-radius: 15px;
+    overflow: hidden;               
+}
+
+.mentor-card-image {
+    width: 250px;         
+    height: 247px;        
+    object-fit: cover;   
+    display: block; 
+}
+
+.mentor-card-front-info-wrapper{
+    background: #132B41;
+    width: 100%;
+    height: 40%;
+    color: #D9D9D9;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.mentor-card-name {
+    padding-top: 7%;
+    margin-top: 0%;
+    padding-bottom: 0.1rem;  
+    margin-bottom: 0.1rem;  
+    text-align: center; 
+    font-family: 'Arial';
+    /* width: 150px;               */
+    white-space: nowrap;       
+    overflow: hidden;          
+    text-overflow: ellipsis;
+    font-size: 20px;
+}
+
+.mentor-card-batch{
+    margin-top: 3%;
+    margin-bottom: 0.3rem;
+    /* margin-left: 1rem; */
+    font-family: 'Arial';
+    white-space: nowrap;       
+    overflow: hidden;          
+    text-overflow: ellipsis;
+}
+
+.mentor-card-dept{
+    margin-top: 1%;
+    margin-bottom: 2rem;
+    /* margin-left: 1rem; */
+    font-family: 'Arial';
+    white-space: nowrap;       
+    overflow: hidden;          
+    text-overflow: ellipsis;
+}
+
+/* para sa back ng card css */
+.mentor-card-bio{
+    margin-left: 1rem;
+    font-family: 'Arial';
+}
+
+.mentor-card-exp{
+    margin-left: 1rem;
+    font-family: 'Arial';
+}
+
+.mentor-card-interests{
+    margin-left: 1rem;
+    font-family: 'Arial';
+    
+}
