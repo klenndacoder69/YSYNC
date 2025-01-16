@@ -172,8 +172,8 @@ const AdminRequests = () => {
               <tbody>
                 {activeTab === "application" ? (
                   filteredApplicationRequests.length > 0 ? (
-                    filteredApplicationRequests.map((request) => (
-                      <tr key={request.id}>
+                    filteredApplicationRequests.map((request, index) => (
+                      <tr key={index}>
                         <td>{`${request.userId.firstName} ${request.userId.middleName} ${request.userId.lastName}`}</td>
                         <td>{request.userId.email}</td>
                         <td>

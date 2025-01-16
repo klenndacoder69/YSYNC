@@ -25,8 +25,6 @@ function ResMem() {
 
   return (
     <div className="body-resmem">
-      
-
       <Table values={residentMembers}/> 
       <Outlet/>
     </div>
