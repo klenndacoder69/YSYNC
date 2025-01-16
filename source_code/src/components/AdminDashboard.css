@@ -33,6 +33,18 @@
     margin-left: 30px;
     margin-bottom: 100px;    
 }
+.menu-img-admin-dashboard{
+    margin-right: 20px;
+    width:25px;
+    height:25px;
+}
+
+.menu-item-admin-dashboard {
+    padding: 15px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}   
 
 .menu-container-admin-dashboard{
     padding-left: 20px;
@@ -45,14 +57,14 @@
 .menu-container-admin-dashboard.active {
     font-weight: bold;
     background-position: left center;
-    background-image: url("./assets/highlight.png");
+    background-image: url("/assets/highlight.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .menu-container-admin-dashboard:hover {
     font-weight: bold;
-    background-image: url("./assets/highlight.png");
+    background-image: url("/assets/highlight.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
