@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
 const Chat = () => {
@@ -61,6 +62,7 @@ const Chat = () => {
             />
             <button onClick={sendMessage}>Send</button>
             <p>Users Online: {userCount}</p>
+            <Outlet/>
         </div>
     );
 };

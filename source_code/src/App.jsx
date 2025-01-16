@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
+// import Connect from "./pages/Connectpage_files/Connectpage.jsx";
+// import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
 import Defer from "./pages/Deferpage_files/Defer.jsx";
 import Report from "./pages/Reportpage_files/Report.jsx";
 import Chat from "./utilities/Chatbox.jsx";
@@ -30,6 +32,14 @@ function App() {
       path: "/register",
       element: <Register/>
     },
+    // {
+    //   path: "/connect",
+    //   element: <Connect/>
+    // },
+    // {
+    //   path: "/connect-post",
+    //   element: <ConnectPost/>
+    // }
     {
       path: "/defer",
       element: <Defer/>
@@ -39,8 +49,17 @@ function App() {
       element: <Report/>
     },
     {
-      path: "/test",
-      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["trainee", "residentMember", "admin"]}/>
+      path: "/trainee",
+      element: <ProtectedRoute element={<ResMem/>} allowedRoles = {["trainee", "admin"]}/>,
+      children: [{
+        path: "residents",
+        element: <Chat/>,
+      }
+      ]
+    },
+    {
+      path: "/resmem",
+      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["residentMember", "admin"]}/>
     },
     {
       path: "/unauthorized",
@@ -68,14 +87,9 @@ function App() {
       element: <Mentor/>
     },
     {
-      path: "/resmem",
-      element: <ResMem/>
-    },
-    {
       path: "/trainee-navbar",
       element: <TraineeNavBar/>
-    }
-
+    },
   ]
   const router = createBrowserRouter(routes)
   return (

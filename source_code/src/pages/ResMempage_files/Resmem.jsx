@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Resmem.css";
 import Table from "./Table.jsx";
 import api from "../../api/axios.js";
+import { Outlet } from "react-router-dom";
 function ResMem() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [residentMembers, setResidentMembers] = useState([]);
@@ -54,7 +55,8 @@ function ResMem() {
             <a href="#">Log Out</a>
         </div>
 
-      <Table values={residentMembers}/>
+      {/* <Table values={residentMembers}/> */}
+      <Outlet/>
     </div>
     </div>
     
