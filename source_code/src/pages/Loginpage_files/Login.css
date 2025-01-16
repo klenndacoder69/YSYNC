@@ -4,15 +4,14 @@
 }
 
 .login-main-content{
-    
     display: flex;
     flex-direction: row;
-    padding: 10px;
-    position: absolute;    
-    top: 50%;              
-    left: 50%;             
-    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
 }
+
 .contact-login-page {
     align-items: center;
     position: absolute;
@@ -24,7 +23,7 @@
 .contact-login-page img {
     size: 30px;
     padding: 20px;
-    transition: transform 0.1s ease, filter 0.3s ease;
+    transition: transform 1s ease, filter 0.3s ease;
 }
 
 .contact-login-page a:hover img {
@@ -33,22 +32,40 @@
 }
 
 .logo-login-page {
-    width: 200px;
-    height: 200px;
-    filter: drop-shadow(0px 4px 4px rgba(19, 43, 65, 0.16));
-    padding: 10px;
+    transform: scale(0.8);
 }
 
-.logo-text-container {
-    margin-right: 100px;
+.logo-text-container-login {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
+@keyframes logoAnimation {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
 
-.text-login-page {
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.logo-login-page-container{
+    display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
+    align-items: center;
+    margin-right: -60px; 
+    animation: logoAnimation 1s ease-in-out 0s 1 normal forwards;
 }
+
+.logo-login-page-container p{
+    font-size: 20px;
+    margin-top: -70px;
+}
+
 
 .text-login-page h1 {
     font-weight: 700;
@@ -61,14 +78,7 @@
     margin-top: -25%;
 }
 
-.container-login-page {
-    transform: translate(-50%, -50%);
-    color: #132B41;
-    box-shadow: 0px 4px 10px 3px rgba(19, 43, 65, 0.1);
-    align-items: center;
-    text-align: center;
-    
-}
+
 
 .card-login-page {
     position:relative;

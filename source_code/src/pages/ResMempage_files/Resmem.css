@@ -71,10 +71,7 @@
   align-items: center;
 }
 
-body  {
-  margin: 0;
-  background-color: #d6dbea;
-}
+
 
 .parentNav-resmem {
   display: flex;

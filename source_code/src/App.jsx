@@ -5,8 +5,6 @@ import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
 // import Connect from "./pages/Connectpage_files/Connectpage.jsx";
 // import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
-import MemberSignin from "./pages/Membersignin_files/members-sign-in.jsx";
-import TraineeSignin from "./pages/Traineesignin_files/trainees-sign-in.jsx";
 import Defer from "./pages/Deferpage_files/Defer.jsx";
 import Report from "./pages/Reportpage_files/Report.jsx";
 import Chat from "./utilities/Chatbox.jsx";
@@ -42,22 +40,6 @@ function App() {
     //   element: <ConnectPost/>
     // }
     {
-      path: "/report",
-      element: <AdminReport/>
-    },
-
-    {
-      path: "/request",
-      element: <AdminRequest/>
-    },
-    {
-      path: "/member-signin",
-      element: <MemberSignin/>
-    },
-    {
-      path: "/trainee-signin",
-      element: <TraineeSignin/>
-    {
       path: "/defer",
       element: <Defer/>
     },
@@ -66,8 +48,17 @@ function App() {
       element: <Report/>
     },
     {
-      path: "/test",
-      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["trainee", "residentMember", "admin"]}/>
+      path: "/trainee",
+      element: <ProtectedRoute element={<ResMem/>} allowedRoles = {["trainee", "admin"]}/>,
+      children: [{
+        path: "residents",
+        element: <Chat/>,
+      }
+      ]
+    },
+    {
+      path: "/resmem",
+      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["residentMember", "admin"]}/>
     },
     {
       path: "/unauthorized",
@@ -94,10 +85,6 @@ function App() {
       path: "/Mentor",
       element: <Mentor/>
     },
-    {
-      path: "/resmem",
-      element: <ResMem/>
-    }
   ]
   const router = createBrowserRouter(routes)
   return (
