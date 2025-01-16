@@ -8,11 +8,22 @@ dotenv.config({
 // Create a new post
 const createPost = async (req, res) => {
     try {
-        const newPost = new Posts(req.body);
+        const { isEvent, eventDate, ...rest } = req.body;
+
+        if (isEvent && !eventDate) {
+            return res.status(400).send({ message: "Event date is required." });
+        }
+
+        const newPost = new Posts({
+            ...rest,
+            isEvent,
+            eventDate: isEvent ? eventDate : null,
+        });
+
         await newPost.save();
         res.status(200).send({ message: 'Post created successfully' });
     } catch (error) {
-        res.status(400).send({ message: 'Error creating post', error });
+        res.status(400).send({ message: 'Error creating post', error: error.message });
     }
 };
 
