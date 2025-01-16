@@ -1,32 +1,29 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
+import { jwtDecode } from "jwt-decode";
 
 export default function Defer() {
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
     const [deferReason, setDeferReason] = useState(""); // State variable for text input
-    
     const [errorMessage, setErrorMessage] = useState("");
     const [submitError, setSubmitError] = useState(""); // State variable for submit error
 
-    // Fetch trainee and user data
+    const fetchUserData = async () => {
+        try {
+            const token = sessionStorage.getItem("accessToken");
+            const decodedToken = jwtDecode(token);
+            console.log(decodedToken);
+            const userResponse = await api.get(`users/${decodedToken.id}`);
+            setUser(userResponse.data);
+        } catch (error) {
+            setErrorMessage("Failed to fetch data.");
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    // Fetch user data
     useEffect(() => {
-        const fetchTraineeData = async () => {
-            try {
-                // Fetching trainee data
-                // this is still hard coded, we need to change this to dynamic (connected to login)
-
-                const traineeResponse = await api.get('trainees/6786827bafa95af7d2de509b');
-
-                // Fetching user data
-                const userResponse = await api.get(`users/${traineeResponse.data.userId}`);
-                setUser(userResponse.data);
-
-            } catch (error) {
-                setErrorMessage("Failed to fetch data.");
-                console.error("Error fetching data:", error);
-            } 
-        };
-        fetchTraineeData();
+        fetchUserData();
         setErrorMessage(''); // Clear any previous error messages
     }, []); // Runs only once after the initial render
 
@@ -35,17 +32,19 @@ export default function Defer() {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
         if (!deferReason) {
             setSubmitError("Defer reason is required.");
             return;
         }
+
         setSubmitError(""); // Clear any previous submit errors
 
         try {
-            const response = await api.post("/auth/defer", {
-                email: user.email,
-                reason: deferReason
+            console.log(user._id);
+            const response = await api.post("/defer", {
+                userId: user._id,
+                reason: deferReason,
             });
             if (response) {
                 alert("Submitted successfully!");
@@ -54,11 +53,7 @@ export default function Defer() {
         } catch (error) {
             if (error.response) {
                 console.log("Error response status: ", error.response.status);
-                if (error.response.status === 400) {
-                    setSubmitError("DeferTrainee already exists.");
-                } else if (error.response.status === 500) {
-                    setSubmitError("An error has occurred while submitting.");
-                }
+                setSubmitError("An error has occurred while submitting.");
             } else {
                 console.error("Error message: ", error.message);
                 setSubmitError("A network error has occurred.");
@@ -68,22 +63,25 @@ export default function Defer() {
 
     return (
         <div>
+            <p>Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p> 
             <h1>Defer Page</h1>
-            <p>Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p>
             {errorMessage && <p className="error">{errorMessage}</p>}
-            <div>
-                <h2>Defer Reason</h2>
-                <textarea
-                    value={deferReason}
-                    onChange={handleTextChange}
-                    rows="10"
-                    cols="50"
-                    placeholder="State your reasons here..."
-                />
-            </div>
-            <button onClick={handleSubmit}>Submit</button>
-            <br></br>
-            {submitError && <p className="error">{submitError}</p>}
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Defer Reason:</label>
+                    <br />
+                    <textarea
+                        value={deferReason}
+                        onChange={handleTextChange}
+                        rows="4"
+                        cols="50"
+                        placeholder="State your reasons here..."
+                    />
+                </div>
+                <button type="submit">Submit</button>
+                <br />
+                {submitError && <p className="error">{submitError}</p>}
+            </form>
         </div>
     );
 }

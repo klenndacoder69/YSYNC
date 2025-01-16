@@ -5,7 +5,9 @@ const getAllResi = async (req, res) => {
     const resMems = await ResidentMember.find()
       .populate("userId")
       .populate("traineeId");
-    res.status(200).json(resMems);
+    // even though some became resident members but terminated, they must be filtered
+    const filteredResMems = resMems.filter((resMem) => resMem.userId.userType === "residentMember");
+    res.status(200).json(filteredResMems);
   } catch (error) {
     res.status(500).json({
       error: "An error has occured while retrieving Resident Members' info.",

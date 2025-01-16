@@ -7,20 +7,6 @@ dotenv.config({
   path: "../.env",
 });
 
-//Get all active Mentors
-// const getMentors = async (req, res) => {
-//   try {
-//     const resMems = await ResidentMember.find({
-//       isMentor: true,
-//     });
-//     res.status(200).json(resMems);
-//   } catch (error) {
-//     res.status(500).json({
-//       error: "An error has occurred while retrieving the Resident Members.",
-//     });
-//   }
-// };
-
 const getMentors = async (req, res) => {
   try {
     const resMems = await ResidentMember.find({
@@ -85,7 +71,8 @@ async function getMentorReco(req, res) {
 const getAllTrainees = async (req, res) => {
   try {
     const trainees = await Trainee.find().populate('userId');
-    res.status(200).json(trainees);
+    const filteredTrainees = trainees.filter((trainee) => trainee.userId.userType === "trainee");
+    res.status(200).json(filteredTrainees);
   } catch (error) {
     res.status(500).json({
       error: "An error has occurred while retrieving the Trainees.",

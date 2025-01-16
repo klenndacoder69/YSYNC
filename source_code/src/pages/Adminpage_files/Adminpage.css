@@ -351,3 +351,25 @@
     display: flex;
     gap: 10px;
 }
+
+.accept-btn-admin-dashboard {
+    width: 85px;
+    height: 25px;
+    background-color: #00a3f0;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+    border-style: none;
+    transition: all 0.3s ease;
+}
+
+.accept-btn-admin-dashboard:hover {
+    background-color: #0081bd;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.accept-btn-admin-dashboard:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

@@ -3,16 +3,21 @@ import "../Adminpage.css";
 import api from "../../../api/axios";
 
 const AdminRequests = () => {
-  const [requests, setRequests] = useState([]); // All requests
-  const [activeTab, setActiveTab] = useState("application"); // Tracks active tab
-  const [searchQuery, setSearchQuery] = useState(""); // Tracks search input
+  const [applicationRequests, setApplicationRequests] = useState([]); // Application requests
+  const [deferralRequests, setDeferralRequests] = useState([]); // Deferral requests
+  const [activeTab, setActiveTab] = useState("application");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch requests (replace with your API calls)
+  // Fetch requests
   const fetchRequests = async () => {
     try {
-      const response = await api.get("/getRequests"); // Adjust endpoint as needed
+      const response = await api.get("/getAllRequestApplications");
       if (response) {
-        setRequests(response.data);
+        setApplicationRequests(response.data);
+      }
+      const response2 = await api.get("/getAllRequestDeferrals");
+      if (response2) {
+        setDeferralRequests(response2.data);
       }
     } catch (error) {
       console.error("Error fetching requests:", error);
@@ -29,27 +34,41 @@ const AdminRequests = () => {
   };
 
   // Filter requests based on active tab and search query
-  const filteredRequests = requests.filter((request) => {
-    const { name, email, formLink, status } = request;
+  const filteredApplicationRequests = applicationRequests.filter((request) => {
+    const { userId } = request;
     const search = searchQuery.toLowerCase();
-    const matchesSearch =
-      name.toLowerCase().includes(search) ||
-      email.toLowerCase().includes(search) ||
-      formLink.toLowerCase().includes(search);
-    return matchesSearch && status === activeTab;
+    const name =
+      `${userId.firstName} ${userId.middleName} ${userId.lastName}`.toLowerCase();
+    const matchesSearch = name.includes(search);
+    return matchesSearch;
   });
 
+  const filteredDeferralRequests = deferralRequests.filter((request) => {
+    const { userId } = request;
+    const search = searchQuery.toLowerCase();
+    const name =
+      `${userId.firstName} ${userId.middleName} ${userId.lastName}`.toLowerCase();
+    const matchesSearch = name.includes(search);
+    return matchesSearch;
+  });
   // Handle Accept button click
-  const handleAccept = async (requestId) => {
+  const handleAccept = async (requestId, type) => {
     try {
-      const response = await api.post(`/acceptRequest/${requestId}`);
-      if (response) {
-        console.log("Request accepted successfully.");
-        setRequests((prev) =>
-          prev.map((request) =>
-            request.id === requestId ? { ...request, status: "accepted" } : request
-          )
-        );
+      if (type === "application") {
+        const response = await api.post(`/acceptApplication/${requestId}`);
+        if (response) {
+          console.log("Application accepted successfully.");
+          fetchRequests();
+          alert("Application accepted successfully.");
+        }
+      } else if (type === "deferral") {
+        console.log(requestId);
+        const response = await api.post(`/acceptDeferral/${requestId}`);
+        if (response) {
+          console.log("Deferral accepted successfully.");
+          fetchRequests();
+          alert("Deferral accepted successfully.");
+        }
       }
     } catch (error) {
       console.error("Error accepting request:", error);
@@ -57,16 +76,22 @@ const AdminRequests = () => {
   };
 
   // Handle Decline button click
-  const handleDecline = async (requestId) => {
+  const handleDecline = async (requestId, type) => {
     try {
-      const response = await api.post(`/declineRequest/${requestId}`);
-      if (response) {
-        console.log("Request declined successfully.");
-        setRequests((prev) =>
-          prev.map((request) =>
-            request.id === requestId ? { ...request, status: "declined" } : request
-          )
-        );
+      if (type === "application") {
+        const response = await api.post(`/declineApplication/${requestId}`);
+        if (response) {
+          console.log("Application declined successfully.");
+          fetchRequests();
+          alert("Application declined successfully.");
+        }
+      } else if (type === "deferral") {
+        const response = await api.post(`/declineDeferral/${requestId}`);
+        if (response) {
+          console.log("Deferral declined successfully.");
+          fetchRequests();
+          alert("Deferral declined successfully.");
+        }
       }
     } catch (error) {
       console.error("Error declining request:", error);
@@ -134,36 +159,100 @@ const AdminRequests = () => {
                 <tr>
                   <th>NAME</th>
                   <th>EMAIL</th>
-                  <th>APPLICATION FORM</th>
-                  <th>MENTOR DATE</th>
+                  <th>
+                    {activeTab === "application"
+                      ? "APPLICATION FORM"
+                      : "REASON"}
+                  </th>
+                  <th>DATE CREATED</th>
+                  <th>STATUS</th>
                   <th>ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredRequests.length > 0 ? (
-                  filteredRequests.map((request) => (
-                    <tr key={request.id}>
-                      <td>{request.name}</td>
-                      <td>{request.email}</td>
+                {activeTab === "application" ? (
+                  filteredApplicationRequests.length > 0 ? (
+                    filteredApplicationRequests.map((request) => (
+                      <tr key={request.id}>
+                        <td>{`${request.userId.firstName} ${request.userId.middleName} ${request.userId.lastName}`}</td>
+                        <td>{request.userId.email}</td>
+                        <td>
+                          <a
+                            href={request.appForm}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            LINK
+                          </a>
+                        </td>
+                        <td>{request.createdAt}</td>
+                        <td>
+                          <strong>{request.status.toUpperCase()}</strong>
+                        </td>
+                        <td>
+                          {request.status === "pending" ? (
+                            <div className="button-div-admin-dashboard">
+                              <button
+                                className="accept-btn-admin-dashboard"
+                                onClick={() =>
+                                  handleAccept(request._id, "application")
+                                }
+                              >
+                                Accept
+                              </button>
+                              <button
+                                className="decline-btn-admin-dashboard"
+                                onClick={() =>
+                                  handleDecline(request._id, "application")
+                                }
+                              >
+                                Decline
+                              </button>
+                            </div>
+                          ) : (
+                            <strong>DONE</strong>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5">No data available</td>
+                    </tr>
+                  )
+                ) : filteredDeferralRequests.length > 0 ? (
+                  filteredDeferralRequests.map((request, index) => (
+                    <tr key={index}>
+                      <td>{`${request.userId.firstName} ${request.userId.middleName} ${request.userId.lastName}`}</td>
+                      <td>{request.userId.email}</td>
+                      <td>{request.reason}</td>
+                      <td>{request.createdAt}</td>
                       <td>
-                        <a href={request.formLink} target="_blank" rel="noopener noreferrer">
-                          {request.formLink}
-                        </a>
+                        <strong>{request.status.toUpperCase()}</strong>
                       </td>
-                      <td>{request.mentorDate}</td>
                       <td>
-                        <button
-                          className="accept-button"
-                          onClick={() => handleAccept(request.id)}
-                        >
-                          Accept
-                        </button>
-                        <button
-                          className="decline-button"
-                          onClick={() => handleDecline(request.id)}
-                        >
-                          Decline
-                        </button>
+                        {request.status === "pending" ? (
+                          <div className="button-div-admin-dashboard">
+                            <button
+                              className="accept-btn-admin-dashboard"
+                              onClick={() =>
+                                handleAccept(request._id, "deferral")
+                              }
+                            >
+                              Accept
+                            </button>
+                            <button
+                              className="decline-btn-admin-dashboard"
+                              onClick={() =>
+                                handleDecline(request._id, "deferral")
+                              }
+                            >
+                              Decline
+                            </button>
+                          </div>
+                        ) : (
+                          <b>DONE</b>
+                        )}
                       </td>
                     </tr>
                   ))

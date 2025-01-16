@@ -1,7 +1,7 @@
 import { deferRequest, getTrainee } from '../controllers/traineeController.js'
 
 const traineeRouter = (app) => {
-    app.post('/api/auth/defer', deferRequest);
+    app.post('/api/defer', deferRequest);
     app.get('/api/trainees/:id', getTrainee);
 };
 
