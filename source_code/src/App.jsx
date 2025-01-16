@@ -50,10 +50,14 @@ function App() {
     },
     {
       path: "/trainee",
-      element: <ProtectedRoute element={<ResMem/>} allowedRoles = {["trainee", "admin"]}/>,
+      element: <ProtectedRoute element={<TraineeNavBar/>} allowedRoles = {["trainee", "admin"]}/>,
       children: [{
-        path: "residents",
+        path: "chat",
         element: <Chat/>,
+      },
+      {
+        path: "residentMembers",
+        element: <ResMem/>
       }
       ]
     },
@@ -83,12 +87,8 @@ function App() {
       ]
     },
     {
-      path: "/Mentor",
+      path: "/mentor",
       element: <Mentor/>
-    },
-    {
-      path: "/trainee-navbar",
-      element: <TraineeNavBar/>
     },
   ]
   const router = createBrowserRouter(routes)
