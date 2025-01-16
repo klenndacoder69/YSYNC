@@ -1,23 +1,34 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider.jsx";
+
 // ProtectedRoute Component
 const ProtectedRoute = ({ element, allowedRoles }) => {
+    // Retrieve accessToken from sessionStorage
+    const accessToken = sessionStorage.getItem("accessToken");
+    const username = sessionStorage.getItem("username");
+
+    if (!accessToken) {
+        console.log("No access token found, redirecting to login");
+        return <Navigate to="/login" replace />;
+    }
+
+    // Retrieve the user's role from sessionStorage or decode the JWT if required
+    // Assuming the user's role is still part of `auth` in context for now
     const { auth } = useContext(AuthContext);
-    console.log(auth)
-    if (!auth?.accessToken) {
-        console.log("pumunta siya rito")
-      // If no access token, redirect to login
-      return <Navigate to="/login" replace />;
+
+    // Ensure auth is consistent if still using context for role checks
+    if (allowedRoles && (!auth || !allowedRoles.includes(auth.role))) {
+        console.log("User role is not allowed, redirecting to unauthorized");
+        return <Navigate to="/unauthorized" replace />;
     }
-  
-    if (allowedRoles && !allowedRoles.includes(auth.role)) {
-      // If user's role is not allowed, or the account is created in a weird way, redirect to "Not Authorized"
-      return <Navigate to="/unauthorized" replace />;
+
+    // If username is not already in sessionStorage, store it
+    if (!username && auth?.email) {
+        sessionStorage.setItem("username", auth.email.replace("@up.edu.ph", "").trim());
     }
-    
-    sessionStorage.setItem("username", auth.email.replace("@up.edu.ph", "").trim());
-    return element; // Render the component if authorized
-  };
+
+    return element; // Render the protected component
+};
 
 export default ProtectedRoute;

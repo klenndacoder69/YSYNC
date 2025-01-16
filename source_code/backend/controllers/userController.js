@@ -84,15 +84,12 @@ const getAllUsers = async (req, res) => {
 }
 const reportRequest = async (req, res) => {
     try {
-        const { reportedID, reportedFirstName, reportedMiddleName, reportedLastName, reason } = req.body;
+        const { userId, reason } = req.body;
         
         // create reportUser object
         const reportUser = new Report({
-            reportedID: reportedID,
-            reportedFirstName: reportedFirstName,
-            reportedMiddleName: reportedMiddleName, 
-            reportedLastName: reportedLastName, 
-            reason: reason,
+            userId,
+            reason,
             createdAt: new Date() // Add any additional fields as needed
         });
 

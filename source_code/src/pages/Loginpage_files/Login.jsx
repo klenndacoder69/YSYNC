@@ -69,7 +69,8 @@ export default function Login() {
         const role = response?.data?.role;
 
         setAuth({email, password, accessToken, role});
-
+        // for now let us store the access token in the session storage TODO:
+        sessionStorage.setItem("accessToken", accessToken);
         if (role === "trainee") {
           navigate("/test");
         } else if (role === "residentMember") {

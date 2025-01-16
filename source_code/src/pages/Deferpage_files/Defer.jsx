@@ -14,6 +14,7 @@ export default function Defer() {
             try {
                 // Fetching trainee data
                 // this is still hard coded, we need to change this to dynamic (connected to login)
+
                 const traineeResponse = await api.get('trainees/6786827bafa95af7d2de509b');
 
                 // Fetching user data

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../models/userSchema.js";
 import Trainee from "../models/traineeSchema.js";
 import ResidentMember from "../models/residentMemberSchema.js";
-
+import Report from "../models/reportSchema.js";
 const editUser = async (req, res) => {
     try {
         const { user, userType, userId } = req.body;
@@ -76,4 +76,48 @@ const deleteUser = async (req, res) => {
 
     }
 }
-export { editUser, deleteUser };
+
+const getAllReports = async (req, res) => {
+    try {
+        const reports = await Report.find().populate("userId");
+        console.log(reports)
+        res.status(200).json(reports);
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while retrieving reports." });
+    }
+}
+
+const resolveReport = async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        const report = await Report.findById(reportId);
+        report.status = "resolved";
+        await report.save();
+        res.status(200).json({ message: "Report resolved successfully." });
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while resolving the report." });
+    }
+}
+
+const declineReport = async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        const report = await Report.findById(reportId);
+        report.status = "declined";
+        await report.save();
+        res.status(200).json({ message: "Report declined successfully." });
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while deleting the report." });
+    }
+}
+
+const deleteReport = async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        await Report.findByIdAndDelete(reportId);
+        res.status(200).json({ message: "Report deleted successfully." });
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while deleting the report." });
+    }
+}
+export { editUser, deleteUser, getAllReports, resolveReport, deleteReport, declineReport };

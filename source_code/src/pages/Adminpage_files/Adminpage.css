@@ -302,3 +302,52 @@
 .edit-user-modal-form button {
     margin:7px;
 }
+
+.resolve-btn-admin-dashboard {
+    width: 85px;
+    height: 25px;
+    background-color: #00a3f0;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+    border-style: none;
+    transition: all 0.3s ease;
+}
+
+.resolve-btn-admin-dashboard:hover {
+    background-color: #0081bd;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.resolve-btn-admin-dashboard:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.decline-btn-admin-dashboard {
+    width: 85px;
+    height: 25px;
+    background-color: gray;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+    border-style: none;
+    transition: all 0.3s ease;
+}
+
+.decline-btn-admin-dashboard:hover {
+    background-color: #666;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.decline-btn-admin-dashboard:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.button-div-admin-dashboard{
+    display: flex;
+    gap: 10px;
+}
