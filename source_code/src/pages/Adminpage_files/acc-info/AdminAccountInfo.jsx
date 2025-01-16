@@ -30,7 +30,7 @@ const AdminAccountInfo = () => {
       setMiddleName(userId.middleName || "");
       setLastName(userId.lastName || "");
       setEmail(userId.email || "");
-      setBatch(traineeId?.univBatch || "");
+      setBatch(traineeId?.univBatch || popup.user.univBatch || "");
       setInterests(
         traineeId?.interests?.join(", ") || (popup.user.interests?.join(", ") || "")
       );
@@ -70,6 +70,7 @@ const handleEditUser = async (user) => {
     user.userId.middleName = middleName;
     user.userId.lastName = lastName;
     user.userId.email = email;
+    user.univBatch = batch
     user.interests = interests.split(",");
     console.log("Sending trainee details...", user);
   } else {
@@ -309,7 +310,7 @@ const handleEditUser = async (user) => {
               <button type="submit" id="submit-admin-dashboard">
                 <img
                   className="search-img-admin-dashboard"
-                  src="./assets/magnifying-glass.png"
+                  src="/assets/magnifying-glass.png"
                   alt="Search"
                 ></img>
               </button>
