@@ -1,4 +1,5 @@
 import User from "../models/userSchema.js";
+import Report from "../models/reportSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 // sample:
@@ -60,6 +61,19 @@ const userRegister = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id; // Get user ID from request parameters
+        const user = await User.findById(userId); // Find the user by their ID
+        if (!user) {
+            return res.status(404).json({ error: "User not found." });
+        }
+        res.status(200).json(user); // Send the user data as a JSON response
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while fetching the user data." });
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -68,6 +82,29 @@ const getAllUsers = async (req, res) => {
         res.status(500).json({ error: "An error has occurred while retrieving users." });
     }
 }
+const reportRequest = async (req, res) => {
+    try {
+        const { reportedID, reportedFirstName, reportedMiddleName, reportedLastName, reason } = req.body;
+        
+        // create reportUser object
+        const reportUser = new Report({
+            reportedID: reportedID,
+            reportedFirstName: reportedFirstName,
+            reportedMiddleName: reportedMiddleName, 
+            reportedLastName: reportedLastName, 
+            reason: reason,
+            createdAt: new Date() // Add any additional fields as needed
+        });
+
+        // Save the new ReportUser document
+        await reportUser.save();
+        res.status(201).json({ message: "Submitted successfully."});
+    } catch (error) {
+        console.error("Error occurred while submitting report:", error); // Log the error
+        res.status(500).json({ error: "An error has occurred while submitting." });
+    }
+}
+
 
 // const testFunction = async (req,res) => {
 //     try {
@@ -84,6 +121,9 @@ const getAllUsers = async (req, res) => {
 export {
     userSignIn,
     userRegister,
+    getUser,
+    getAllUsers,
+    reportRequest
     getAllUsers,
     // testFunction
 }
