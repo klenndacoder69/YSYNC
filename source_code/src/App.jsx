@@ -12,6 +12,8 @@ import AdminDashboard from "./components/AdminDashboard.jsx";
 import AdminAccountInfo from "./pages/Adminpage_files/acc-info/AdminAccountInfo.jsx";
 import AdminRequests from "./pages/Adminpage_files/requests/AdminRequests.jsx";
 import AdminReports from "./pages/Adminpage_files/reports/AdminReports.jsx";
+import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
+
 function App() {
   const routes = [
     {
@@ -58,6 +60,10 @@ function App() {
         element: <AdminReports/>
       }
       ]
+    },
+    {
+      path: "Mentor",
+      element: <Mentor/>
     }
   ]
   const router = createBrowserRouter(routes)
