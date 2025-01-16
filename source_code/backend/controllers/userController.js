@@ -123,8 +123,7 @@ export {
     userRegister,
     getUser,
     getAllUsers,
-    reportRequest
-    getAllUsers,
+    reportRequest,
     // testFunction
 }
 
