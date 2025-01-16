@@ -17,7 +17,10 @@
     transition: transform 0.5s ease;
 }
 
-.mentor-card:hover {
+/* .mentor-card:hover {
+    transform: rotateY(180deg);
+} */
+.mentor-card-flipped {
     transform: rotateY(180deg);
 }
 
@@ -84,7 +87,6 @@
     margin-bottom: 0.1rem;  
     text-align: center; 
     font-family: 'Arial';
-    /* width: 150px;               */
     white-space: nowrap;       
     overflow: hidden;          
     text-overflow: ellipsis;
@@ -94,7 +96,6 @@
 .mentor-card-batch{
     margin-top: 3%;
     margin-bottom: 0.3rem;
-    /* margin-left: 1rem; */
     font-family: 'Arial';
     white-space: nowrap;       
     overflow: hidden;          
@@ -104,7 +105,6 @@
 .mentor-card-dept{
     margin-top: 1%;
     margin-bottom: 2rem;
-    /* margin-left: 1rem; */
     font-family: 'Arial';
     white-space: nowrap;       
     overflow: hidden;          
