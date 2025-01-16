@@ -2,6 +2,7 @@ import User from "../models/userSchema.js";
 import Report from "../models/reportSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import RequestApplication from "../models/requestApplicationSchema.js";
 // sample:
 // import ResidentMember from "../models/residentMemberSchema.js";
 // import Trainee from "../models/traineeSchema.js";
@@ -42,19 +43,13 @@ const userRegister = async (req, res) => {
         
         // we set userType to trainee (TODO: this will be changed later on)
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ firstName, lastName, middleName, email, password: hashedPassword, userType: "trainee"});
+        const user = new User({ firstName, lastName, middleName, email, password: hashedPassword});
         console.log("test", user)
+        // create the user
         await user.save();
-
-        // this part is for migrating a user to a trainee (which is the main purpose of the register)
-            // const trainee = new Trainee({ userId: user._id,
-            //     interests: ["AI", "Cybersecurity", "UI/UX", "Database"],
-            //     univBatch: 2023
-            //  });
-            // await trainee.save();
-
-        // const residentMember = new ResidentMember({ userId: user._id, traineeId: trainee._id, isMentor: true, orgBatch: 2024, department: "VL", status: "active", isMentor: true, whyYouShouldChooseMe: "I enjoy teaching.", whatToExpect: "Hands-on mentorship." });
-        // await residentMember.save();
+        // create an application form
+        await RequestApplication.create({ userId: user._id });
+        
         res.status(201).json({ message: "User registered successfully."});
     } catch (error) {
         res.status(500).json({ error: "An error has occured while registering the user."});
@@ -84,15 +79,12 @@ const getAllUsers = async (req, res) => {
 }
 const reportRequest = async (req, res) => {
     try {
-        const { reportedID, reportedFirstName, reportedMiddleName, reportedLastName, reason } = req.body;
+        const { userId, reason } = req.body;
         
         // create reportUser object
         const reportUser = new Report({
-            reportedID: reportedID,
-            reportedFirstName: reportedFirstName,
-            reportedMiddleName: reportedMiddleName, 
-            reportedLastName: reportedLastName, 
-            reason: reason,
+            userId,
+            reason,
             createdAt: new Date() // Add any additional fields as needed
         });
 

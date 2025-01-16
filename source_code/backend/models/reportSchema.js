@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema({
-    reportedID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    reportedFirstName: { type: String, required: true },
-    reportedMiddleName: { type: String, required: false },
-    reportedLastName: { type: String, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     reason: { type: String, required: true },
+    status: { type: String, default: "pending" },
     createdAt: { type: Date, default: Date.now },
   });
 
