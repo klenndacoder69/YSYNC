@@ -1,6 +1,5 @@
 
 .post-container {
-  box-shadow: 3px 3px 10px rgb(188, 188, 188);
   background-color: #F2F5FF;
   margin-bottom: 20px;
   min-height: 210px;
@@ -8,7 +7,7 @@
   border-radius: 20px;
   display: flex; 
   flex-direction: column;
-  border: 1.5px solid #005E8A;
+  border: 0.5px solid #d6dbea;
   padding: 20px;
 }
 
@@ -76,7 +75,9 @@
   padding: 2px 20px;
   margin-top: 15px;
   padding-top: 10px;
+  padding-bottom: 10px;
   border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 .post-user-left {
   display: flex;
@@ -119,9 +120,9 @@
   align-items: center;
 }
 .post-user-comment-add input {
-  background-color: #efefef89;
-  border-color: rgba(119, 136, 153, 0.469);
-  border-width: 0.5px;
+  background-color: #d6dbea50;
+  border-color: #d6dbea50;
+  border-width: 0.3px;
   padding: 8px 12px;
   border-radius: 20px;
   outline: none;

@@ -5,6 +5,7 @@ import heartIcon from '/assets/heart.png';
 import heartRedIcon from '/assets/heart-red.png';
 import pinIcon from '/assets/pin-2.png';
 import pinFilledIcon from '/assets/pin-filled.png';
+import Comment from "./Comment.jsx";
 
 function Post({ post, onPostUpdate, onPinToggle }) {
 
@@ -93,6 +94,10 @@ function Post({ post, onPostUpdate, onPinToggle }) {
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="post-comment">
+                <Comment />
+                <Comment />
             </div>
         </div>
     );
