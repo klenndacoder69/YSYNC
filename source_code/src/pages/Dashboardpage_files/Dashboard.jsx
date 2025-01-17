@@ -1,44 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Upcoming from "./Components/Upcoming";
-import Pinned from "./Components/Pinned";
+// import Pinned from "./Components/Pinned";
 import Post from "./Components/Post";
-import Create from "./Components/Create";
-import Createtriggered from "./Components/Createtriggered";
+// import Create from "./Components/Create";
+// import Createtriggered from "./Components/Createtriggered";
 import Chat from "../../utilities/Chatbox";
+import api from "../../api/axios";
+import { jwtDecode } from "jwt-decode";
 
 function Dashboard() {
-  const [isCreating, setIsCreating] = useState(false);
-  const [posts, setPosts] = useState([
-    { id: 1, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-    { id: 2, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-    { id: 3, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-    { id: 4, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-    { id: 5, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-    { id: 6, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
-  ]);
+  const [posts, setPosts] = useState([]);
+  const [userId, setUserId] = useState("");
 
-  const handleCreateClick = () => {
-    setIsCreating(true);
-  };
+  useEffect(() => {
+      const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+      console.log(decodedToken);
+      setUserId(decodedToken.id);
+  }, []); 
 
-  const handleCancelCreate = () => {
-    setIsCreating(false);
-  };
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+      console.log(decodedToken)
+      setUserId(decodedToken.id);
+      console.log("The user id is: ", userId)
+      try {
+        const response = await api.get(`/getposts/${userId}`, {
+          params: { userId },
+        });
+        setPosts(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, [userId]);
+
+  // const handleCreateClick = () => {
+  //   setIsCreating(true);
+  // };
+
+  // const handleCancelCreate = () => {
+  //   setIsCreating(false);
+  // };
 
   const handlePostUpdate = (updatedPost) => {
     setPosts((prevPosts) =>
-      prevPosts.map((post) => (post.id === updatedPost.id ? updatedPost : post))
+      prevPosts.map((post) => (post._id === updatedPost._id ? updatedPost : post))
     );
   };
 
-  const handlePinToggle = (postId) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId ? { ...post, isPinned: !post.isPinned } : post
-      )
-    );
-  };
+  // const handlePinToggle = (postId) => {
+  //   setPosts((prevPosts) =>
+  //     prevPosts.map((post) =>
+  //       post.id === postId ? { ...post, isPinned: !post.isPinned } : post
+  //     )
+  //   );
+  // };
 
   const pinnedPosts = posts.filter((post) => post.isPinned);
 
@@ -56,17 +76,17 @@ function Dashboard() {
               <br />
             </div>
           )}
-          <div className="dashboard-create-container">
+          {/* Placeholder for Create component */}
+          {/* <div className="dashboard-create-container">
             {isCreating ? (
               <Createtriggered onCancel={handleCancelCreate} />
             ) : (
               <Create onCreateClick={handleCreateClick} />
             )}
             <br />
-          </div>
+          </div> */}
           <div className="announcements-title">
-            {" "}
-            <h2>Announcements</h2>{" "}
+            <h2>Announcements</h2>
           </div>
           <div className="dashboard-solution-container">
             <div className="dashboard-post-container">
@@ -74,15 +94,19 @@ function Dashboard() {
                 if (!post.isPinned) {
                   return (
                     <Post
-                      key={post.id}
+                      key={post._id}
                       post={post}
-                      onPostUpdate={handlePostUpdate}
-                      onPinToggle={handlePinToggle}
+                      userId={userId}
+                      onPostsUpdate={(updatedPost) =>
+                        setPosts((prev) =>
+                          prev.map((p) => (p._id === updatedPost._id ? updatedPost : p))
+                        )
+                      }
                     />
                   );
                 }
+                return null;
               })}
-
             </div>
           </div>
         </div>
