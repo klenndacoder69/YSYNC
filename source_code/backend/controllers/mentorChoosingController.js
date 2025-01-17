@@ -36,8 +36,8 @@ async function getMentorReco(req, res) {
     const mentors = await ResidentMember.find({
       isMentor: true,
     })
-      .populate("traineeId")
-      .populate("userId");
+      .populate("traineeId", "interests")
+      .populate("userId", "firstName lastName image");
 
     //Mentor match
     const mentorMatch = mentors.map((mentor) => {
@@ -47,7 +47,7 @@ async function getMentorReco(req, res) {
       );
       return {
         //Returns array with userID: and matchcount;
-        mentor: mentor, //Should i return userId or mentor itself (does mentor return ObjectID)
+        ...mentor.toObject(), //Should i return userId or mentor itself (does mentor return ObjectID)
         matchCount: commonInterest.length,
       };
     });
@@ -63,7 +63,7 @@ async function getMentorReco(req, res) {
     });
 
     // console.log(mentorMatch);
-    res.status(200).json(mentorMatch);
+    res.status(200).json(slicedMentorMatch);
   } catch (error) {
     res.status(500).json({
       error: "An error has occurred while retrieving the Resident Members.",
