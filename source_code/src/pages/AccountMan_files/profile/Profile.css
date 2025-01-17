@@ -20,12 +20,12 @@
   }
   
   .text2 {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: lighter;
       color: gray;
       position: absolute;
-      right: 780px;
-      bottom: -10px;
+      left: 32%;
+      bottom: -30px;
   }
   
   .edit-profile {

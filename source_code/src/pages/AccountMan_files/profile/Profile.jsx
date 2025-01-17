@@ -92,15 +92,15 @@ const Profile = () => {
                             </form>
                         </div>
                     </div>
-                   <div className="profile-information-2">
+                   {/* <div className="profile-information-2">
                         <p>MENTOR INFORMATION</p>
                         <br></br>
                         <hr />
-                   </div>
+                   </div> */}
                 </div>
                 <div className="edit-profile">
                     <button className="edit-button" onClick={toggleEdit}>
-                        <i className="material-symbols-outlined">{isEditMode ? 'check' : 'edit'}</i>
+                        {/* <i className="material-symbols-outlined">{isEditMode ? 'check' : 'edit'}</i> */}
                         <span>{isEditMode ? 'Save' : 'Edit'}</span>
                     </button>
                 </div>
