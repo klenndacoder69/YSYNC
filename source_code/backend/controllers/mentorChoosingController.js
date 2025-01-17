@@ -26,9 +26,12 @@ const getMentors = async (req, res) => {
 
 async function getMentorReco(req, res) {
   try {
-    console.log("This is the request body", req.body);
+    const traineeId = req.params.id;
+    const trainee = await Trainee.findById(traineeId);
+    const traineeInterests = trainee.interests;
+  
     // const traineeInterests = req.body;
-    const traineeInterests = ["AI", "Cybersecurity", "UI/UX", "Database"];
+    // const traineeInterests = ["AI", "Cybersecurity", "UI/UX", "Database"];
     const mentors = await ResidentMember.find({
       isMentor: true,
     })
