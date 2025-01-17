@@ -1,28 +1,39 @@
-.dashboard-createtriggered-container{
-    min-height: 250px;
-    max-width: 100%;
-    border-radius: 10px;
-    border-color: transparent;
-    box-shadow: 3px 3px 10px rgb(188, 188, 188);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    border: none; 
-    padding: 0; 
-} 
+.dashboard-createtriggered-container {
+  min-height: 220px;
+  max-width: 100%;
+  border-radius: 10px;
+  border-color: transparent;
+  box-shadow: 3px 3px 10px rgb(188, 188, 188);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; 
+  background-color: #ffffff;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.dashdashboard-createtriggered-announcement input{
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-bottom: 3px solid #00A3F0;
-    background-color: #efefef89;
-    outline: none;
-    margin: 22px;
-    width: 980px;
-    height: 170px;
-  }
+.dashdashboard-createtriggered-announcement {
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+
+.dashdashboard-createtriggered-announcement input {
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom: 3px solid #00A3F0;
+  background-color: #efefef89;
+  outline: none;
+  width: 100%;
+  min-height: 140px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  resize: none;
+  font-size: 13px;
+
+}
 
 
 .dashboard-createtriggered-options {
@@ -30,7 +41,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    padding: 2px 20px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
     margin-top: -10px;
     margin-bottom: 10px;
   }
@@ -40,22 +52,14 @@
 .dashboard-createtriggered-options-right {
     display: flex;
     align-items: center;
-}
-
-.dashboard-createtriggered-options-left{
-    margin-right: 20px;
-    margin-left: 25px;
-}
-.dashboard-createtriggered-options-middle{
-    margin-right: 15px;
-}
-.dashboard-createtriggered-options-right{
-    margin-left: 4px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .dashboard-createtriggered-options-left-upload,
 .dashboard-createtriggered-options-middle-link{
     margin: -20px;
+    margin-left: 0px;
 }
 
 .dashboard-createtriggered-options-left button,
