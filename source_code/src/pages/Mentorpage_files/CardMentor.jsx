@@ -26,9 +26,9 @@ export default function CardMentor({ image, name, batch, dept, bio, exp, interes
             </div>
 
             <div className="mentor-card-back">
-                <h2 className="mentor-card-bio">WHY YOU SHOULD CHOOSE ME:<br/>{bio}</h2>
-                <h2 className="mentor-card-exp">WHAT TO EXPECT: <br/>{exp}</h2>
-                <h2 className="mentor-card-interests">INTERESTS: <br/>{interests}</h2>
+                <h2 className="mentor-card-bio">WHY CHOOSE ME:<br/><span style={{ fontWeight: "normal" }}>{bio}</span></h2>
+                <h2 className="mentor-card-exp">WHAT TO EXPECT: <br/><span style={{ fontWeight: "normal" }}>{exp}</span></h2>
+                <h2 className="mentor-card-interests">INTERESTS: <br/><span style={{ fontWeight: "normal" }}>{interests}</span></h2>
             </div>
 
         </div>
