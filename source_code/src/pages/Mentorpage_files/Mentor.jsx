@@ -14,10 +14,9 @@ const fetchMentors = async () => {
     }
 };
 
-const fetchTopMentors = async () => {
+const fetchTopMentors = async (userId) => {
     try {
-        const response = await api.get('/getMentorRecommendations');
-        console.log('Mentors:', response.data);
+        const response = await api.post(`/getMentorRecommendations/${userId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching mentors:', error.response ? error.response.data : error.message);
@@ -30,13 +29,15 @@ export default function Mentor(){
     const [topMentors, setTopMentors] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const userId = '67891ee00a8813ebc8c7156f';
+
     useEffect(() => {
         const loadMentors = async () => {
-
+            
             try {
                 const fetchedMentors = await fetchMentors();
                 setMentors(fetchedMentors);
-                const fetchedTopMentors = await fetchTopMentors();
+                const fetchedTopMentors = await fetchTopMentors(userId);
                 setTopMentors(fetchedTopMentors);
             } catch (err) {
                 console.error('Error loading mentors:', err);
@@ -59,10 +60,10 @@ export default function Mentor(){
                 <div className="mentor-main">
                     <div className="mentor-top-picks">
                         <div className="mentor-top-components">
-                            {mentors.slice(0,3).map((mentor) => ( // mentors must be topMentors and shouldn't be sliced
+                            {topMentors.map((mentor) => (
                                 <CardMentor
-                                    key={mentor.userId}
-                                    image={mentor.userId.image}
+                                    key = {mentor.userId}
+                                    image = {mentor.userId.image}
                                     name={`${mentor.userId.firstName} ${mentor.userId.lastName}`}
                                     batch={mentor.orgBatch}
                                     dept={mentor.department}
