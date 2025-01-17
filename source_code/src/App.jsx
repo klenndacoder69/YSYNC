@@ -20,6 +20,7 @@ import TraineeNavBar from "./components/TraineeNavBar.jsx";
 import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
 import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
 import ResmemNavBar from "./components/ResmemNavbar.jsx";
+import Profile from "./pages/AccountMan_files/profile/Profile.jsx";
 
 function App() {
   const routes = [
@@ -74,7 +75,12 @@ function App() {
       {
         path: "chat",
         element: <Chat/>
+      },
+      {
+        path:"testing",
+        element: <Profile/>
       }
+      
       ]
     },
     {
@@ -115,6 +121,11 @@ function App() {
       }
       ]
     },
+
+    {
+      path:"/testing",
+      element: <Profile/>
+    }
   ]
   const router = createBrowserRouter(routes)
   return (

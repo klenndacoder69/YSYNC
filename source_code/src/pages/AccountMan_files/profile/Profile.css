@@ -1,0 +1,217 @@
+.profile-container {
+    position: relative;
+  }
+  .profile-header {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin-left: 10%;
+      margin-top: 25px;
+      margin-right: 10%;
+      position: relative;
+  }
+  
+  .account-header-container {
+      position: relative;
+  }
+  
+  .account-header {
+      font-size: 30px;
+      font-weight: bold;
+      color: #132b41;
+  }
+  
+  .text2 {
+      font-size: 16px;
+      font-weight: lighter;
+      color: gray;
+      position: absolute;
+      right: 780px;
+      bottom: -10px;
+  }
+  
+  .edit-profile {
+      position: absolute; 
+      top: -10px;
+      right: 180px;
+      margin: 10px; 
+      display: flex;
+      justify-content: flex-end;
+  }
+
+
+.profile-information {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 74%;
+}
+.profile2 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-information-1 {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Segoe UI", Arial, sans-serif;
+    gap: 20px;
+}
+
+.profile-information-1-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 20px;
+}
+
+.profile-information-1-photo {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0px;
+    margin-top: 0px;
+    gap: 10px;
+}
+
+.change-photo {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: lighter;
+    margin-top: 0px;
+    margin-left: 25%;
+    display: block;
+}
+
+.change-photo i {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.change-photo {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: lighter;
+    margin-top: 0px;
+    margin-left: 25%;
+    display: block;
+}
+
+.change-photo i {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.bio {
+    margin-top: -18px;
+    margin-left: 3px;
+    color: #1e85b6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.bio1 {
+    margin-top: 0px;
+    margin-left: 12px;
+    color: gray;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+input[type=text] {
+    width: 100%;
+    height: 125px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 1px solid #787878;
+}
+.profile-information-2 {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    color:gray;
+}
+
+.profile-information-2 hr {
+    border: 0;
+    height: 1px;
+    background: #132b41;
+    margin: 20px 0;
+    margin-top: -7px;
+}
+
+.mentor-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    background-color: #2A9CD4;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    gap: 5px;
+}
+
+.mentor-button i {
+    font-size: 18px;
+}
+
+.mentor-button:hover {
+    background-color: #1e85b6;
+}
+
+/* Added the new style here*/
+
+.bio-display-container {
+  margin-top: 20px; /* Adjust the value as needed */
+}
+
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    background-color: #2A9CD4;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    gap: 5px;
+}
+
+.edit-button i {
+    font-size: 18px;
+}
+
+.edit-button:hover {
+    background-color: #1e85b6;
+}
