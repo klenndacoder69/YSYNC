@@ -193,3 +193,7 @@ input[type="checkbox"]:checked {
     justify-content: space-between;
     width: 80%;
 }
+
+.regis-error-message {
+    color: red;
+}
