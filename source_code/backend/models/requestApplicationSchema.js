@@ -7,6 +7,8 @@ const requestApplicationSchema = new mongoose.Schema({
     status: { type: String, required: true, default: "pending", enum: ["pending", "accepted", "rejected"] },
     // default will be changed later TODO:
     appForm: { type: String, required: true, default: "https://drive.google.com/file/d/1i8O9l2NWjBPRXWvEwU4ms-xmi8CliuQY/view?usp=drive_link"},
+    interests: { type: [String], required: true },
+    univBatch: { type: Number, required: true },
     createdAt: { type: Date, default: Date.now },
   });
 

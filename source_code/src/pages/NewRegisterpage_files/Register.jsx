@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Register.css";
-
+import api from "../../api/axios.js";
 import logo from "/assets/logo.png";
 
 const RegistrationForm = () => {
@@ -164,6 +164,34 @@ const RegistrationForm = () => {
     });
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = api.post("/auth/register", {
+        firstName,
+        middleName,
+        lastName,
+        email,
+        password,
+        nickname,
+        univBatch,
+        orgBatch,
+        birthday,
+        about,
+        interests,
+      });
+      if (response){
+        alert("Registration successful!");
+      }
+    } catch (error) {
+      if(error.response){
+        console.log("Error response status: ", error.response.status);
+      }
+      else{
+        console.error("A network error has occurred.")
+      }
+    }
+  };
   const handleNext = () => {
     setFormStep(formStep + 1);
   };
@@ -700,11 +728,19 @@ const RegistrationForm = () => {
                   </button>
                 </div>
 
-                <div className="regis-button-container">
-                  <button type="submit" className="regis-signup-button">
-                    SIGN UP
-                  </button>
-                </div>
+                {errorMessage ? (
+                  <div className="regis-error-message">{errorMessage}</div>
+                ) : (
+                  <div className="regis-button-container">
+                    <button
+                      type="submit"
+                      className="regis-signup-button"
+                      onClick={handleSubmit}
+                    >
+                      SIGN UP
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}

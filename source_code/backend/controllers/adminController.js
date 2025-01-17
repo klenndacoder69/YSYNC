@@ -186,7 +186,7 @@ const acceptApplication = async (req, res) => {
     await User.findByIdAndUpdate(application.userId._id, { userType: "trainee" });
     // create into trainee
     // TODO: this is still hardcoded, change it later if we already have interests
-    await Trainee.create({ userId: application.userId._id, interests: ["hehe"], univBatch: "1000" });
+    await Trainee.create({ userId: application.userId._id, interests: application.interests, univBatch: application.univBatch });
     res.status(200).json({ message: "Application accepted successfully." });
   } catch (error) {
     res
