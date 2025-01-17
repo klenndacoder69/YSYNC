@@ -1,19 +1,19 @@
 .mentor-page{
     background: #d6dbea;  
-    min-height: 100vh;
+    min-height: 1000px;
     display: flex;
     flex-direction: column; 
 }
 
 .mentor-main-bg-size{
     background: #d6dbea;  
-    height: 65vh; 
+    height: 500px; 
 }
 
 .mentor-main{
     background: #132b41; 
     /* width: 100vw; */
-    height: 65vh; 
+    height: 500px; 
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
     display: flex;
@@ -52,7 +52,7 @@
 
 .mentor-main-bg{
     background: #132b41; 
-    height: 30vh; 
+    height: 300px; 
 }
 
 .mentor-top-picks{
@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: column;
     width: 90vw;          
-    height: 60vh;
+    height: 600px;
 }
 
 .mentor-top-components{
