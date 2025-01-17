@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Post.css';
 import profilePic from '/assets/profile.jpg';
 import heartIcon from '/assets/heart.png';
@@ -6,42 +6,29 @@ import heartRedIcon from '/assets/heart-red.png';
 import pinIcon from '/assets/pin-2.png';
 import pinFilledIcon from '/assets/pin-filled.png';
 
-function Post({ initialLikes = 0, initialComments = 0, postId, onPinToggle, isPinned }) {
-    const [likes, setLikes] = useState(initialLikes);
-    const [liked, setLiked] = useState(false);
-    const [comments, setComments] = useState(initialComments);
-    const [commentInput, setCommentInput] = useState('');
-     const [pinned, setPinned] = useState(false);
-
-    useEffect(() => {
-    if (isPinned){
-            setPinned(true)
-        }
-    }, [isPinned]);
-
+function Post({ post, onPostUpdate, onPinToggle }) {
 
     const handleLikeClick = () => {
-        setLiked(!liked);
-        if (liked) {
-            setLikes(likes - 1);
-        } else {
-            setLikes(likes + 1);
-        }
+        const updatedLiked = !post.liked;
+        const updatedLikes = updatedLiked ? post.likes + 1 : post.likes - 1;
+        const updatedPost = { ...post, likes: updatedLikes, liked: updatedLiked };
+        onPostUpdate(updatedPost);
     };
 
     const handleSendClick = () => {
-        setComments(comments + 1);
-        setCommentInput('');
+        const updatedPost = {...post, comments: post.comments + 1}
+        onPostUpdate(updatedPost);
     };
 
-    const handleCommentInputChange = (event) => {
-        setCommentInput(event.target.value);
-    };
+   const handleCommentInputChange = (event) => {
+    const updatedPost = { ...post, commentInput: event.target.value}
+        onPostUpdate(updatedPost);
+   };
 
     const handlePinClick = () => {
-            setPinned(!pinned);
-            onPinToggle(postId, !pinned, {postId, initialLikes, initialComments});
+        onPinToggle(post.id);
     };
+
 
     return (
         <div className="dashboard-post-container">
@@ -66,11 +53,11 @@ function Post({ initialLikes = 0, initialComments = 0, postId, onPinToggle, isPi
                     <div className="dashboard-post-user-like">
                         <button onClick={handleLikeClick}>
                             <img
-                                src={liked ? heartRedIcon : heartIcon}
+                                src={post.liked ? heartRedIcon : heartIcon}
                                 alt="Like Icon"
                             />
                         </button>
-                        {likes}
+                        {post.likes}
                     </div>
                     <div className="dashboard-post-user-comment">
                         <button>
@@ -79,12 +66,12 @@ function Post({ initialLikes = 0, initialComments = 0, postId, onPinToggle, isPi
                                 alt="Comment Icon"
                             />
                         </button>
-                        {comments}
+                        {post.comments}
                     </div>
                      <div className="dashboard-post-user-pin">
                         <button onClick={handlePinClick}>
                             <img
-                                src={pinned ? pinFilledIcon : pinIcon}
+                                src={post.isPinned ? pinFilledIcon : pinIcon}
                                 alt="Pin Icon"
                             />
                         </button>
@@ -96,7 +83,7 @@ function Post({ initialLikes = 0, initialComments = 0, postId, onPinToggle, isPi
                         <input
                           type="text"
                            placeholder="Add a comment..."
-                            value={commentInput}
+                            value={post.commentInput}
                             onChange={handleCommentInputChange}
                         />
                     </div>

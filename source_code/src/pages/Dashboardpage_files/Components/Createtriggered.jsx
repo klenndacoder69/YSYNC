@@ -37,7 +37,8 @@ function Createtriggered({ onCancel }) {
     return (
         <div className="dashboard-createtriggered-container">
             <div className="dashdashboard-createtriggered-announcement">
-                <input type="text" placeholder="Input your announcement here"/>
+                <input type="text" 
+                className="dashboard-createtriggered-announcement-input" placeholder="Input your announcement here"/>
             </div>
             <div className="dashboard-createtriggered-options">
                 <div className="dashboard-createtriggered-options-left">

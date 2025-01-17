@@ -1,8 +1,6 @@
 .pinnedContainer {
     max-height: 100%;
     max-width: 100%;
-    border-bottom-right-radius: 30px;
-    border-bottom-right-radius: 30px;
   }
   
   .pinnedHeader {
@@ -23,6 +21,9 @@
   .pinnedPost {
     width: 100%;
     height: 100%;
+    background-color: #ffffff;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
   }
   
   .pfp {

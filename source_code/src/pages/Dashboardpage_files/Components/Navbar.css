@@ -6,69 +6,75 @@
   background-color: #132b41;
   overflow: auto;
   gap: 1rem;
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
+
 .logoname {
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .navi {
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-  font-family: "Segoe UI", Arial, sans-serif;
-  padding: 15px;
-  padding-right: 0;
+font-size: 30px;
+font-weight: bold;
+color: white;
+font-family: "Segoe UI", Arial, sans-serif;
+padding: 15px;
+padding-right: 0;
 }
 
 .navButtons {
-  list-style-type: none;
-  font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 15px;
-  display: flex;
-  gap: 4rem;
-  padding: 0px 80px;
-  text-decoration: none;
-  align-items: center;
+list-style-type: none;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 15px;
+display: flex;
+gap: 4rem;
+padding: 0px 80px;
+text-decoration: none;
+align-items: center;
 }
 
 .navButtons li {
-  display: inline;
+display: inline;
 }
 
 .navButtons a {
-  text-decoration: none;
-  color: white;
+text-decoration: none;
+color: white;
 }
 
 .button{
-  transition: all 0.3s ease;
+transition: all 0.3s ease;
 }
 .button.active {
-  background-color: #00A3F0;
-  border-radius: 20px;
-  padding: 10px 40px 10px 40px;
+background-color: #00A3F0;
+border-radius: 20px;
+padding: 10px 40px 10px 40px;
 }
 
 .button:hover{
-  background-color: #3c9ecc6b;
-  border-radius: 20px;
-  padding: 10px 40px 10px 40px;
+background-color: #3c9ecc6b;
+border-radius: 20px;
+padding: 10px 40px 10px 40px;
 }
 
 .logo {
-  width: 70px;
+width: 70px;
 }
 
 .profile {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
 }
 
 .profile-button {
-  background: none;
-  border: none;
+background: none;
+border: none;
 }
