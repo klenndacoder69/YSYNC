@@ -3,33 +3,12 @@
   height: 100vh;
 }
 
-.profile-traineee-navbar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.profile-button-traineee-navbar {
-  background: none;
-  border: none;
-}
-
-.acc-show-traineee-navbar {
-  display: block;
-}
-
-.container-traineee-navbar h1 {
+/* .container-traineee-navbar h1 {
   font-family: "Segoe UI";
   font-weight: bold;
   font-size: 23px;
-  color: #1e1e1e;
-}
-
-.logoname-traineee-navbar {
-  display: flex;
-  align-items: center;
-}
+  color: #ffffff;
+} */
 
 .parentNav-traineee-navbar {
   display: flex;
