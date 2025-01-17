@@ -4,11 +4,10 @@ import { useState } from "react";
 
 
 function TraineeNavBar(){
-    const [activeMenu, setActiveMenu] = useState("acc-info");
-    const navigate = useNavigate();
+    const [activeMenu, setActiveMenu] = useState("dashboard");
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
-      const [residentMembers, setResidentMembers] = useState([]);
+    const [residentMembers, setResidentMembers] = useState([]);
 
     return(
      <div className="container-traineee-navbar">
@@ -20,12 +19,12 @@ function TraineeNavBar(){
         <nav className="navButtons-traineee-navbar">
           <div 
             className={`button-traineee-navbar ${
-              activeMenu === "acc-info" ? "active" : ""
+              activeMenu === "dashboard" ? "active" : ""
             }`}
-            onClick={() => {setActiveMenu("acc-info"); navigate("acc-info")}}
+            onClick={() => {setActiveMenu("dashboard")}}
             >
             <Link
-              to="acc-info"
+              to="chat"
               className={`button-traineee-navbar-dashboard ${
                 activeMenu === "acc-info" ? "active" : ""
               }`}
@@ -34,12 +33,12 @@ function TraineeNavBar(){
             </Link>
             </div>
           <div className={`button-traineee-navbar ${
-              activeMenu === "acc-info" ? "active" : ""
+              activeMenu === "mentors" ? "active" : ""
             }`}
-            onClick={() => {setActiveMenu("acc-info"); navigate("acc-info")}}
+            onClick={() => {setActiveMenu("mentors")}}
             >
             <Link
-              to="acc-info"
+              to="mentors"
               className={`button-traineee-navbar-dashboard ${
                 activeMenu === "acc-info" ? "active" : ""
               }`}
@@ -47,12 +46,12 @@ function TraineeNavBar(){
               Mentors
             </Link></div>
           <div className={`button-traineee-navbar ${
-              activeMenu === "acc-info" ? "active" : ""
+              activeMenu === "resmem" ? "active" : ""
             }`}
-            onClick={() => {setActiveMenu("acc-info"); navigate("acc-info")}}
+            onClick={() => {setActiveMenu("resmem")}}
             >
             <Link
-              to="acc-info"
+              to="residentMembers"
               className={`button-traineee-navbar-dashboard ${
                 activeMenu === "acc-info" ? "active" : ""
               }`}
