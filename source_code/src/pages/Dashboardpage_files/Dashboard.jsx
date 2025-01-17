@@ -46,7 +46,6 @@ function Dashboard() {
     return (
       <div className="dashboard-main-wrapper">
       <div className="dashboard-main">
-        {/* <Navbar /> */}
         <div className="dashboard-left-div">
             {pinnedPosts.length > 0 && (
               <div className="dashboard-pinned-container">
