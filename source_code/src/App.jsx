@@ -99,8 +99,18 @@ function App() {
     {
       path: "/dashboard",
       element: <Dashboard/>
+    },
+    {
+      path: "/test",
+      element: <TraineeNavBar/>,
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard/>
+        }
+      ]
     }
-
+  
   ]
   const router = createBrowserRouter(routes)
   return (
