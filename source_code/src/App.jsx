@@ -76,11 +76,10 @@ function App() {
         path: "chat",
         element: <Chat/>
       },
-      {
-        path:"testing",
-        element: <Profile/>
-      }
-      
+      // {
+      //   path:"testing",
+      //   element: <Profile/>
+      // }
       ]
     },
     {

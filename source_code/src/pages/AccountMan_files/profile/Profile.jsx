@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
+import api from "../../../api/axios.js";
+import { jwtDecode } from "jwt-decode";
 import './Profile.css';
+
 const Profile = () => {
+    const [resMem, setResMem] = useState(null);
+    const [user, setUser] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [univBatch, setUnivBatch] = useState('2022');
-    const [orgBatch, setOrgBatch] = useState('Reboot');
-    const [bio, setBio] = useState('');
+    const [univBatch, setUnivBatch] = useState("");
+    const [orgBatch, setOrgBatch] = useState("");
+    const [bio, setBio] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const toggleEdit = () => {
         setIsEditMode(!isEditMode);
     };
 
+    const fetchUserData = async () => {
+        try {
+            const token = sessionStorage.getItem("accessToken");
+            const decodedToken = jwtDecode(token);
+            console.log(decodedToken);
+            const resMemResponse = await api.get(`residentmembers/${decodedToken.id}`);
+            console.log(resMemResponse.data);
+            setResMem(resMemResponse.data); 
+            const userResponse = await api.get(`users/${decodedToken.id}`);
+            console.log(userResponse.data);
+            setUser(userResponse.data);
+
+        } catch (error) {
+            setErrorMessage("Failed to fetch data.");
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    // Fetch user data
+    useEffect(() => {
+        fetchUserData();
+        setErrorMessage(''); // Clear any previous error messages
+    }, []); // Runs only once after the initial render
 
     return (
         <>
@@ -25,15 +54,15 @@ const Profile = () => {
                 <div className="profile-information">
                     <div className="profile-information-1">
                         <div className="profile-information-1-photo">
-                            <img src="" alt="profile pic" className="profile2"/>
+                            <img src={user && `${user.image}`} alt="profile pic" className="profile2"/>
                             <p id="changePhoto" className="change-photo" style={{display: isEditMode ? 'block' : 'none', color: isEditMode ? '#1e85b6' : '#ffff'}}>
                                 <i className="material-symbols-outlined">photo_camera</i> Change photo
                             </p>
                         </div>
                         <div className="profile-information-1-name">
-                            <h1 className="account-header">Surprised Pikachu</h1>
+                            <h1 className="account-header">{user && `${user.firstName} ${user.middleName} ${user.lastName}`}</h1>
                             <div className={`bio-display-container ${isEditMode ? 'edit-mode' : ''}`}> {/* Apply the class conditionally */}
-                                <p id="bioDisplay" className="bio">{univBatch} | {orgBatch}</p>
+                                <p id="bioDisplay" className="bio">{resMem && `${resMem.orgBatch}`}</p>
                             </div>
                             <div id="bioEditFields" style={{display: isEditMode ? 'block' : 'none'}}>
                                 <label htmlFor="univBatchInput" className="bio1">University Batch:</label>
@@ -46,15 +75,7 @@ const Profile = () => {
                                     onChange={(e) => setUnivBatch(e.target.value)}
                                 />
 
-                                <label htmlFor="orgBatchInput" className="bio1">Organization Batch:</label>
-                                <input
-                                    type="text"
-                                    id="orgBatchInput"
-                                    name="orgBatch"
-                                    placeholder="Enter Organization Batch"
-                                    value={orgBatch}
-                                    onChange={(e) => setOrgBatch(e.target.value)}
-                                />
+                    
                             </div>
                             <form>
                                 <label className="bio1" id="bio1">{isEditMode ? 'Edit Bio' : 'Bio'}</label>
@@ -63,7 +84,7 @@ const Profile = () => {
                                     id="bioInput"
                                     name="bio"
                                     className="bio1"
-                                    placeholder="Please tell us more about yourself."
+                                    placeholder={user && `${user.about}`}
                                     disabled={!isEditMode}
                                     value={bio}
                                     onChange={(e) => setBio(e.target.value)}
@@ -75,12 +96,6 @@ const Profile = () => {
                         <p>MENTOR INFORMATION</p>
                         <br></br>
                         <hr />
-                        <div className="add-mentor">
-                            <button className="mentor-button">
-                                <i className="material-icons">person_add</i>
-                                <span>Invite Mentor</span>
-                            </button>
-                        </div>
                    </div>
                 </div>
                 <div className="edit-profile">
