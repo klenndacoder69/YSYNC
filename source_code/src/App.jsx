@@ -21,7 +21,7 @@ import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
 import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
 import ResmemNavBar from "./components/ResmemNavbar.jsx";
 import Profile from "./pages/AccountMan_files/profile/Profile.jsx";
-
+import Trainee from "./pages/Traineepage_files/Trainee.jsx";
 function App() {
   const routes = [
     {
@@ -92,6 +92,7 @@ function App() {
         },
         {
           path: "trainees",
+          element: <Trainee/>
         },
         {
           path: "residentMembers",

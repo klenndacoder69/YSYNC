@@ -2,9 +2,9 @@
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   flex-wrap: nowrap;
     min-height: 250px;
-    max-width: 70%;
-    background-color: #ffffff;
-    border-radius: 30px;
+    max-width: 100%;
+    background-color: #F2F5FF;
+    border-radius: 20px;
     font-family: 'Segoe UI', Arial;
   }
   
@@ -18,21 +18,22 @@
     font-size: 20px;
     font-weight: 700;
     padding-left: 30px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
   
   .dashboard-upcomingContent {
     padding-top: 5px;
     max-width: fit-content;
     margin-left: 30px;
-    margin-right: auto;
+    margin-right: 30px;
+    padding-bottom: 10px;
     font-size: 15px;
   }
   
   .dashboard-taskName {
     margin-top: -10px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .dashboard-taskDate {

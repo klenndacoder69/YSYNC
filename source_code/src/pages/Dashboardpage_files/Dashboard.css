@@ -15,49 +15,64 @@
 
 .announcements-title {
     margin-left: 4vw;
-  font-family: "Segoe UI";
-  color: #33363F;
+  font-family: "Segoe UI", Arial;
+  color: #000000;
   font-weight: bold;
 }
 
 .dashboard-left-div {
   width: 75%;
-  margin-left: 10vw;
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 25px;
   float: left;
 }
 .dashboard-pinned-container {
   max-width: 100%;
-  margin-left: 30px;
-  margin-right: 30px;
   border-radius: 30px;
 }
 .dashboard-create-container {
   max-width: 100%;
   min-height: 40px;
-  margin-left: 30px;
-  margin-right: 30px;
   border-radius: 30px;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.dashboard-create-container-transition {
+  width: 100%;
+  position: relative;
+}
+
+.dashboard-create-container-transition.slide-in {
+transform: translateX(0%);
+}
+
+.dashboard-create-container-transition.slide-out {
+transform: translateX(100%);
+}
+
+.dashboard-create-button{
+width: 100%; /* Starting width to allow the transition to take effect */
 }
 .dashboard-post-container {
-    margin-left: 4vw;
+  margin-left: 4vw;
   max-width: 100%;
   border-radius: 30px;
   margin-bottom: 20px;
 }
-.dashboard-solution-container {
-  margin-left: 30px;
-  margin-right: 30px;
-}
 
 .dashboard-right-div {
-    margin-left: 4vw;
   width: 25%;
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-left: 25px;
+  margin-right: 50px;
   float: right;
 }
 .dashboard-upcoming-container {
   max-width: 100%;
-  margin-right: 30px;
   border-radius: 30px;
+}
+.dashboard-chatbox-container{
+  max-width: 100%;
 }
