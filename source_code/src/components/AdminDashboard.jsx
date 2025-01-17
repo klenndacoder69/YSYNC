@@ -9,8 +9,7 @@ const AdminDashboard = () => {
     <div className="container-admin-dashboard">
       <aside className="sidebar-admin-dashboard">
         <div className="logo-admin-dashboard">
-          <img className="logo-image-admin-dashboard" alt="Logo" />
-          <h2>YSYNC</h2>
+          <img src="/assets/YSYNC.png" className="logo-image-admin-dashboard" alt="Logo" />
         </div>
         <nav className="menu-admin-dashboard">
           <div

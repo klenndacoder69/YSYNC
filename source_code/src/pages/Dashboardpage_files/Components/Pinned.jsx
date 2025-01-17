@@ -1,6 +1,6 @@
 import React from 'react';
 import './Pinned.css';
-import pin from '/Users/bry/Desktop/YSYNC_Project/YSYNC_Project_PAD/ysync_plain/assets/pin.png';
+import pin from '/assets/pin.png';
 import Post from "./Post";
 
 function Pinned({ pinnedPosts, onPinToggle }) {

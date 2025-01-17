@@ -23,7 +23,7 @@ export default function Homepage() {
                     </a>
                     </div>
                     <div className="logo-text-container-homepage">
-                        <img src="/assets/YSYNC.png" className="logo" alt="YSES Logo" />
+                        <img src="/assets/YSYNC.png" className="logo-homepage" alt="YSES Logo" />
 
                         <div className="text">
                             <p>

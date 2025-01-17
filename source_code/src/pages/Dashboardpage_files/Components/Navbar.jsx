@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import Dropdown from './Dropdown.jsx';
-import profilePic from '/Users/bry/Desktop/YSYNC_Project/YSYNC_Project_PAD/ysync_plain/assets/profile.jpg';
+import profilePic from '/assets/profile.jpg';
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

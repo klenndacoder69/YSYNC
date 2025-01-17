@@ -111,7 +111,7 @@ const AdminReports = () => {
               <button type="submit" id="submit-admin-dashboard">
                 <img
                   className="search-img-admin-dashboard"
-                  src="./assets/magnifying-glass.png"
+                  src="/assets/magnifying-glass.png"
                   alt="Search"
                 />
               </button>

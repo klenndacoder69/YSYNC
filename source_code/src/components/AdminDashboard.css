@@ -14,8 +14,22 @@
     z-index: 10; 
     background-color: #132B41;
     color: white;
-    width: 20vw;
+    width: 17vw;
     padding: 20px;
+}
+
+.logo-image-admin-dashboard{
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.logo-image-admin-dashboard:hover{
+    transform: translateY(-2px);
+}
+
+.logo-image-admin-dashboard:active {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in;
 }
 
 .logo-admin-dashboard {
@@ -70,9 +84,10 @@
 }
 
 .admin-account {
-    position: absolute;
+    position: relative;
     font-size: 14px;
     color: #90A4AE;
-    bottom: 0;
-    transform: translate(75%, 0);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
