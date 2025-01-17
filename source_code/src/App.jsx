@@ -18,6 +18,8 @@ import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
 import ResMem from "./pages/ResMempage_files/Resmem.jsx";
 import TraineeNavBar from "./components/TraineeNavBar.jsx";
 import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
+import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
+
 
 function App() {
   const routes = [
@@ -32,6 +34,10 @@ function App() {
     {
       path: "/register",
       element: <Register/>
+    },
+    {
+      path: "/new-register",
+      element: <NewRegister/>
     },
     // {
     //   path: "/connect",
