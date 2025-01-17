@@ -65,9 +65,9 @@ export default function Login() {
         // for now let us store the access token in the session storage TODO:
         sessionStorage.setItem("accessToken", accessToken);
         if (role === "trainee") {
-          navigate("/trainee");
+          navigate("/trainee/dashboard");
         } else if (role === "residentMember") {
-          navigate("/resmem");
+          navigate("/resmem/dashboard");
         } else if (role === "admin") {
           navigate("/admin/acc-info");
         } else {
