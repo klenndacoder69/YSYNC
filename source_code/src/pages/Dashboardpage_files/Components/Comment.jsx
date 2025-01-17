@@ -1,23 +1,23 @@
 import React from 'react';
-import './Post.css';
+import "./Comment.css"
 
 function Comment() {
     return (
-        <div className="dashboard-comment">
-            <div className="dashboard-comment-container">
-                <div className="dashboard-comment-container-left">
-                    <img src="profilePic" className="dashboard-comment-container-left-profile"/>
+        <div className="comment-container">
+            <div className="comment-profile-pic">
+                <img src="/assets/profile.jpg" alt="profile" className="comment-profile-pic-img"/>
+            </div>
+            <div className="comment-content">
+                <div className="comment-text">
+                    <div className="comment-name">
+                       Ana Lovelace
+                    </div>
+                    <div className="comment-body">
+                        Placeholder placeholder placeholder placeholder placeholder placeholder placeholder
+                    </div>
                 </div>
-                <div className="dashboard-comment-container-right">
-                    <div className="dashboard-comment-container-right-bg">
-                        <div className="dashboard-comment-container-right-name">
-                        </div>
-                        <div className="dashboard-comment-container-right-content">
-                        </div>
-                    </div>
-                    <div>
-                        Time | Date
-                    </div>
+                <div className="comment-time">
+                    9:00 PM | January 17, 2025
                 </div>
             </div>
         </div>

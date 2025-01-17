@@ -11,11 +11,10 @@
     display: flex;
     color: #ffffff;
     background-color: #132b41;
-    font-family: 'Segoe UI';
+    font-family: 'Segoe UI', Arial;
     font-size: 20px;
     font-weight: 700;
     padding-left: 30px;
-    padding-top: 10px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
   }
