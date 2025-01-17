@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 
 const fetchTrainees = async () => {
   try {
-    const response = await api.get("/api/getAllTrainees");
+    const response = await api.get("/getAllTrainees");
     console.log("Trainees:", response.data);
     return response.data;
   } catch (error) {
