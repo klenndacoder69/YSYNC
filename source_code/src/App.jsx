@@ -54,6 +54,10 @@ function App() {
       element: <ProtectedRoute element={<TraineeNavBar/>} allowedRoles = {["trainee", "admin"]}/>,
       children: [
       {
+        path: "mentors",
+        element: <Mentor/>
+      },
+      {
         path: "residentMembers",
         element: <ResMem/>
       },
@@ -87,10 +91,6 @@ function App() {
         element: <AdminReports/>
       }
       ]
-    },
-    {
-      path: "/mentor",
-      element: <Mentor/>
     },
     {
       path: "/trainee-navbar",
