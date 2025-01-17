@@ -2,6 +2,7 @@ import CardMentor from "./CardMentor.jsx"
 import "./Mentor.css"
 import api from "../../api/axios.js"
 import React, { useEffect, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const fetchMentors = async () => {
     try {
@@ -17,6 +18,7 @@ const fetchMentors = async () => {
 const fetchTopMentors = async (userId) => {
     try {
         const response = await api.post(`/getMentorRecommendations/${userId}`);
+        console.log('TOP MENTORS:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching mentors:', error.response ? error.response.data : error.message);
@@ -28,10 +30,19 @@ export default function Mentor(){
     const [mentors, setMentors] = useState([]); 
     const [topMentors, setTopMentors] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const userId = '67891ee00a8813ebc8c7156f';
+    const [userId, setUserId] = useState("");
 
     useEffect(() => {
+        const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+        console.log(decodedToken);
+        setUserId(decodedToken.id);
+    }, []); 
+
+    useEffect(() => {
+        const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+        console.log(decodedToken)
+        setUserId(decodedToken.id);
+        console.log("The user id is: ", userId)
         const loadMentors = async () => {
             
             try {
@@ -47,11 +58,12 @@ export default function Mentor(){
         };       
 
         loadMentors();
-    }, []);
-
+    }, [userId]);
+ 
     if (loading) {
         return <div>Loading mentors...</div>;
     }
+
 
     return(
         <>  

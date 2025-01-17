@@ -1,5 +1,5 @@
 import "./App.css"
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
@@ -19,7 +19,7 @@ import ResMem from "./pages/ResMempage_files/Resmem.jsx";
 import TraineeNavBar from "./components/TraineeNavBar.jsx";
 import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
 import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
-
+import ResmemNavBar from "./components/ResmemNavbar.jsx";
 
 function App() {
   const routes = [
@@ -70,12 +70,29 @@ function App() {
       {
         path: "dashboard",
         element: <Dashboard/>
+      },
+      {
+        path: "chat",
+        element: <Chat/>
       }
       ]
     },
     {
       path: "/resmem",
-      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["residentMember", "admin"]}/>
+      element: <ProtectedRoute element={<ResmemNavBar/>} allowedRoles = {["residentMember", "admin"]}/>,
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard/>
+        },
+        {
+          path: "trainees",
+        },
+        {
+          path: "residentMembers",
+          element: <ResMem/>
+        }
+      ]
     },
     {
       path: "/unauthorized",
@@ -98,29 +115,6 @@ function App() {
       }
       ]
     },
-    {
-      path: "/trainee-navbar",
-      element: <TraineeNavBar/>
-    },
-    {
-      path: "/dashboard",
-      element: <Dashboard/>
-    },
-    {
-      path: "/test",
-      element: <TraineeNavBar/>,
-      children: [
-        {
-          path: "dashboard",
-          element: <Dashboard/>
-        },
-        {
-          path: "mentors",
-          element: <Mentor/>
-        }
-      ]
-    }
-  
   ]
   const router = createBrowserRouter(routes)
   return (
