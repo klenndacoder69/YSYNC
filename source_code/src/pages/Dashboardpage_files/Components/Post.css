@@ -32,13 +32,13 @@
 .dashboard-post-profile-info-name{
   color: black;
   font-family: 'Arial';
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
 }
 .dashboard-post-profile-info-datetime{
   color: gray;
   font-family: 'Arial';
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .dashboard-post-content {
@@ -47,7 +47,7 @@
   margin-top: 15px;
   justify-content: left;
   font-family: 'Arial';
-  font-size: 13px;
+  font-size: 15px;
   display: flex;
   padding-left: 20px;
   padding-right: 20px;
@@ -59,7 +59,7 @@
   align-items: center;
   justify-content: space-between; 
   padding: 2px 20px;
-  margin-top: 20px;
+  margin-top: 15px;
   padding-top: 10px;
   border-top: 1px solid #ddd;
 }
@@ -72,7 +72,7 @@
 .dashboard-post-user-pin {
   color: gray;
   font-family: 'Arial';
-  font-size: 13px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   margin-right: 15px; 
@@ -113,6 +113,7 @@
   margin-right: 8px;
   width: 300px;
   height: 20px;
+  font-size: 15px;
 }
 .dashboard-post-user-comment-send button {
   background-color: transparent; 

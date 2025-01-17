@@ -31,7 +31,7 @@
   flex-wrap: wrap;
   box-sizing: border-box;
   resize: none;
-  font-size: 13px;
+  font-size: 15px;
 
 }
 
@@ -109,7 +109,7 @@
     border-radius: 15px;
     color: gray;
     font-family: Arial;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .dashboard-createtriggered-options-middle-datetime{
@@ -135,7 +135,7 @@
     border: none;
     padding: 15px;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 15px;
     color: gray;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -175,8 +175,9 @@
 .dashboard-createtriggered-options-right-post button{
     background-color: #00A3F0;
     padding: 10px 40px;
-    border-radius: 15px;
+    border-radius: 10px;
     color: white;
+    font-size: 15px;
 }
 
 .switch {
