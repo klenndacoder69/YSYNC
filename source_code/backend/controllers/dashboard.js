@@ -88,7 +88,7 @@ const toggleHeart = async (req, res) => {
 const fetchPosts = async (req, res) => {
     try {
         const userId = req.query.userId;
-        const posts = await Posts.find().sort({ createdAt: -1 });
+        const posts = await Posts.find().sort({ createdAt: -1 }).populate("userId");
 
         const fetchedPosts = posts.map(post => ({
             ...post.toObject(),
