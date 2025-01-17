@@ -104,7 +104,7 @@ export default function Trainee() {
                     image={trainee.userId.image}
                     name={`${trainee.userId.firstName} ${trainee.userId.lastName}`}
                     batch={trainee.univBatch}
-                    birthday={trainee.userId.birthday}
+                    nickname={trainee.userId.nickname}
                     about={trainee.userId.about}
                     interests={trainee.interests.join(", ")}
                   />

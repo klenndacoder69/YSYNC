@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CardTrainee.css";
 
-export default function CardTrainee({ image, name, batch, birthday, about, interests }) {
+export default function CardTrainee({ image, name, batch, nickname, about, interests }) {
   const [isFlipped, setIsFlipped] = useState(false); 
 
   const handleCardClick = () => {
@@ -21,7 +21,7 @@ export default function CardTrainee({ image, name, batch, birthday, about, inter
                 <div className="mentor-card-front-info-wrapper">
                     <h1 className="mentor-card-name">{name}</h1>
                     <p className="mentor-card-batch">Batch {batch}</p>
-                    <p className="mentor-card-dept">{birthday}</p>
+                    <p className="mentor-card-dept">{nickname}</p>
                 </div>
             </div>
 

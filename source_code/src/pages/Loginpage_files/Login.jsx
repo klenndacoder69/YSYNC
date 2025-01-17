@@ -79,9 +79,10 @@ export default function Login() {
     } catch (error) {
       if (error.response) {
         console.log("Error response status: ", error.response.status);
+        console.log(password);
         if (error.response.status === 401) {
           setErrorMessage("Invalid email or password.");
-        } else {
+        } else {  
           setErrorMessage("An error has occurred while signing in.");
         }
       } else {
