@@ -1,8 +1,7 @@
 .search-bar-resmem {
     display: flex;
     justify-content: end;
-    right:0;
-    gap: 10px;
+    width:95%;
 }
 
 .search-container-resmem {
