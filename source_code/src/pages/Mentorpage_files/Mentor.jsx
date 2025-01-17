@@ -2,6 +2,7 @@ import CardMentor from "./CardMentor.jsx"
 import "./Mentor.css"
 import api from "../../api/axios.js"
 import React, { useEffect, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const fetchMentors = async () => {
     try {
@@ -29,10 +30,19 @@ export default function Mentor(){
     const [mentors, setMentors] = useState([]); 
     const [topMentors, setTopMentors] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const userId = '678a2899eebd27ced914e557';
+    const [userId, setUserId] = useState("");
 
     useEffect(() => {
+        const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+        console.log(decodedToken);
+        setUserId(decodedToken.id);
+    }, []); 
+
+    useEffect(() => {
+        const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+        console.log(decodedToken)
+        setUserId(decodedToken.id);
+        console.log("The user id is: ", userId)
         const loadMentors = async () => {
             
             try {
@@ -48,11 +58,12 @@ export default function Mentor(){
         };       
 
         loadMentors();
-    }, []);
-
+    }, [userId]);
+ 
     if (loading) {
         return <div>Loading mentors...</div>;
     }
+
 
     return(
         <>  
