@@ -94,7 +94,7 @@ export default function Login() {
   return (
     <>
       <div className="login-page">
-        <div className="bg">
+        <div className="bg-login">
           <div className="login-main-content">
             <div className="logo-text-container-login">
               <div className="logo-login-page-container">

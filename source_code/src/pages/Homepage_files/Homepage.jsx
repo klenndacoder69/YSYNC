@@ -4,7 +4,7 @@ export default function Homepage() {
     return(
         <>
             <div className="homepage">
-                <div className="bg">
+                <div className="bg-homepage">
                     <div className="contact">
                     <a href="mailto:info@yses.org">
                         <img src="/assets/Email Icon.png" alt="Email Icon" />

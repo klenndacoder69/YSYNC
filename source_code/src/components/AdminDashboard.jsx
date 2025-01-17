@@ -80,6 +80,7 @@ const AdminDashboard = () => {
           </div>
         </nav>
         <div className="admin-account">
+          <Link to="/login">Logout</Link>
           <p>ADMIN ACCOUNT</p>
         </div>
       </aside>
