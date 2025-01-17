@@ -17,6 +17,7 @@ import AdminReports from "./pages/Adminpage_files/reports/AdminReports.jsx";
 import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
 import ResMem from "./pages/ResMempage_files/Resmem.jsx";
 import TraineeNavBar from "./components/TraineeNavBar.jsx";
+import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
 
 function App() {
   const routes = [
@@ -90,6 +91,14 @@ function App() {
       path: "/mentor",
       element: <Mentor/>
     },
+    {
+      path: "/trainee-navbar",
+      element: <TraineeNavBar/>
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard/>
+    }
   ]
   const router = createBrowserRouter(routes)
   return (

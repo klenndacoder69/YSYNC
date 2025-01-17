@@ -1,0 +1,237 @@
+.dashboard-createtriggered-container{
+    min-height: 250px;
+    max-width: 100%;
+    border-radius: 10px;
+    border-color: transparent;
+    box-shadow: 3px 3px 10px rgb(188, 188, 188);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f5ff;
+    border: none; 
+    padding: 0; 
+} 
+
+.dashdashboard-createtriggered-announcement input{
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom: 3px solid #00A3F0;
+    background-color: #b8b6d243;
+    margin: 22px;
+    width: 980px;
+    height: 170px;
+  }
+
+.dashboard-createtriggered-options {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 2px 20px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+
+.dashboard-createtriggered-options-left,
+.dashboard-createtriggered-options-middle,
+.dashboard-createtriggered-options-right {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-createtriggered-options-left{
+    margin-right: 20px;
+    margin-left: 25px;
+}
+.dashboard-createtriggered-options-middle{
+    margin-right: 15px;
+}
+.dashboard-createtriggered-options-right{
+    margin-left: 4px;
+}
+
+.dashboard-createtriggered-options-left-upload,
+.dashboard-createtriggered-options-middle-link{
+    margin: -20px;
+}
+
+.dashboard-createtriggered-options-left button,
+.dashboard-createtriggered-options-middle button,
+.dashboard-createtriggered-options-right button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.dashboard-createtriggered-options-left button img {
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(203, 199, 199);
+    background-color: transparent; 
+
+}
+.dashboard-createtriggered-options-middle button img,
+.dashboard-createtriggered-options-right button img {
+    width: 24px;
+    height: 24px;
+}
+
+.dashboard-createtriggered-options-middle-toggle{
+    background-color: #b8b6d243;
+    height: 30px;
+    padding: 5px 15px;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+}
+
+.dashboard-createtriggered-options-middle-toggle-pinned,
+.dashboard-createtriggered-options-middle-toggle-event,
+.dashboard-createtriggered-options-middle-datetime-time,
+.dashboard-createtriggered-options-middle-datetime-date{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: gray;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.dashboard-createtriggered-options-middle-datetime{
+    background-color: #b8b6d243;
+    height: 30px;
+    padding: 5px 15px;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.dashboard-createtriggered-options-middle-datetime input{
+    margin-left: 10px;
+}
+
+/* Date and Time Input Styling */
+.dashboard-createtriggered-options-middle-datetime input[type="time"],
+.dashboard-createtriggered-options-middle-datetime input[type="date"] {
+    background-color: transparent;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: gray;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.dashboard-createtriggered-options-middle-datetime input[type="time"]::-webkit-calendar-picker-indicator {
+    
+    -webkit-appearance: none;
+        filter: invert(66%) sepia(1%) saturate(1018%) hue-rotate(182deg) brightness(85%) contrast(85%);
+}
+.dashboard-createtriggered-options-middle-datetime input[type="time"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.dashboard-createtriggered-options-middle-datetime input[type="time"]::-ms-clear {
+    display: none;
+}
+
+
+.dashboard-createtriggered-options-middle-datetime input[type="date"]::-webkit-calendar-picker-indicator {
+     filter: invert(66%) sepia(1%) saturate(1018%) hue-rotate(182deg) brightness(85%) contrast(85%);
+    -webkit-appearance: none;
+}
+
+.dashboard-createtriggered-options-middle-datetime input[type="time"]:focus,
+.dashboard-createtriggered-options-middle-datetime input[type="date"]:focus {
+    outline: none;
+    box-shadow: 0 0 2px #00A3F0; 
+}
+
+.dashboard-createtriggered-options-right-cancel,
+.dashboard-createtriggered-options-right-post{
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-createtriggered-options-right-post button{
+    background-color: #00A3F0;
+    padding: 10px 40px;
+    border-radius: 15px;
+    color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 33px;
+  height: 19px;
+  margin-right: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d6dbea;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px; 
+  left: 2px; 
+  bottom: 2.5px; 
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #00A3F0;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00A3F0;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(14px); 
+  -ms-transform: translateX(14px); 
+  transform: translateX(14px); 
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
