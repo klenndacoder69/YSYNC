@@ -11,11 +11,12 @@ const getMentors = async (req, res) => {
   try {
     const resMems = await ResidentMember.find({
       isMentor: true,
-    }).populate("traineeId");
+    }).populate("userId", "firstName lastName image").populate("traineeId", "interests");
 
-    resMems.forEach((resMems) => {
-      console.log(resMems.univBatch);
+    resMems.forEach((resMem) => {
+      console.log(resMem.orgBatch);
     });
+
     res.status(200).json(resMems);
   } catch (error) {
     res.status(500).json({

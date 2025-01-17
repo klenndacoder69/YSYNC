@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
       default: 'pending',
       required: true
     },
+    image: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
