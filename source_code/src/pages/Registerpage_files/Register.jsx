@@ -63,14 +63,12 @@ export default function Register() {
             firstName: firstName,
             lastName: lastName,
             middleName: middleName,
-            userType: "trainee"
         }
 
         try {
             const response = await api.post("/auth/register", user);
             if (response) {
                 alert("Registration successful!");
-                return await response.data;
             }
         } catch (error) {
             if (error.response) {

@@ -24,14 +24,7 @@ const sampleData = {
       password: "password1",
       userType: "trainee",
     },
-    {
-      firstName: "Bob",
-      middleName: "C.",
-      lastName: "Jones",
-      email: "bob.jones@up.edu.ph",
-      password: "password2",
-      userType: "residentMember",
-    },
+
     {
       firstName: "Charlie",
       middleName: "D.",
@@ -40,14 +33,7 @@ const sampleData = {
       password: "password3",
       userType: "admin",
     },
-    {
-      firstName: "Klenn Jakek",
-      middleName: "V.",
-      lastName: "Borja",
-      email: "kvborja@up.edu.ph",
-      password: "password4",
-      userType: "residentMember",
-    },
+
     {
       firstName: "Diana",
       middleName: "E.",
@@ -72,36 +58,39 @@ const sampleData = {
       password: "password7",
       userType: "trainee",
     },
-    {
-      firstName: "George",
-      middleName: "H.",
-      lastName: "King",
-      email: "george.king@up.edu.ph",
-      password: "password8",
-      userType: "residentMember",
-    },
-    {
-      firstName: "Hannah",
-      middleName: "I.",
-      lastName: "White",
-      email: "hannah.white@up.edu.ph",
-      password: "password9",
-      userType: "residentMember",
-    },
-    {
-      firstName: "Ian",
-      middleName: "J.",
-      lastName: "Moore",
-      email: "ian.moore@up.edu.ph",
-      password: "password10",
-      userType: "residentMember",
-    },
+
     {
       firstName: "Jane",
       middleName: "K.",
       lastName: "Scott",
       email: "jane.scott@up.edu.ph",
       password: "password11",
+      userType: "trainee",
+    },
+  ],
+  traineeSample: [
+    {
+      firstName: "Hannah",
+      middleName: "I.",
+      lastName: "Miller",
+      email: "hannah.miller@up.edu.ph",
+      password: "password8",
+      userType: "trainee",
+    },
+    {
+      firstName: "Isaac",
+      middleName: "J.",
+      lastName: "Hall",
+      email: "isaac.hall@up.edu.ph",
+      password: "password9",
+      userType: "trainee",
+    },
+    {
+      firstName: "Julia",
+      middleName: "K.",
+      lastName: "Davis",
+      email: "julia.davis@up.edu.ph",
+      password: "password10",
       userType: "trainee",
     },
   ],
@@ -167,31 +156,72 @@ const populateDatabase = async () => {
     // Create users
     const users = await User.insertMany(sampleData.users);
     console.log("Users created.");
-
+    
     // Assign trainees
     const traineeUsers = users.filter((user) => user.userType === "trainee");
+    console.log("Trainee users: ", traineeUsers)
     const traineeData = sampleData.trainees.map((trainee, index) => ({
-      ...trainee,
       userId: traineeUsers[index]._id,
+      interests: sampleData.trainees[index].interests,
+      univBatch: sampleData.trainees[index].univBatch,
     }));
     await Trainee.insertMany(traineeData);
     console.log("Trainees created.");
-
+    
     // Assign resident members (with interests and univBatch inherited from trainees)
-    const residentMemberUsers = users.filter(
-      (user) => user.userType === "residentMember"
-    );
-    const residentMemberData = sampleData.residentMembers.map(
-      (resMem, index) => ({
-        ...resMem,
-        userId: residentMemberUsers[index]._id,
-        traineeId: traineeUsers[index % traineeUsers.length]._id, // Example mapping
-        interests: traineeData[index % traineeData.length].interests, // Inherited from trainee
-        univBatch: traineeData[index % traineeData.length].univBatch, // Inherited from trainee
+    const trainees = await Trainee.find();
+    const residentMemberData = trainees.map(
+      (trainee, index) => ({
+        ...trainee,
+        userId: trainee.userId,
+        traineeId: trainee._id,
+        orgBatch: sampleData.residentMembers[index].orgBatch,
+        department: sampleData.residentMembers[index].department,
+        status: sampleData.residentMembers[index].status,
+        isMentor: sampleData.residentMembers[index].isMentor,
+        whyYouShouldChooseMe: sampleData.residentMembers[index].whyYouShouldChooseMe,
+        whatToExpect: sampleData.residentMembers[index].whatToExpect,
       })
     );
-    await ResidentMember.insertMany(residentMemberData);
+    const residentMembers = await ResidentMember.insertMany(residentMemberData);
     console.log("Resident Members created.");
+
+    // Update userType in the User collection to 'residentMember'
+    await Promise.all(
+      residentMemberData.map(async (residentMember) => {
+        await User.updateOne(
+          { _id: residentMember.userId },
+          { userType: "residentMember" }
+        );
+      })
+    );
+
+    // Hash passwords
+
+    for (const user of sampleData.traineeSample) {
+      user.password = bcrypt.hashSync(user.password, 10);
+    }
+    console.log(sampleData.traineeSample)
+    await User.insertMany(sampleData.traineeSample);
+    console.log("Other users created.");
+    const otherUsers = await User.find();
+    console.log("Other users fetched.");
+    const otherTraineeUsers = otherUsers.filter((user) => user.userType === "trainee");
+    console.log("Other trainee users:", otherTraineeUsers);
+    const otherTraineeData = otherTraineeUsers.map((trainee, index) => ({
+      userId: trainee._id,
+      interests: sampleData.trainees[index].interests,
+      univBatch: sampleData.trainees[index].univBatch
+    }))
+    console.log(otherTraineeData)
+    // const otherTraineeData = sampleData.trainees.map((trainee, index) => ({
+    //   ...trainee, 
+    //   userId: otherTraineeUsers[index]._id
+    // }));
+    // console.log(otherTraineeData)
+    await Trainee.insertMany(otherTraineeData);
+    console.log("Other trainees created.")
+
 
     // Assign admin
     const adminUser = users.find((user) => user.userType === "admin");

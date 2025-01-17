@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import "./Chatbox.css";
 
@@ -83,6 +84,7 @@ const Chat = () => {
                     </div>
                 </div>
             )}
+
         </div>
     );
 };

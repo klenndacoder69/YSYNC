@@ -3,6 +3,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
 import Register from "./pages/Registerpage_files/Register.jsx";
+// import Connect from "./pages/Connectpage_files/Connectpage.jsx";
+// import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
+import Defer from "./pages/Deferpage_files/Defer.jsx";
+import Report from "./pages/Reportpage_files/Report.jsx";
 import Chat from "./utilities/Chatbox.jsx";
 import Unauthorized from "./components/Unauthorized.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -10,6 +14,11 @@ import AdminDashboard from "./components/AdminDashboard.jsx";
 import AdminAccountInfo from "./pages/Adminpage_files/acc-info/AdminAccountInfo.jsx";
 import AdminRequests from "./pages/Adminpage_files/requests/AdminRequests.jsx";
 import AdminReports from "./pages/Adminpage_files/reports/AdminReports.jsx";
+import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
+import ResMem from "./pages/ResMempage_files/Resmem.jsx";
+import TraineeNavBar from "./components/TraineeNavBar.jsx";
+import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
+
 function App() {
   const routes = [
     {
@@ -24,9 +33,43 @@ function App() {
       path: "/register",
       element: <Register/>
     },
+    // {
+    //   path: "/connect",
+    //   element: <Connect/>
+    // },
+    // {
+    //   path: "/connect-post",
+    //   element: <ConnectPost/>
+    // }
     {
-      path: "/test",
-      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["trainee", "residentMember", "admin"]}/>
+      path: "/defer",
+      element: <Defer/>
+    },
+    {
+      path: "/report",
+      element: <Report/>
+    },
+    {
+      path: "/trainee",
+      element: <ProtectedRoute element={<TraineeNavBar/>} allowedRoles = {["trainee", "admin"]}/>,
+      children: [
+      {
+        path: "mentors",
+        element: <Mentor/>
+      },
+      {
+        path: "residentMembers",
+        element: <ResMem/>
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard/>
+      }
+      ]
+    },
+    {
+      path: "/resmem",
+      element: <ProtectedRoute element={<Chat/>} allowedRoles = {["residentMember", "admin"]}/>
     },
     {
       path: "/unauthorized",
@@ -48,7 +91,30 @@ function App() {
         element: <AdminReports/>
       }
       ]
+    },
+    {
+      path: "/trainee-navbar",
+      element: <TraineeNavBar/>
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard/>
+    },
+    {
+      path: "/test",
+      element: <TraineeNavBar/>,
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard/>
+        },
+        {
+          path: "mentors",
+          element: <Mentor/>
+        }
+      ]
     }
+  
   ]
   const router = createBrowserRouter(routes)
   return (

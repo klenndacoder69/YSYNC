@@ -1,18 +1,58 @@
+.bg-login::before {
+    content: "";
+    top: -52px;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    position: absolute;
+    background-image: linear-gradient(90deg, #0B1E30 0%, rgba(17, 46, 74, 0.64) 28.9%, rgba(23, 58, 90, 0.410464) 65.9%, rgba(35, 94, 149, 0) 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+@keyframes fadeInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.bg-login::after {
+    content: "";
+    top: -52px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-image: url("assets/YSESgroup.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 100;
+    z-index: -2;
+}
+
 .login-page {
     font-family: 'Segoe UI';
     color: #FFFFFF;
 }
 
 .login-main-content{
-    
     display: flex;
     flex-direction: row;
-    padding: 10px;
-    position: absolute;    
-    top: 50%;              
-    left: 50%;             
-    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
 }
+
 .contact-login-page {
     align-items: center;
     position: absolute;
@@ -24,7 +64,7 @@
 .contact-login-page img {
     size: 30px;
     padding: 20px;
-    transition: transform 0.1s ease, filter 0.3s ease;
+    transition: transform 1s ease, filter 0.3s ease;
 }
 
 .contact-login-page a:hover img {
@@ -33,22 +73,40 @@
 }
 
 .logo-login-page {
-    width: 200px;
-    height: 200px;
-    filter: drop-shadow(0px 4px 4px rgba(19, 43, 65, 0.16));
-    padding: 10px;
+    transform: scale(0.8);
 }
 
-.logo-text-container {
-    margin-right: 100px;
+.logo-text-container-login {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
+@keyframes logoAnimation {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
 
-.text-login-page {
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.logo-login-page-container{
+    display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
+    align-items: center;
+    margin-right: -60px; 
+    animation: logoAnimation 1s ease-in-out 0s 1 normal forwards;
 }
+
+.logo-login-page-container p{
+    font-size: 20px;
+    margin-top: -70px;
+}
+
 
 .text-login-page h1 {
     font-weight: 700;
@@ -61,14 +119,7 @@
     margin-top: -25%;
 }
 
-.container-login-page {
-    transform: translate(-50%, -50%);
-    color: #132B41;
-    box-shadow: 0px 4px 10px 3px rgba(19, 43, 65, 0.1);
-    align-items: center;
-    text-align: center;
-    
-}
+
 
 .card-login-page {
     position:relative;

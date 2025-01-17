@@ -1,0 +1,45 @@
+.pinnedContainer {
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 3px 3px 10px rgb(188, 188, 188);
+    border-radius: 30px;
+  }
+  
+  .pinnedHeader {
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    color: #ffffff;
+    background-color: #132b41;
+    font-family: 'Segoe UI';
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-top: 10px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  .pinnedPost {
+    width: 100%;
+    height: 100%;
+    background-color: #F2F5FF;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  
+  .pfp {
+    border: 1.5px solid #132B41;
+    border-radius: 20px;
+  
+    width: 60px;
+    height: 60px;
+  
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+  }

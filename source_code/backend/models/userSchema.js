@@ -8,9 +8,11 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     userType: {
       type: String,
-      enum: ['trainee', 'residentMember', 'admin'],
+      enum: ['trainee', 'residentMember', 'admin', 'pending', 'rejected'],
+      default: 'pending',
       required: true
     },
+    image: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });

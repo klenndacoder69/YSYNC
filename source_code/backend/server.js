@@ -6,9 +6,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mailer from "./utilities/mailer.js";
 import connectChat from "./utilities/connect_chat.js";
+import traineeRouter from "./routers/traineeRouter.js";
 import dashboardRouter from "./routers/dashboardRouter.js";
 import getAllResiRouter from "./routers/resident-membersRouter.js";
 import mentorChooseRouter from "./routers/mentorChooseRouter.js";
+import adminRouter from "./routers/adminRouter.js";
 dotenv.config();
 
 const uri = process.env.DB_URI;
@@ -47,9 +49,10 @@ app.use(bodyParser.json());
 
 // initialize the routers (these are the things necessary for the endpoints)
 userRouter(app);
+traineeRouter(app);
 dashboardRouter(app);
 getAllResiRouter(app);
-
+adminRouter(app);
 // initialize utilities
 mailer(app);
 

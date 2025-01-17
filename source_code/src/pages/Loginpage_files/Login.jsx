@@ -1,6 +1,6 @@
 import "./Login.css";
 import { useEffect, useState, useContext } from "react";
-import AuthContext from '../../context/AuthProvider.jsx';
+import AuthContext from "../../context/AuthProvider.jsx";
 import api from "../../api/axios.js";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -12,15 +12,9 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setErrorMessage('')
-  }, [email,password]);
+    setErrorMessage("");
+  }, [email, password]);
 
-  // debug auth:
-  // useEffect(() => {
-  //   console.log("Updated auth state: ", auth);
-  // }, [auth]);
-
-  // regex for accepting only upmails
   const isValidEmail = (email) => {
     const upEmailRegex = /^[a-zA-Z0-9._%+-]+@up\.edu\.ph$/;
     return upEmailRegex.test(email);
@@ -30,9 +24,8 @@ export default function Login() {
     if (!isValidEmail(email)) {
       return "Please enter a valid @up.edu.ph email address.";
     }
-    return null; 
+    return null;
   };
-
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -48,8 +41,8 @@ export default function Login() {
     // check if fields are valid
     const error = checkValidCredentials();
     if (error) {
-      setErrorMessage(error); 
-      return; 
+      setErrorMessage(error);
+      return;
     }
 
     setErrorMessage("");
@@ -59,26 +52,26 @@ export default function Login() {
     try {
       const response = await api.post("/auth/login", {
         email: email,
-        password: password
+        password: password,
       });
-      if (response){
+      if (response) {
         alert("Login successful!");
 
         // save access token and role in memory
         const accessToken = response?.data?.accessToken;
         const role = response?.data?.role;
 
-        setAuth({email, password, accessToken, role});
-
+        setAuth({ email, password, accessToken, role });
+        // for now let us store the access token in the session storage TODO:
+        sessionStorage.setItem("accessToken", accessToken);
         if (role === "trainee") {
-          navigate("/test");
+          navigate("/trainee/dashboard");
         } else if (role === "residentMember") {
-          navigate("/test");
+          navigate("/resmem/dashboard");
         } else if (role === "admin") {
           navigate("/admin/acc-info");
-        }
-        else{
-          // How did it go here? Well, for some reason, they got a response with an invalid rol
+        } else {
+          // How did it go here? Well, for some reason, they got a response with an invalid role
           console.log("Invalid role: ", role);
           throw new Error("Invalid role.");
         }
@@ -88,87 +81,91 @@ export default function Login() {
         console.log("Error response status: ", error.response.status);
         if (error.response.status === 401) {
           setErrorMessage("Invalid email or password.");
-        } else{
+        } else {
           setErrorMessage("An error has occurred while signing in.");
         }
-      }
-      else{
+      } else {
         console.error("Error message: ", error.message);
         setErrorMessage("No response from the server.");
       }
     }
-  }
-     
+  };
+
   return (
     <>
       <div className="login-page">
-        <div className="bg">
+        <div className="bg-login">
           <div className="login-main-content">
-            <div className="logo-text-container">
-              <img
-                src="./assets/YSES Logo.png"
-                className="logo-login-page"
-                alt="YSES Logo"
-              />
-              <div className="text-login-page">
-                <h1>YSYNC</h1>
+            <div className="logo-text-container-login">
+              <div className="logo-login-page-container">
+                <img
+                  src="/assets/YSYNC.png"
+                  className="logo-login-page"
+                  alt="YSES Logo"
+                />
                 <p>
                   Streamlined Platform for YSES
                   <br />
                   Trainees' Application Process
                 </p>
               </div>
-            </div>
-            <div className="login-container"></div>
 
-            <div className="card-login-page">
-              <div className="rectangle-login-page" />
-              <h1>Welcome back, Trainee!</h1>
-              <form id="email-form" onSubmit={handleSubmit}>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  onChange={handleEmailChange}
-                  id="email-login-page"
-                  required
-                />
-                <br />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  onChange={handlePasswordChange}
-                  id="password-login-page"
-                  required
-                />
-                <br />
-                {errorMessage && <span id="errorMessage" className="error">{errorMessage}</span>}
-                <br />
-                <input
-                  type="submit"
-                  value="Login with UPmail"
-                  id="submit-btn-login-page"
-                />
-              </form>
-              <p>
-                Having trouble? <a href="mailto:info@yses.org">Contact us</a>
-              </p>
-            </div>
-            <div className="contact-login-page">
-              <a href="mailto:info@yses.org">
-                <img src="./assets/Email Icon.png" alt="Email Icon" />
-              </a>
-              <a href="https://www.yses.org/">
-                <img src="./assets/YSES Icon.png" alt="YSES Icon" />
-              </a>
-              <a href="https://www.facebook.com/YSES2005/">
-                <img src="./assets/Facebook Icon.png" alt="Facebook Icon" />
-              </a>
-              <a href="https://www.instagram.com/yses2005/">
-                <img src="./assets/Instagram Icon.png" alt="Instagram Icon" />
-              </a>
-              <a href="https://x.com/yses2005">
-                <img src="./assets/X Icon.png" alt="X Icon" />
-              </a>
+              <div className="card-login-page">
+                <div className="rectangle-login-page" />
+                <h1>Welcome back!</h1>
+                <form id="email-form" onSubmit={handleSubmit}>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    onChange={handleEmailChange}
+                    id="email-login-page"
+                    required
+                  />
+                  <br />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={handlePasswordChange}
+                    id="password-login-page"
+                    required
+                  />
+                  <br />
+                  {errorMessage && (
+                    <span id="errorMessage" className="error">
+                      {errorMessage}
+                    </span>
+                  )}
+                  <br />
+                  <input
+                    type="submit"
+                    value="Login with UPmail"
+                    id="submit-btn-login-page"
+                  />
+                </form>
+                <p>
+                  Having trouble? <a href="mailto:info@yses.org">Contact us</a>
+                </p>
+                <div className="contact-login-page">
+                  <a href="mailto:info@yses.org">
+                    <img src="./assets/Email Icon.png" alt="Email Icon" />
+                  </a>
+                  <a href="https://www.yses.org/">
+                    <img src="./assets/YSES Icon.png" alt="YSES Icon" />
+                  </a>
+                  <a href="https://www.facebook.com/YSES2005/">
+                    <img src="./assets/Facebook Icon.png" alt="Facebook Icon" />
+                  </a>
+                  <a href="https://www.instagram.com/yses2005/">
+                    <img
+                      src="./assets/Instagram Icon.png"
+                      alt="Instagram Icon"
+                    />
+                  </a>
+                  <a href="https://x.com/yses2005">
+                    <img src="./assets/X Icon.png" alt="X Icon" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

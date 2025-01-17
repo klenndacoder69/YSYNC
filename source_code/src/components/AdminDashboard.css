@@ -14,8 +14,22 @@
     z-index: 10; 
     background-color: #132B41;
     color: white;
-    width: 316px;
+    width: 17vw;
     padding: 20px;
+}
+
+.logo-image-admin-dashboard{
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.logo-image-admin-dashboard:hover{
+    transform: translateY(-2px);
+}
+
+.logo-image-admin-dashboard:active {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in;
 }
 
 .logo-admin-dashboard {
@@ -33,6 +47,18 @@
     margin-left: 30px;
     margin-bottom: 100px;    
 }
+.menu-img-admin-dashboard{
+    margin-right: 20px;
+    width:25px;
+    height:25px;
+}
+
+.menu-item-admin-dashboard {
+    padding: 15px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}   
 
 .menu-container-admin-dashboard{
     padding-left: 20px;
@@ -45,22 +71,27 @@
 .menu-container-admin-dashboard.active {
     font-weight: bold;
     background-position: left center;
-    background-image: url("./assets/highlight.png");
+    background-image: url("/assets/highlight.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .menu-container-admin-dashboard:hover {
     font-weight: bold;
-    background-image: url("./assets/highlight.png");
+    background-image: url("/assets/highlight.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .admin-account {
-    position: absolute;
+    position: relative;
     font-size: 14px;
     color: #90A4AE;
-    bottom: 0;
-    transform: translate(75%, 0);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.admin-account {
+    
 }

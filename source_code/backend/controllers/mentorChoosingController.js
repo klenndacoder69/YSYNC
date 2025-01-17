@@ -7,29 +7,16 @@ dotenv.config({
   path: "../.env",
 });
 
-//Get all active Mentors
-// const getMentors = async (req, res) => {
-//   try {
-//     const resMems = await ResidentMember.find({
-//       isMentor: true,
-//     });
-//     res.status(200).json(resMems);
-//   } catch (error) {
-//     res.status(500).json({
-//       error: "An error has occurred while retrieving the Resident Members.",
-//     });
-//   }
-// };
-
 const getMentors = async (req, res) => {
   try {
     const resMems = await ResidentMember.find({
       isMentor: true,
-    }).populate("traineeId");
+    }).populate("userId", "firstName lastName image").populate("traineeId", "interests");
 
-    resMems.forEach((resMems) => {
-      console.log(resMems.univBatch);
+    resMems.forEach((resMem) => {
+      console.log(resMem.orgBatch);
     });
+
     res.status(200).json(resMems);
   } catch (error) {
     res.status(500).json({
@@ -40,14 +27,17 @@ const getMentors = async (req, res) => {
 
 async function getMentorReco(req, res) {
   try {
-    console.log("This is the request body", req.body);
+    const userId = req.params.id;
+    const trainee = await Trainee.findOne({userId});
+    const traineeInterests = trainee.interests;
+    console.log(traineeInterests)
     // const traineeInterests = req.body;
-    const traineeInterests = ["AI", "Cybersecurity", "UI/UX", "Database"];
+    // const traineeInterests = ["AI", "Cybersecurity", "UI/UX", "Database"];
     const mentors = await ResidentMember.find({
       isMentor: true,
     })
-      .populate("traineeId")
-      .populate("userId");
+      .populate("traineeId", "interests")
+      .populate("userId", "firstName lastName image");
 
     //Mentor match
     const mentorMatch = mentors.map((mentor) => {
@@ -57,7 +47,7 @@ async function getMentorReco(req, res) {
       );
       return {
         //Returns array with userID: and matchcount;
-        mentor: mentor, //Should i return userId or mentor itself (does mentor return ObjectID)
+        ...mentor.toObject(), //Should i return userId or mentor itself (does mentor return ObjectID)
         matchCount: commonInterest.length,
       };
     });
@@ -66,14 +56,14 @@ async function getMentorReco(req, res) {
       (mentor1, mentor2) => mentor2.matchCount - mentor1.matchCount
     );
     //Gets the top 3 Mentors Matched
-    mentorMatch.slice(0, 3);
+    const slicedMentorMatch = mentorMatch.slice(0, 3);
 
-    mentorMatch.forEach((mentorMatch) => {
-      console.log(mentorMatch.mentor);
+    slicedMentorMatch.forEach((mentorMatch) => {
+      console.log(mentorMatch);
     });
 
     // console.log(mentorMatch);
-    res.status(200).json(mentorMatch);
+    res.status(200).json(slicedMentorMatch);
   } catch (error) {
     res.status(500).json({
       error: "An error has occurred while retrieving the Resident Members.",
@@ -84,8 +74,9 @@ async function getMentorReco(req, res) {
 //Get all Trainees
 const getAllTrainees = async (req, res) => {
   try {
-    const trainees = await Trainee.find();
-    res.status(200).json(trainees);
+    const trainees = await Trainee.find().populate('userId');
+    const filteredTrainees = trainees.filter((trainee) => trainee.userId.userType === "trainee");
+    res.status(200).json(filteredTrainees);
   } catch (error) {
     res.status(500).json({
       error: "An error has occurred while retrieving the Trainees.",

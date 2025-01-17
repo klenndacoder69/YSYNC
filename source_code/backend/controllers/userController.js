@@ -1,6 +1,8 @@
 import User from "../models/userSchema.js";
+import Report from "../models/reportSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import RequestApplication from "../models/requestApplicationSchema.js";
 // sample:
 // import ResidentMember from "../models/residentMemberSchema.js";
 // import Trainee from "../models/traineeSchema.js";
@@ -41,22 +43,29 @@ const userRegister = async (req, res) => {
         
         // we set userType to trainee (TODO: this will be changed later on)
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ firstName, lastName, middleName, email, password: hashedPassword, userType: "trainee"});
+        const user = new User({ firstName, lastName, middleName, email, password: hashedPassword});
         console.log("test", user)
+        // create the user
         await user.save();
-
-        // this part is for migrating a user to a trainee (which is the main purpose of the register)
-            // const trainee = new Trainee({ userId: user._id,
-            //     interests: ["AI", "Cybersecurity", "UI/UX", "Database"],
-            //     univBatch: 2023
-            //  });
-            // await trainee.save();
-
-        // const residentMember = new ResidentMember({ userId: user._id, traineeId: trainee._id, isMentor: true, orgBatch: 2024, department: "VL", status: "active", isMentor: true, whyYouShouldChooseMe: "I enjoy teaching.", whatToExpect: "Hands-on mentorship." });
-        // await residentMember.save();
+        // create an application form
+        await RequestApplication.create({ userId: user._id });
+        
         res.status(201).json({ message: "User registered successfully."});
     } catch (error) {
         res.status(500).json({ error: "An error has occured while registering the user."});
+    }
+}
+
+const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id; // Get user ID from request parameters
+        const user = await User.findById(userId); // Find the user by their ID
+        if (!user) {
+            return res.status(404).json({ error: "User not found." });
+        }
+        res.status(200).json(user); // Send the user data as a JSON response
+    } catch (error) {
+        res.status(500).json({ error: "An error has occurred while fetching the user data." });
     }
 }
 
@@ -68,6 +77,26 @@ const getAllUsers = async (req, res) => {
         res.status(500).json({ error: "An error has occurred while retrieving users." });
     }
 }
+const reportRequest = async (req, res) => {
+    try {
+        const { userId, reason } = req.body;
+        
+        // create reportUser object
+        const reportUser = new Report({
+            userId,
+            reason,
+            createdAt: new Date() // Add any additional fields as needed
+        });
+
+        // Save the new ReportUser document
+        await reportUser.save();
+        res.status(201).json({ message: "Submitted successfully."});
+    } catch (error) {
+        console.error("Error occurred while submitting report:", error); // Log the error
+        res.status(500).json({ error: "An error has occurred while submitting." });
+    }
+}
+
 
 // const testFunction = async (req,res) => {
 //     try {
@@ -84,7 +113,9 @@ const getAllUsers = async (req, res) => {
 export {
     userSignIn,
     userRegister,
+    getUser,
     getAllUsers,
+    reportRequest,
     // testFunction
 }
 
