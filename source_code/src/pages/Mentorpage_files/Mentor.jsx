@@ -17,6 +17,7 @@ const fetchMentors = async () => {
 const fetchTopMentors = async (userId) => {
     try {
         const response = await api.post(`/getMentorRecommendations/${userId}`);
+        console.log('TOP MENTORS:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching mentors:', error.response ? error.response.data : error.message);
@@ -29,7 +30,7 @@ export default function Mentor(){
     const [topMentors, setTopMentors] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const userId = '67891ee00a8813ebc8c7156f';
+    const userId = '678a2899eebd27ced914e557';
 
     useEffect(() => {
         const loadMentors = async () => {
