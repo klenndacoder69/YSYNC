@@ -17,11 +17,14 @@
     transition: transform 0.5s ease;
     background-color: #D9D9D9;
     border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
 }
 
 /* .mentor-card:hover {
-    transform: rotateY(180deg);
+    transform: scale(1);
 } */
+
 .mentor-card-flipped {
     transform: rotateY(180deg);
 }
@@ -114,24 +117,36 @@
 /* para sa back ng card css */
 .mentor-card-bio{
     margin-left: 1rem;
+    margin-right: 1rem;
     font-family: 'Nirmala UI';
     font-size: 15px; 
     height: 25%;
     overflow: hidden;
+    /* overflow: visible; 
+    white-space: normal; 
+    word-wrap: break-word; */
 }
 
 .mentor-card-exp{
     margin-left: 1rem;
+    margin-right: 1rem;
     font-family: 'Nirmala UI';
     font-size: 15px; 
     height: 25%;
     overflow: hidden;
+    /* overflow: visible; 
+    white-space: normal; 
+    word-wrap: break-word; */
 }
 
 .mentor-card-interests{
     margin-left: 1rem;
+    margin-right: 1rem;
     font-family: 'Nirmala UI';
     font-size: 15px; 
     height: 25%;
     overflow: hidden;
+    /* overflow: visible; 
+    white-space: normal; 
+    word-wrap: break-word; */
 }

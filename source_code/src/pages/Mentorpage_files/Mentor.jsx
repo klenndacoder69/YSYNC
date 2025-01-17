@@ -31,6 +31,25 @@ export default function Mentor(){
     const [topMentors, setTopMentors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState("");
+    const [animate, setAnimate] = useState(false);
+    const [background, setBackground] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+        setAnimate(true); // callback func so setAnimate will be set to true after 1000ms
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+        setBackground(true);
+        }, 1200);
+
+        return () => clearTimeout(timer);
+    }, []);
+
 
     useEffect(() => {
         const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
@@ -68,31 +87,35 @@ export default function Mentor(){
     return(
         <>  
             <div className="mentor-page">
+                <div className="mentor-main-bg-size">                                   {/* serves as the size for the top div for top 3 mentors */}
+                    <div className={`${background ? "mentor-main-bg": ""}`}>            {/* adds a color bg so when bounce occurs you wont see white on top*/}
+                        <div className={`mentor-main ${animate ? "slideDown" : ""}`}>   {/* main div for the top 3 mentors with bounce functionality */}
+                            <div className="mentor-top-picks">
+                                <div className="mentor-top-components">
+                                    {topMentors.map((mentor) => (
+                                        <CardMentor
+                                            key = {mentor.userId}
+                                            image = {mentor.userId.image}
+                                            name={`${mentor.userId.firstName} ${mentor.userId.lastName}`}
+                                            batch={mentor.orgBatch}
+                                            dept={mentor.department}
+                                            bio={mentor.whyYouShouldChooseMe}
+                                            exp={mentor.whatToExpect}
+                                            interests={mentor.traineeId.interests.join(", ")}
+                                        />
+                                    ))}
+                                </div>
 
-                <div className="mentor-main">
-                    <div className="mentor-top-picks">
-                        <div className="mentor-top-components">
-                            {topMentors.map((mentor) => (
-                                <CardMentor
-                                    key = {mentor.userId}
-                                    image = {mentor.userId.image}
-                                    name={`${mentor.userId.firstName} ${mentor.userId.lastName}`}
-                                    batch={mentor.orgBatch}
-                                    dept={mentor.department}
-                                    bio={mentor.whyYouShouldChooseMe}
-                                    exp={mentor.whatToExpect}
-                                    interests={mentor.traineeId.interests.join(", ")}
-                                />
-                            ))}
-                        </div>
-
-                        <div className="mentor-top-text">
-                        ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ TOP RECOMMENDED MENTORS FOR YOU ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+                                <div className="mentor-top-text">
+                                ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ TOP RECOMMENDED MENTORS FOR YOU ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="other-mentors-container">
+                <div className={`other-mentors-container ${animate ? "slideDown" : ""}`}>
+                {/* <div className="other-mentors-container"> */}
                     <div className="other-mentors">
                             {mentors.map((mentor) => (
                                 <CardMentor
