@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
       default: 'pending',
       required: true
     },
-    image: { type: String, required: true },
+    image: { type: String, default: "https://a.storyblok.com/f/178900/640x360/4aaaa615e9/419f2683754a97abca0f15b660b2645e1682163751_main.png/m/filters:quality(95)format(webp)", required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });

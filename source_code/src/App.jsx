@@ -64,6 +64,10 @@ function App() {
       {
         path: "dashboard",
         element: <Dashboard/>
+      },
+      {
+        path: "chat",
+        element: <Chat/>
       }
       ]
     },
@@ -111,8 +115,13 @@ function App() {
         {
           path: "mentors",
           element: <Mentor/>
-        }
+        },
+
       ]
+    },
+    {
+      path: "/chat",
+      element: <Chat/>
     }
   
   ]

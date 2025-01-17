@@ -5,6 +5,7 @@ import Pinned from "./Components/Pinned";
 import Post from "./Components/Post";
 import Create from "./Components/Create";
 import Createtriggered from "./Components/Createtriggered";
+import Chat from "../../utilities/Chatbox";
 
 function Dashboard() {
   const [isCreating, setIsCreating] = useState(false);
@@ -92,6 +93,7 @@ function Dashboard() {
         </div>
         <div className="dashboard-chatbox-container"></div>
       </div>
+      <Chat/>
     </div>
   );
 }
