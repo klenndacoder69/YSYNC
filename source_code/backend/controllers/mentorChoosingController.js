@@ -27,10 +27,10 @@ const getMentors = async (req, res) => {
 
 async function getMentorReco(req, res) {
   try {
-    const traineeId = req.params.id;
-    const trainee = await Trainee.findById(traineeId);
+    const userId = req.params.id;
+    const trainee = await Trainee.findOne({userId});
     const traineeInterests = trainee.interests;
-  
+    console.log(traineeInterests)
     // const traineeInterests = req.body;
     // const traineeInterests = ["AI", "Cybersecurity", "UI/UX", "Database"];
     const mentors = await ResidentMember.find({
@@ -56,10 +56,10 @@ async function getMentorReco(req, res) {
       (mentor1, mentor2) => mentor2.matchCount - mentor1.matchCount
     );
     //Gets the top 3 Mentors Matched
-    mentorMatch.slice(0, 3);
+    const slicedMentorMatch = mentorMatch.slice(0, 3);
 
-    mentorMatch.forEach((mentorMatch) => {
-      console.log(mentorMatch.mentor);
+    slicedMentorMatch.forEach((mentorMatch) => {
+      console.log(mentorMatch);
     });
 
     // console.log(mentorMatch);
