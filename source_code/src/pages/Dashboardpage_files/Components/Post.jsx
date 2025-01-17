@@ -31,26 +31,26 @@ function Post({ post, onPostUpdate, onPinToggle }) {
 
 
     return (
-        <div className="dashboard-post-container">
-            <div className="dashboard-post-profile">
-                <img src={profilePic} alt="profile pic" className="dashboard-post-profile-pic"/>
-                <div className="dashboard-post-profile-info">
-                    <div className="dashboard-post-profile-info-name">
+        <div className={`post-container${post.isPinned ? '-pinned' : ''}`}>
+            <div className="post-profile">
+                <img src={profilePic} alt="profile pic" className="post-profile-pic"/>
+                <div className="post-profile-info">
+                    <div className="post-profile-info-name">
                         Placeholder
                     </div>
-                    <div className="dashboard-post-profile-info-datetime">
+                    <div className="post-profile-info-datetime">
                         January 16, 2025 | 12:00 PM
                     </div>
                 </div>
             </div>
-            <div className="dashboard-post-content">
+            <div className="post-content">
                 Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
                 Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
                 Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
             </div>
-            <div className="dashboard-post-user">
-                <div className='dashboard-post-user-left'>
-                    <div className="dashboard-post-user-like">
+            <div className="post-user">
+                <div className='post-user-left'>
+                    <div className="post-user-like">
                         <button onClick={handleLikeClick}>
                             <img
                                 src={post.liked ? heartRedIcon : heartIcon}
@@ -59,7 +59,7 @@ function Post({ post, onPostUpdate, onPinToggle }) {
                         </button>
                         {post.likes}
                     </div>
-                    <div className="dashboard-post-user-comment">
+                    <div className="post-user-comment">
                         <button>
                             <img
                                 src="/assets/chat-bubble.png"
@@ -68,7 +68,7 @@ function Post({ post, onPostUpdate, onPinToggle }) {
                         </button>
                         {post.comments}
                     </div>
-                     <div className="dashboard-post-user-pin">
+                     <div className="post-user-pin">
                         <button onClick={handlePinClick}>
                             <img
                                 src={post.isPinned ? pinFilledIcon : pinIcon}
@@ -78,8 +78,8 @@ function Post({ post, onPostUpdate, onPinToggle }) {
                          Click To Pin
                     </div>
                 </div>
-                <div className="dashboard-post-user-right">
-                    <div className="dashboard-post-user-comment-add">
+                <div className="post-user-right">
+                    <div className="post-user-comment-add">
                         <input
                           type="text"
                            placeholder="Add a comment..."
@@ -87,7 +87,7 @@ function Post({ post, onPostUpdate, onPinToggle }) {
                             onChange={handleCommentInputChange}
                         />
                     </div>
-                    <div className="dashboard-post-user-comment-send">
+                    <div className="post-user-comment-send">
                         <button onClick={handleSendClick}>
                             <img src="/assets/paper-plane.png" alt="send"/>
                         </button>

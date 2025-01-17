@@ -1,6 +1,8 @@
 .dashboard-upcomingContainer {
+  box-shadow: 3px 3px 10px rgb(188, 188, 188);
+  flex-wrap: nowrap;
     min-height: 250px;
-    max-width: 100%;
+    max-width: 70%;
     background-color: #ffffff;
     border-radius: 30px;
     font-family: 'Segoe UI', Arial;
