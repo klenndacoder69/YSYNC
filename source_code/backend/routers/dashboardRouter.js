@@ -4,7 +4,7 @@ const dashboardRouter = (app) => {
     app.post('/api/posts', createPost);
     app.post('/api/posts/:id/comment', addComment);
     app.put('/api/posts/:id/heart', toggleHeart);
-    app.get('/api/getposts', fetchPosts);
+    app.get('/api/getposts/:id', fetchPosts);
     app.put('/api/updatepost/:id', updatePost);
     app.delete('/api/delpost/:id', delPost);
 };
