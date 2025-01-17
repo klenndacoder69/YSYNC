@@ -9,12 +9,12 @@ import Createtriggered from "./Components/Createtriggered";
 function Dashboard() {
   const [isCreating, setIsCreating] = useState(false);
   const [posts, setPosts] = useState([
-    { id: 1, likes: 0, comments: 0, isPinned: false, liked: false },
-    { id: 2, likes: 0, comments: 0, isPinned: false, liked: false },
-    { id: 3, likes: 0, comments: 0, isPinned: false, liked: false },
-    { id: 4, likes: 0, comments: 0, isPinned: false, liked: false },
-    { id: 5, likes: 0, comments: 0, isPinned: false, liked: false },
-    { id: 6, likes: 0, comments: 0, isPinned: false, liked: false },
+    { id: 1, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
+    { id: 2, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
+    { id: 3, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
+    { id: 4, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
+    { id: 5, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
+    { id: 6, likes: 0, comments: 0, isPinned: false, liked: false, isEvent: Math.random() >= 0.5, date: new Date(Date.now() + Math.floor(Math.random() * 10000000)) },
   ]);
 
   const handleCreateClick = () => {
@@ -87,7 +87,7 @@ function Dashboard() {
         </div>
         <div className="dashboard-right-div">
           <div className="dashboard-upcoming-container">
-            <Upcoming />
+            <Upcoming posts={posts}/>
           </div>
         </div>
         <div className="dashboard-chatbox-container"></div>

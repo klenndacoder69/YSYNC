@@ -1,13 +1,14 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./TraineeNavBar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function TraineeNavBar() {
   const [activeMenu, setActiveMenu] = useState("dashboard");
-
+  const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [residentMembers, setResidentMembers] = useState([]);
-
+  useEffect(() => {
+    navigate(`/trainee/${activeMenu}`);
+  }, [])
   return (
     <div className="container-traineee-navbar">
       <div className="parentNav-traineee-navbar">
