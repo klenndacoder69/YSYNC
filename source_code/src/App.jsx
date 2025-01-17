@@ -107,6 +107,10 @@ function App() {
         {
           path: "dashboard",
           element: <Dashboard/>
+        },
+        {
+          path: "mentors",
+          element: <Mentor/>
         }
       ]
     }

@@ -13,7 +13,7 @@ function TraineeNavBar(){
      <div className="container-traineee-navbar">
         <div className="parentNav-traineee-navbar">
         <div className="logoname-traineee-navbar">
-          <img src="" alt="YSES Logo" className="traineee-navbar-logo" />
+          <img src="/assets/YSYNC.png" alt="YSES Logo" className="traineee-navbar-logo" />
           <div className="navi-traineee-navbar">YSYNC</div>
         </div>
         <nav className="navButtons-traineee-navbar">
