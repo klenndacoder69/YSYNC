@@ -13,6 +13,22 @@ function Dashboard() {
   const [posts, setPosts] = useState([]);
   const [userId, setUserId] = useState("");
 
+  const fetchPosts = async () => {
+    const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
+    console.log(decodedToken)
+    setUserId(decodedToken.id);
+    console.log("The user id is: ", userId)
+    try {
+      const response = await api.get(`/getposts/${userId}`, {
+        params: { userId },
+      });
+      console.log(response)
+      setPosts(response.data.data || []);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+  
   useEffect(() => {
       const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
       console.log(decodedToken);
@@ -20,20 +36,7 @@ function Dashboard() {
   }, []); 
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
-      console.log(decodedToken)
-      setUserId(decodedToken.id);
-      console.log("The user id is: ", userId)
-      try {
-        const response = await api.get(`/getposts/${userId}`, {
-          params: { userId },
-        });
-        setPosts(response.data.data || []);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
+   
 
     fetchPosts();
   }, [userId]);
@@ -59,6 +62,8 @@ function Dashboard() {
   //     )
   //   );
   // };
+
+
 
   const pinnedPosts = posts.filter((post) => post.isPinned);
 
@@ -98,9 +103,12 @@ function Dashboard() {
                       post={post}
                       userId={userId}
                       onPostsUpdate={(updatedPost) =>
-                        setPosts((prev) =>
-                          prev.map((p) => (p._id === updatedPost._id ? updatedPost : p))
-                        )
+                      {
+                        console.log("The updated post is: ", updatedPost);
+                        setPosts(updatedPost);
+                        console.log("The posts are: ", posts);
+                      }
+                        
                       }
                     />
                   );

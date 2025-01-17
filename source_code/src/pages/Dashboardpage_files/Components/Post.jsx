@@ -107,10 +107,11 @@ const Post = ({ post, userId, onPostsUpdate }) => {
     const handleLikeClick = async () => {
         try {
             const response = await api.put(`/posts/${post._id}/heart`, { userId });
+            console.log("Dito: ", response)
             setLiked(response.data.hearts.includes(userId));
             setLikesCount(response.data.hearts.length);
-            const updatedPost = { ...post, hasReacted: response.data.hearts.includes(userId)};
-            onPostUpdate(updatedPost);
+            // const updatedPost = { ...post, hasReacted: response.data.hearts.includes(userId)};
+            // onPostUpdate(updatedPost);
         } catch (error) {
             console.error('Error toggling like:', error);
         }
@@ -130,6 +131,7 @@ const Post = ({ post, userId, onPostsUpdate }) => {
             });
 
             setCommentInput('');
+            console.log("This should be an array: ", response.data.data);
             onPostsUpdate(response.data.data);
         } catch (error) {
             console.error('Error adding comment:', error);
