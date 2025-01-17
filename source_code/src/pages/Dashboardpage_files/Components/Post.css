@@ -7,7 +7,7 @@
   border-radius: 20px;
   display: flex; 
   flex-direction: column;
-  border: 0.5px solid #8787876f;
+  border: 0.5px solid #d6dbea;
   padding: 20px;
 }
 
@@ -120,9 +120,9 @@
   align-items: center;
 }
 .post-user-comment-add input {
-  background-color: #efefef89;
-  border-color: rgba(119, 136, 153, 0.469);
-  border-width: 0.5px;
+  background-color: #d6dbea50;
+  border-color: #d6dbea50;
+  border-width: 0.3px;
   padding: 8px 12px;
   border-radius: 20px;
   outline: none;
