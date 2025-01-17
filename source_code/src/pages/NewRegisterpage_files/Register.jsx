@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Register.css";
 import api from "../../api/axios.js";
 import logo from "/assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [formStep, setFormStep] = useState(1);
@@ -17,6 +18,7 @@ const RegistrationForm = () => {
   const [birthday, setBirthday] = useState(
     new Date().toISOString().split("T")[0]
   );
+  const navigate = useNavigate();
   const [about, setAbout] = useState("");
   const [interests, setInterests] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -182,6 +184,7 @@ const RegistrationForm = () => {
       });
       if (response){
         alert("Registration successful!");
+        navigate("/login");
       }
     } catch (error) {
       if(error.response){
