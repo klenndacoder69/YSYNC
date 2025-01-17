@@ -23,8 +23,9 @@ const sampleData = {
       email: "alice.smith@up.edu.ph",
       password: "password1",
       userType: "trainee",
+      nickname: "AliceSmith",
+      about: "Alice loves collecting vintage typewriters and dreams of writing a novel set in the 1950s. She is also a tea enthusiast who can identify over 20 varieties by taste."
     },
-
     {
       firstName: "Charlie",
       middleName: "D.",
@@ -32,8 +33,9 @@ const sampleData = {
       email: "charlie.brown@up.edu.ph",
       password: "password3",
       userType: "admin",
+      nickname: "CharlieBrown",
+      about: "Charlie is a self-proclaimed comic book aficionado and is secretly working on his own graphic novel. On weekends, he hosts trivia nights for his friends and is undefeated."
     },
-
     {
       firstName: "Diana",
       middleName: "E.",
@@ -41,6 +43,8 @@ const sampleData = {
       email: "diana.lee@up.edu.ph",
       password: "password5",
       userType: "trainee",
+      nickname: "DianaLee",
+      about: "Diana is a martial arts practitioner who can break a wooden board with a single kick. She also has a knack for solving jigsaw puzzles, often finishing 1000-piece puzzles in a day."
     },
     {
       firstName: "Evan",
@@ -49,6 +53,8 @@ const sampleData = {
       email: "evan.stone@up.edu.ph",
       password: "password6",
       userType: "trainee",
+      nickname: "EvanStone",
+      about: "Evan is an avid stargazer and can name over 30 constellations. He once built a telescope from scratch and is always the first to spot shooting stars during meteor showers."
     },
     {
       firstName: "Fiona",
@@ -57,8 +63,9 @@ const sampleData = {
       email: "fiona.harris@up.edu.ph",
       password: "password7",
       userType: "trainee",
+      nickname: "FionaHarris",
+      about: "Fiona is a master baker who specializes in creating artistic cakes. She once made a cake shaped like a galaxy, complete with edible stars and planets."
     },
-
     {
       firstName: "Jane",
       middleName: "K.",
@@ -66,6 +73,8 @@ const sampleData = {
       email: "jane.scott@up.edu.ph",
       password: "password11",
       userType: "trainee",
+      nickname: "JaneScott",
+      about: "Jane is a skilled photographer who loves capturing candid moments. She has a secret talent for mimicking accents and often entertains her friends with her spot-on impersonations."
     },
   ],
   traineeSample: [
@@ -76,6 +85,8 @@ const sampleData = {
       email: "hannah.miller@up.edu.ph",
       password: "password8",
       userType: "trainee",
+      nickname: "HannahMiller",
+    about: "Hannah is passionate about marine biology and has a collection of seashells from around the world. She enjoys snorkeling and once swam with a pod of dolphins."
     },
     {
       firstName: "Isaac",
@@ -84,6 +95,8 @@ const sampleData = {
       email: "isaac.hall@up.edu.ph",
       password: "password9",
       userType: "trainee",
+      nickname: "IsaacHall",
+      about: "Isaac is a tech wizard who loves building robots. He once programmed a robot to dance to his favorite songs, earning him the nickname 'DJ Robo.'"
     },
     {
       firstName: "Julia",
@@ -92,6 +105,8 @@ const sampleData = {
       email: "julia.davis@up.edu.ph",
       password: "password10",
       userType: "trainee",
+      nickname: "JuliaDavis",
+      about: "Julia is a yoga instructor in training who finds peace in nature. She has a green thumb and maintains a thriving garden with over 50 plant species."
     },
   ],
   trainees: [

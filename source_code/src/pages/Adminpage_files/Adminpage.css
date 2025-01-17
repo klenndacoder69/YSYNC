@@ -4,6 +4,7 @@
     padding: 30px;
     background-color: #D6DBEA;
     animation: fadeIn 0.25s ease-in forwards;  
+    height: 100vh;
 }
 
 .header-admin-dashboard {
