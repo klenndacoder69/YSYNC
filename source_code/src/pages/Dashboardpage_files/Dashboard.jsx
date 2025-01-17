@@ -37,7 +37,6 @@ function Dashboard() {
 
     return (
         <div className="dashboard-main">
-            <Navbar />
             <div className="dashboard-left-div">
                 <div className="dashboard-pinned-container">
                     <Pinned pinnedPosts={pinnedPosts} onPinToggle={handlePinToggle} />

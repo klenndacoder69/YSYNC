@@ -52,13 +52,14 @@ function App() {
     {
       path: "/trainee",
       element: <ProtectedRoute element={<TraineeNavBar/>} allowedRoles = {["trainee", "admin"]}/>,
-      children: [{
-        path: "chat",
-        element: <Chat/>,
-      },
+      children: [
       {
         path: "residentMembers",
         element: <ResMem/>
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard/>
       }
       ]
     },
@@ -99,6 +100,7 @@ function App() {
       path: "/dashboard",
       element: <Dashboard/>
     }
+
   ]
   const router = createBrowserRouter(routes)
   return (

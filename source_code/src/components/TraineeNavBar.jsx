@@ -24,7 +24,7 @@ function TraineeNavBar(){
             onClick={() => {setActiveMenu("dashboard")}}
             >
             <Link
-              to="chat"
+              to="dashboard"
               className={`button-traineee-navbar-dashboard ${
                 activeMenu === "acc-info" ? "active" : ""
               }`}
