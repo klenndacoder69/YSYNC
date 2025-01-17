@@ -1,0 +1,92 @@
+.mentor-page{
+    background: #d6dbea;  
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; 
+}
+
+.mentor-main-bg-size{
+    background: #d6dbea;  
+    height: 65vh; 
+}
+
+.mentor-main{
+    background: #132b41; 
+    /* width: 100vw; */
+    height: 65vh; 
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    display: flex;
+    justify-content: center; 
+    visibility: hidden;
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    visibility: visible !important;
+}
+  
+@keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+    }
+    50% {
+      transform: translateY(8%);
+    }
+    65% {
+      transform: translateY(-4%);
+    }
+    80% {
+      transform: translateY(4%);
+    }
+    95% {
+      transform: translateY(-2%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+}
+
+
+.mentor-main-bg{
+    background: #132b41; 
+    height: 30vh; 
+}
+
+.mentor-top-picks{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    width: 90vw;          
+    height: 60vh;
+}
+
+.mentor-top-components{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mentor-top-text{
+    display: flex;
+    justify-content: center; 
+    font-family: 'Nirmala UI';
+    font-size: 30px;
+    margin-top: 2%;
+    color: #ffffff;
+}
+
+.other-mentors-container{
+    margin: 3%;
+    visibility: hidden;
+}
+
+.other-mentors{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+    gap: 5%;
+}
