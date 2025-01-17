@@ -26,9 +26,9 @@ export default function CardMentor({ image, name, batch, dept, bio, exp, interes
             </div>
 
             <div className="mentor-card-back">
-                <h2 className="mentor-card-bio">{bio}</h2>
-                <h2 className="mentor-card-exp">{exp}</h2>
-                <h2 className="mentor-card-interests">{interests}</h2>
+                <h2 className="mentor-card-bio">WHY YOU SHOULD CHOOSE ME:<br/>{bio}</h2>
+                <h2 className="mentor-card-exp">WHAT TO EXPECT: <br/>{exp}</h2>
+                <h2 className="mentor-card-interests">INTERESTS: <br/>{interests}</h2>
             </div>
 
         </div>
