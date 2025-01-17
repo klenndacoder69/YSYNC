@@ -2,12 +2,12 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./ResmemNavbar.css";
 import { useEffect, useState } from "react";
 
-function TraineeNavBar() {
+function ResmemNavBar() {
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
   useEffect(() => {
-    navigate(`/residentMember/${activeMenu}`);
+    navigate(`/resmem/${activeMenu}`);
   }, [])
   return (
     <div className="container-resmem-navbar">
@@ -46,12 +46,12 @@ function TraineeNavBar() {
             }}
           >
             <Link
-              to="mentors"
+              to="trainees"
               className={`button-resmem-navbar-dashboard ${
                 activeMenu === "acc-info" ? "active" : ""
               }`}
             >
-              Mentors
+              Trainees
             </Link>
           </div>
           <div
@@ -102,4 +102,4 @@ function TraineeNavBar() {
   );
 }
 
-export default TraineeNavBar;
+export default ResmemNavBar;
