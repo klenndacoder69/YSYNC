@@ -1,8 +1,8 @@
 .chat-container {
   position: fixed;
   bottom: 0;
-  right: 8vw;
-  width: 300px;
+  right: 2.5vw;
+  width: 400px;
   z-index: 1000;
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
 }
@@ -11,7 +11,7 @@
   font-size: 21px;
   align-items: center;
   background-color: #132b41;
-  font-family: "Segoe UI";
+  font-family: "Segoe UI", Arial;
   font-weight: 350;
   color: white;
   padding: 20px;
@@ -34,6 +34,7 @@
   width: 25px;
   justify-content: center;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .input-chatbox-send {
