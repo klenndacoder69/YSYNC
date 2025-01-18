@@ -24,9 +24,6 @@ DASHBOARD
 DASHBOARD CHAT  
 
 
-
-
-
 MENTORS PAGE
 
 ![Screenshot 2025-01-18 at 12-07-32 YSYNC](https://github.com/user-attachments/assets/92f7ce52-12bd-43cf-835c-be578c61d230)
@@ -38,6 +35,8 @@ RESIDENT MEMBERS PAGE
 
 PROFILE PAGE
 
+![image](https://github.com/user-attachments/assets/d8e96470-e80b-48cf-89ea-e7167c05becf)
+![image](https://github.com/user-attachments/assets/8ec66a55-adec-42dd-8b07-ff6e6d5f8c7c)
 
 REPORT PAGE
 
