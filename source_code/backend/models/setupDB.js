@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import RequestApplication from "./requestApplicationSchema.js";
 import RequestDeferral from "./requestDeferralSchema.js";
 import Posts from "./postSchema.js";
-
+import Report from "./reportSchema.js";
 dotenv.config({
   path: "../.env",
 });
@@ -202,6 +202,7 @@ const populateDatabase = async () => {
     await Trainee.deleteMany({});
     await ResidentMember.deleteMany({});
     await Admin.deleteMany({});
+    await Report.deleteMany({});
     await RequestApplication.deleteMany({});
     await RequestDeferral.deleteMany({});
     await Posts.deleteMany({});
