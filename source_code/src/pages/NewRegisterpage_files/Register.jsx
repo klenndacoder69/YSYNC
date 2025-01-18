@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom"
 import React, { useEffect, useState } from "react";
 import "./Register.css";
 import api from "../../api/axios.js";
-import logo from "/assets/logo.png";
+import logo from "/assets/YSYNC borderless.png";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
@@ -207,16 +208,13 @@ const RegistrationForm = () => {
     <div className="regis-body">
       <div className="regis-container">
         <div className="regis-left-panel">
-          <img src={logo} className="regis-logo" alt="Logo" />
-          Streamlined Platform for YSES
-          <br />
-          Trainees' Application Process
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="regis-logo-subtext">
+            <br /><br />
+            <img src={logo} className="regis-logo" alt="Logo" /><br />
+            Streamlined Platform for YSES<br />
+            Trainees' Application Process<br />
+          </div>
+          <br /><br /><br /><br /><br />
           <div className="regis-left-contact">
             Having trouble? <a href="mailto:info@yses.org">Contact us</a>
           </div>
@@ -426,7 +424,7 @@ const RegistrationForm = () => {
               <h2>Register</h2>
               <br />
               <div className="regis-form-group">
-                {/* Personal Details Section */}
+
                 <div className="regis-p3-info">
                   <h3>Personal Details</h3>
                   <p>Choose 1-5 options</p>
@@ -445,30 +443,21 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Digital Media and Content Creation"
+                      value="Startup"
                       checked={interests.includes(
-                        "Digital Media and Content Creation"
+                        "Startup"
                       )}
                       onChange={handleCheckboxChange}
                     />
-                    Digital Media and Content Creation
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value="Technical Writing and Documentation"
-                      checked={interests.includes(
-                        "Technical Writing and Documentation"
-                      )}
-                      onChange={handleCheckboxChange}
-                    />
-                    Technical Writing and Documentation
+                    Startup
                   </label>
                   <label>
                     <input
                       type="checkbox"
                       value="Project Management"
-                      checked={interests.includes("Project Management")}
+                      checked={interests.includes(
+                        "Project Management"
+                      )}
                       onChange={handleCheckboxChange}
                     />
                     Project Management
@@ -476,11 +465,20 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Startup"
-                      checked={interests.includes("Startup")}
+                      value="Game Art and Design"
+                      checked={interests.includes("Game Art and Design")}
                       onChange={handleCheckboxChange}
                     />
-                    Startup
+                    Game Art and Design
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="Digital Media and Content Creation"
+                      checked={interests.includes("Digital Media and Content Creation")}
+                      onChange={handleCheckboxChange}
+                    />
+                    Digital Media and Content Creation
                   </label>
                   <label>
                     <input
@@ -514,15 +512,14 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Game Art and Design"
-                      checked={interests.includes("Game Art and Design")}
+                      value="Technical Writing and Documentation"
+                      checked={interests.includes("Technical Writing and Documentation")}
                       onChange={handleCheckboxChange}
                     />
-                    Game Art and Design
+                    Technical Writing and Documentation
                   </label>
                 </div>
 
-                {/* Academic Details Section */}
                 <div className="regis-p3-info">
                   <h3>Academic Details</h3>
                   <p>Choose 1-5 options</p>
@@ -532,44 +529,44 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Algorithm and Problem Solving"
+                      value="Operating Systems"
                       checked={interests.includes(
-                        "Algorithm and Problem Solving"
+                        "Operating Systems"
                       )}
                       onChange={handleCheckboxChange}
                     />
-                    Algorithm and Problem Solving
+                    Operating Systems
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="Scientific Computations"
+                      checked={interests.includes(
+                        "Scientific Computations"
+                      )}
+                      onChange={handleCheckboxChange}
+                    />
+                    Scientific Computations
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="Networking"
+                      checked={interests.includes(
+                        "Networking"
+                      )}
+                      onChange={handleCheckboxChange}
+                    />
+                    Networking
                   </label>
                   <label>
                     <input
                       type="checkbox"
                       value="Database Design and Management"
-                      checked={interests.includes(
-                        "Database Design and Management"
-                      )}
+                      checked={interests.includes("Database Design and Management")}
                       onChange={handleCheckboxChange}
                     />
                     Database Design and Management
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value="Software Development and Design"
-                      checked={interests.includes(
-                        "Software Development and Design"
-                      )}
-                      onChange={handleCheckboxChange}
-                    />
-                    Software Development and Design
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value="System Administration"
-                      checked={interests.includes("System Administration")}
-                      onChange={handleCheckboxChange}
-                    />
-                    System Administration
                   </label>
                   <label>
                     <input
@@ -585,11 +582,11 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Operating Systems"
-                      checked={interests.includes("Operating Systems")}
+                      value="Algorithm and Problem Solving"
+                      checked={interests.includes("Algorithm and Problem Solving")}
                       onChange={handleCheckboxChange}
                     />
-                    Operating Systems
+                    Algorithm and Problem Solving
                   </label>
                   <label>
                     <input
@@ -603,20 +600,11 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Networking"
-                      checked={interests.includes("Networking")}
+                      value="Software Development and Design"
+                      checked={interests.includes("Software Development and Design")}
                       onChange={handleCheckboxChange}
                     />
-                    Networking
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value="Scientific Computations"
-                      checked={interests.includes("Scientific Computations")}
-                      onChange={handleCheckboxChange}
-                    />
-                    Scientific Computations
+                    Software Development and Design
                   </label>
                   <label>
                     <input
@@ -627,9 +615,17 @@ const RegistrationForm = () => {
                     />
                     Open Source Contribution
                   </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="System Administration"
+                      checked={interests.includes("System Administration")}
+                      onChange={handleCheckboxChange}
+                    />
+                    System Administration
+                  </label>
                 </div>
 
-                {/* Technical Details Section */}
                 <div className="regis-p3-info">
                   <h3>Technical Details</h3>
                   <p>Choose 1-5 options</p>
@@ -648,11 +644,11 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Mobile App Development"
-                      checked={interests.includes("Mobile App Development")}
+                      value="Cyber Security"
+                      checked={interests.includes("Cyber Security")}
                       onChange={handleCheckboxChange}
                     />
-                    Mobile App Development
+                    Cyber Security
                   </label>
                   <label>
                     <input
@@ -675,24 +671,6 @@ const RegistrationForm = () => {
                   <label>
                     <input
                       type="checkbox"
-                      value="Cyber Security"
-                      checked={interests.includes("Cyber Security")}
-                      onChange={handleCheckboxChange}
-                    />
-                    Cyber Security
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value="Data Science and Analytics"
-                      checked={interests.includes("Data Science and Analytics")}
-                      onChange={handleCheckboxChange}
-                    />
-                    Data Science and Analytics
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
                       value="Cloud Computing"
                       checked={interests.includes("Cloud Computing")}
                       onChange={handleCheckboxChange}
@@ -707,6 +685,24 @@ const RegistrationForm = () => {
                       onChange={handleCheckboxChange}
                     />
                     Dev Ops
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="Mobile App Development"
+                      checked={interests.includes("Mobile App Development")}
+                      onChange={handleCheckboxChange}
+                    />
+                    Mobile App Development
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="Data Science and Analytics"
+                      checked={interests.includes("Data Science and Analytics")}
+                      onChange={handleCheckboxChange}
+                    />
+                    Data Science and Analytics
                   </label>
                   <label>
                     <input
@@ -748,7 +744,7 @@ const RegistrationForm = () => {
             </div>
           )}
           <div className="regis-right-contact">
-            Already on YSYNC? <a href="#">Log in</a>
+            Already on YSYNC? <Link to="/login">Log in</Link>
           </div>
         </div>
       </div>
