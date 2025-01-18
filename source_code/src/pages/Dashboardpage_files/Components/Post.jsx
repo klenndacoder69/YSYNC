@@ -11,6 +11,7 @@ const Post = ({ post, userId, onPostsUpdate }) => {
   const [commentInput, setCommentInput] = useState('');
   const [liked, setLiked] = useState(post.hasReacted);
   const [likesCount, setLikesCount] = useState(post.hearts.length);
+  const [showComments, setShowComments] = useState(false);
 
   const handleLikeClick = async () => {
     try {
@@ -37,11 +38,22 @@ const Post = ({ post, userId, onPostsUpdate }) => {
 
       setCommentInput('');
       console.log("Updated comments: ", response.data.data);
-      onPostsUpdate(response.data.data);  // Update posts after adding a comment
+      onPostsUpdate(response.data.data);
+      setShowComments(true);
     } catch (error) {
       console.error('Error adding comment:', error);
     }
   };
+
+  const handleCommentButtonClick = () => {
+    setShowComments(!showComments);
+  };
+
+  // Determine if comment section should have a bottom border
+    const commentContainerClass = `post-comment-cont${
+        post.isPinned && showComments ? "-pinned" : ""
+    }`;
+
 
   return (
     <div className={`post-container${post.isPinned ? '-pinned' : ''}`}>
@@ -70,7 +82,7 @@ const Post = ({ post, userId, onPostsUpdate }) => {
             {likesCount}
           </div>
           <div className="post-user-comment">
-            <button>
+            <button onClick={handleCommentButtonClick}>
               <img
                 src="/assets/chat-bubble.png"
                 alt="Comment Icon"
@@ -96,17 +108,21 @@ const Post = ({ post, userId, onPostsUpdate }) => {
           </div>
         </div>
       </div>
-      <div className="post-comment">
-        {post.comments.map((comment) => {
-          return (
-            <Comment
-            comment={comment}
-              key={comment._id}
-              user={comment.userId}
-              text={comment.text}
-            />
-          );
-        })}
+      <div className={commentContainerClass}>
+        {showComments && (
+          <div className="post-comment">
+            {post.comments.map((comment) => {
+              return (
+                <Comment
+                  comment={comment}
+                  key={comment._id}
+                  user={comment.userId}
+                  text={comment.text}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
