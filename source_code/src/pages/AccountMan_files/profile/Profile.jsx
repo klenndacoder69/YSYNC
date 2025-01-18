@@ -11,34 +11,54 @@ const Profile = () => {
     const [orgBatch, setOrgBatch] = useState("");
     const [bio, setBio] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
+    const [currentUser, setCurrentUser] = useState({});
     const toggleEdit = () => {
         setIsEditMode(!isEditMode);
     };
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("accessToken");
+        const decodedToken = jwtDecode(token);
+        const currentUser = {
+            id: decodedToken.id,
+            userType: decodedToken.userType,
+        };
+        setCurrentUser(currentUser);
+        console.log(currentUser);
+    }, []);
+
+    const isEmpty = (obj) => Object.keys(obj).length === 0;
+
     const fetchUserData = async () => {
         try {
-            const token = sessionStorage.getItem("accessToken");
-            const decodedToken = jwtDecode(token);
-            console.log(decodedToken);
-            const resMemResponse = await api.get(`residentmembers/${decodedToken.id}`);
-            console.log(resMemResponse.data);
-            setResMem(resMemResponse.data); 
-            const userResponse = await api.get(`users/${decodedToken.id}`);
-            console.log(userResponse.data);
-            setUser(userResponse.data);
-
+            const userResponse = await api.get(`users/${currentUser.id}`);
+            if(userResponse.data) {
+                console.log("This is a normal user, their data is: ", userResponse.data);
+                setUser(userResponse.data);
+                setBio(userResponse.data.about);
+            }
+            const traineeResponse = await api.get(`trainees/${currentUser.id}`);
+            if(traineeResponse.data) {
+                console.log("This is a trainee, their data is: ", traineeResponse.data);
+                setUnivBatch(traineeResponse.data.univBatch);
+            }
         } catch (error) {
             setErrorMessage("Failed to fetch data.");
             console.error("Error fetching data:", error);
         }
     };
 
-    // Fetch user data
+    // fetch the user data
+    // this useEffect only runs when userId is already set
     useEffect(() => {
+        console.log("Fetching user data of current user: ", currentUser);
+        if (isEmpty(currentUser)) {
+            console.log("Data is still being fetched...");
+            return;
+        }
+        console.log("Data is now fetched.");
         fetchUserData();
-        setErrorMessage(''); // Clear any previous error messages
-    }, []); // Runs only once after the initial render
+    }, [currentUser]); 
 
     return (
         <>
@@ -46,8 +66,7 @@ const Profile = () => {
         <div className="profile-container">
             <div className="profile-header">
                 <div className="account-header-container">
-                    <h1 className="account-header">Account Management</h1>
-                    <h5 className="text2">/ Profile</h5>
+                    <h1 className="account-header">Account Management <span className="text2">/ Profile</span></h1>
                 </div>
             </div>
             <div title="Account Management" breadcrumb="/ Profile">
@@ -65,7 +84,7 @@ const Profile = () => {
                                 <p id="bioDisplay" className="bio">{resMem && `${resMem.orgBatch}`}</p>
                             </div>
                             <div id="bioEditFields" style={{display: isEditMode ? 'block' : 'none'}}>
-                                <label htmlFor="univBatchInput" className="bio1">University Batch:</label>
+                                <label htmlFor="univBatchInput" className="bio1">University Batch: </label>
                                 <input
                                     type="text"
                                     id="univBatchInput"
@@ -78,15 +97,16 @@ const Profile = () => {
                     
                             </div>
                             <form>
-                                <label className="bio1" id="bio1">{isEditMode ? 'Edit Bio' : 'Bio'}</label>
+                                <br/>
+                                <label className="bio2" id="bio1">{isEditMode ? 'Edit Bio' : 'Bio'}</label>
                                 <input
                                     type="text"
                                     id="bioInput"
                                     name="bio"
                                     className="bio1"
-                                    placeholder={user && `${user.about}`}
-                                    disabled={!isEditMode}
                                     value={bio}
+                                    disabled={!isEditMode}
+                                    // value={bio}
                                     onChange={(e) => setBio(e.target.value)}
                                 />
                             </form>

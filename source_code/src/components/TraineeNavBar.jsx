@@ -106,9 +106,9 @@ function TraineeNavBar() {
           dropdownVisible ? "visible" : "hidden"
         }`}
       >
-        <a href="#">Profile</a>
-        <a href="#">Report</a>
-        <a href="#">Defer</a>
+        <Link to="profile">Profile</Link>
+        <Link to="report">Report</Link>
+        <Link to="defer">Defer</Link>
         <a href="#">Log Out</a>
       </div>
       <Outlet />

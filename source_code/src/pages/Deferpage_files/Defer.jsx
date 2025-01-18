@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
+import './Defer.css';
 
 export default function Defer() {
     const [user, setUser] = useState(null);
@@ -62,15 +63,16 @@ export default function Defer() {
     };
 
     return (
-        <div>
-            <p>Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p> 
-            <h1>Defer Page</h1>
-            {errorMessage && <p className="error">{errorMessage}</p>}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Defer Reason:</label>
+        <div className="defer-container">
+            <p className="defer-logged-in">Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p> 
+            <h1 className="defer-header">Defer Page</h1>
+            {errorMessage && <p className="defer-error">{errorMessage}</p>}
+            <form className="defer-form" onSubmit={handleSubmit}>
+                <div className="defer-reason-container">
+                    <label className="defer-label">Defer Reason:</label>
                     <br />
                     <textarea
+                        className="defer-textarea"
                         value={deferReason}
                         onChange={handleTextChange}
                         rows="4"
@@ -78,9 +80,9 @@ export default function Defer() {
                         placeholder="State your reasons here..."
                     />
                 </div>
-                <button type="submit">Submit</button>
+                <button className="defer-submit-button" type="submit">Submit</button>
                 <br />
-                {submitError && <p className="error">{submitError}</p>}
+                {submitError && <p className="defer-error">{submitError}</p>}
             </form>
         </div>
     );
