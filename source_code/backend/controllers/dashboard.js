@@ -89,8 +89,8 @@ const toggleHeart = async (req, res) => {
 const fetchPosts = async (req, res) => {
     try {
         const userId = req.query.userId;
-        const posts = await Posts.find().sort({ createdAt: -1 }).populate("userId");
-
+        const posts = await Posts.find().sort({ createdAt: -1 }).populate({path: 'comments.userId', model: 'User'});
+        console.log("Posts", posts)
         const fetchedPosts = posts.map(post => ({
             ...post.toObject(),
             hasReacted: post.hearts.includes(userId)

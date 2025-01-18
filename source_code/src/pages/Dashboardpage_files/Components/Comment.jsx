@@ -1,7 +1,9 @@
 import React from 'react';
 import "./Comment.css"
 
-function Comment({userId, text}) {
+function Comment({comment,user, text}) {
+    console.log("comment: ", comment)
+    console.log(user, text);
     return (
         <div className="comment-container">
             <div className="comment-profile-pic">
@@ -10,7 +12,7 @@ function Comment({userId, text}) {
             <div className="comment-content">
                 <div className="comment-text">
                     <div className="comment-name">
-                       {userId}
+                       {user.firstName} {user.middleName} {user.lastName}
                     </div>
                     <div className="comment-body">
                         {text}
