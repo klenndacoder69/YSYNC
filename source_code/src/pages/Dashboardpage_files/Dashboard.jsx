@@ -121,7 +121,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <Chat />
     </div>
   );
 }
