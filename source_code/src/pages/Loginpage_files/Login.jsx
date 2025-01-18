@@ -55,7 +55,6 @@ export default function Login() {
         password: password,
       });
       if (response) {
-        alert("Login successful!");
 
         // save access token and role in memory
         const accessToken = response?.data?.accessToken;
@@ -70,11 +69,17 @@ export default function Login() {
           navigate("/resmem/dashboard");
         } else if (role === "admin") {
           navigate("/admin/acc-info");
-        } else {
-          // How did it go here? Well, for some reason, they got a response with an invalid role
-          console.log("Invalid role: ", role);
-          throw new Error("Invalid role.");
+        } 
+        else if (role === "pending") {
+          setErrorMessage("Your account is pending approval.");
+          return;
         }
+        else {
+        // How did it go here? Well, for some reason, they got a response with an invalid role
+        console.log("Invalid role: ", role);
+        throw new Error("Invalid role.");
+        }
+        alert("Login successful!");
       }
     } catch (error) {
       if (error.response) {

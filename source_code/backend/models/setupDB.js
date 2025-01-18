@@ -13,6 +13,44 @@ dotenv.config({
   path: "../.env",
 });
 
+const allInterests = [
+  "UI/UX Design",
+  "Startup",
+  "Project Management",
+  "Game Art and Design",
+  "Digital Media and Content Creation",
+  "Entrepreneurship Community",
+  "Engagement and Teaching",
+  "Hackathons and Coding Competitions",
+  "Technical Writing and Documentation",
+  "Operating Systems",
+  "Scientific Computations",
+  "Networking",
+  "Database Design and Management",
+  "Hardware and Embedded Systems",
+  "Algorithm and Problem Solving",
+  "Human-Computer Interaction",
+  "Software Development and Design",
+  "Open Source Contribution",
+  "System Administration",
+  "Web Development",
+  "Cyber Security",
+  "Game Development",
+  "AI / Machine Learning",
+  "Cloud Computing",
+  "Dev Ops",
+  "Mobile App Development",
+  "Data Science and Analytics",
+  "Blockchain and Cryptography",
+];
+
+// randomly get interests
+const getRandomInterests = () => {
+  const numInterests = Math.floor(Math.random() * 5) + 1; 
+  const shuffled = [...allInterests].sort(() => 0.5 - Math.random()); 
+  return shuffled.slice(0, numInterests); 
+};
+
 // Database connection URI
 const MONGODB_URI = process.env.DB_URI;
 
@@ -113,11 +151,11 @@ const sampleData = {
     },
   ],
   trainees: [
-    { interests: ["AI", "Cybersecurity"], univBatch: 2025 },
-    { interests: ["Web Development"], univBatch: 2024 },
-    { interests: ["Game Design"], univBatch: 2026 },
-    { interests: ["Data Science"], univBatch: 2023 },
-    { interests: ["Networking"], univBatch: 2025 },
+    { univBatch: 2025 }, 
+    { univBatch: 2024 },
+    { univBatch: 2026 },
+    { univBatch: 2023 },
+    { univBatch: 2025 },
   ],
   residentMembers: [
     {
@@ -183,7 +221,7 @@ const populateDatabase = async () => {
     console.log("Trainee users: ", traineeUsers)
     const traineeData = sampleData.trainees.map((trainee, index) => ({
       userId: traineeUsers[index]._id,
-      interests: sampleData.trainees[index].interests,
+      interests: getRandomInterests(),
       univBatch: sampleData.trainees[index].univBatch,
     }));
     await Trainee.insertMany(traineeData);
@@ -231,7 +269,7 @@ const populateDatabase = async () => {
     console.log("Other trainee users:", otherTraineeUsers);
     const otherTraineeData = otherTraineeUsers.map((trainee, index) => ({
       userId: trainee._id,
-      interests: sampleData.trainees[index].interests,
+      interests: getRandomInterests(),
       univBatch: sampleData.trainees[index].univBatch
     }))
     console.log(otherTraineeData)
@@ -266,7 +304,7 @@ const populateDatabase = async () => {
     // Step 2: Create the trainee
     const trainee = new Trainee({
       userId: user._id, // Reference to the created user
-      interests: ["AI", "Cybersecurity", "UI/UX", "Database"], // Interests
+      interests: getRandomInterests(), // Interests
       univBatch: 2023, // University batch
     });
     console.log("Creating trainee:", trainee);
