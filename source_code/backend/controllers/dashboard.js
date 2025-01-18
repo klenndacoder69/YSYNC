@@ -8,6 +8,7 @@ dotenv.config({
 // Create a new post
 const createPost = async (req, res) => {
     try {
+        console.log(req.body)
         const { isEvent, eventDate, ...rest } = req.body;
 
         if (isEvent && !eventDate) {
@@ -89,7 +90,7 @@ const toggleHeart = async (req, res) => {
 const fetchPosts = async (req, res) => {
     try {
         const userId = req.query.userId;
-        const posts = await Posts.find().sort({ createdAt: -1 }).populate({path: 'comments.userId', model: 'User'});
+        const posts = await Posts.find().sort({ createdAt: -1 }).populate('userId').populate({path: 'comments.userId', model: 'User'});
         console.log("Posts", posts)
         const fetchedPosts = posts.map(post => ({
             ...post.toObject(),

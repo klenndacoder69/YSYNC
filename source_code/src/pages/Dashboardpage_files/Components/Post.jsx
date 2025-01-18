@@ -44,6 +44,7 @@ const Post = ({ post, userId, onPostsUpdate }) => {
   return (
     <div className={`post-container${post.isPinned ? '-pinned' : ''}`}>
       <div className="post-profile">
+        {console.log(post.userId)}
         <img src={post.userId.image} alt="profile pic" className="post-profile-pic" />
         <div className="post-profile-info">
           <div className="post-profile-info-name">{post.userId.firstName} {post.userId.lastName}</div>
