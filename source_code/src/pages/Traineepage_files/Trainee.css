@@ -1,21 +1,18 @@
-.mentor-page{
+.trainee-page{
     background: #d6dbea;  
     min-height: 100vh;
-    display: flex;
-    flex-direction: column; 
 }
 
-.mentor-main-bg-size{
+.trainee-main-bg-size{
     background: #d6dbea;  
-    height: 65vh; 
+    height: 70vh; 
 }
 
-.mentor-main{
+.trainee-main{
     background: #132b41; 
     /* width: 100vw; */
-    height: 65vh; 
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px;
+    height: 100%; 
+    border-radius: 50px;
     display: flex;
     justify-content: center; 
     visibility: hidden;
@@ -50,12 +47,14 @@
 }
 
 
-.mentor-main-bg{
+.trainee-main-bg{
+    font-family: "Segoe UI";
     background: #132b41; 
-    height: 30vh; 
+    padding: 20px;
+    animation: slideDown 1s ease-in-out;
 }
 
-.mentor-top-picks{
+.trainee-top-picks{
     margin-top: 2%;
     display: flex;
     flex-direction: column;
@@ -63,13 +62,13 @@
     height: 60vh;
 }
 
-.mentor-top-components{
+.trainee-top-components{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.mentor-top-text{
+.trainee-top-text{
     display: flex;
     justify-content: center; 
     font-family: 'Nirmala UI';
@@ -78,15 +77,49 @@
     color: #ffffff;
 }
 
-.other-mentors-container{
+.other-trainees-container{
     margin: 3%;
     visibility: hidden;
 }
 
-.other-mentors{
+.other-trainees{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
     justify-content: space-evenly;
     gap: 5%;
 }
+
+.trainee-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f2f5ff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #132b41;
+}
+
+.trainee-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Ensures the content is spread out */
+  align-items: center;
+  background-color: #f2f5ff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #132b41;
+}
+
+
+.selected-profile{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
