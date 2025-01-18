@@ -23,6 +23,9 @@
   background-color: #132b41;
   overflow: auto;
   gap: 1rem;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 
 .logoname-traineee-navbar {
@@ -98,7 +101,10 @@
 }
 
 .acc-parentNav-traineee-navbar {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  margin-top: 82px;
+  z-index: 100;
   right: 80px;
   background-color: #132b41;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
