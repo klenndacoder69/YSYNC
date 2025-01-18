@@ -1,14 +1,38 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./TraineeNavBar.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function TraineeNavBar() {
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  useEffect(() => {
-    navigate(`/trainee/${activeMenu}`);
-  }, [])
+  const [indicatorPosition, setIndicatorPosition] = useState({
+      top: 0,
+      left: 0,
+      width: 0,
+      height: 0,
+    });
+    const navButtonsRef = useRef({});
+
+    useEffect(() => {
+        navigate(`/trainee/${activeMenu}`);
+    }, [])
+    useEffect(() => {
+        updateIndicatorPosition(activeMenu)
+    }, [activeMenu]);
+
+    const updateIndicatorPosition = (menu) => {
+        if(navButtonsRef.current[menu]){
+            const button = navButtonsRef.current[menu];
+            const { offsetTop, offsetLeft, offsetWidth, offsetHeight} = button;
+            setIndicatorPosition({
+                top: offsetTop,
+                left: offsetLeft,
+                width: offsetWidth,
+                height: offsetHeight
+            })
+        }
+    }
   return (
     <div className="container-traineee-navbar">
       <div className="parentNav-traineee-navbar">
@@ -20,57 +44,47 @@ function TraineeNavBar() {
           />
         </div>
         <nav className="navButtons-traineee-navbar">
-          <div
-            className={`button-traineee-navbar ${
-              activeMenu === "dashboard" ? "active" : ""
-            }`}
+             <div
+                className="active-indicator-trainee-navbar"
+                style={{
+                  top: `${indicatorPosition.top}px`,
+                  left: `${indicatorPosition.left}px`,
+                  width: `${indicatorPosition.width}px`,
+                  height: `${indicatorPosition.height}px`,
+                }}
+            />
+          <Link
+            to="dashboard"
+            className={`button-traineee-navbar`}
             onClick={() => {
-              setActiveMenu("dashboard");
-            }}
+                setActiveMenu("dashboard");
+             }}
+             ref={(element) => (navButtonsRef.current['dashboard'] = element)}
           >
-            <Link
-              to="dashboard"
-              className={`button-traineee-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
-              Dashboard
-            </Link>
-          </div>
-          <div
-            className={`button-traineee-navbar ${
-              activeMenu === "mentors" ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveMenu("mentors");
+            <span className="button-traineee-navbar-content">Dashboard</span>
+          </Link>
+          <Link
+            to="mentors"
+            className={`button-traineee-navbar`}
+             onClick={() => {
+                 setActiveMenu("mentors");
             }}
+             ref={(element) => (navButtonsRef.current['mentors'] = element)}
           >
-            <Link
-              to="mentors"
-              className={`button-traineee-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
-              Mentors
-            </Link>
-          </div>
-          <div
-            className={`button-traineee-navbar ${
-              activeMenu === "resmem" ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveMenu("resmem");
+            <span className="button-traineee-navbar-content">Mentors</span>
+          </Link>
+          <Link
+            to="residentMembers"
+            className={`button-traineee-navbar`}
+             onClick={() => {
+                setActiveMenu("resmem");
             }}
+            ref={(element) => (navButtonsRef.current['resmem'] = element)}
           >
-            <Link
-              to="residentMembers"
-              className={`button-traineee-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
+            <span className="button-traineee-navbar-content">
               Resident Members
-            </Link>
-          </div>
+            </span>
+          </Link>
         </nav>
         <button
           onClick={() => {
@@ -92,10 +106,13 @@ function TraineeNavBar() {
           dropdownVisible ? "visible" : "hidden"
         }`}
       >
-        <a href="#">Profile</a>
-        <a href="#">Report</a>
-        <a href="#">Defer</a>
-        <a href="#">Log Out</a>
+        <Link to="profile">Profile</Link>
+        <Link to="report">Report</Link>
+        <Link to="defer">Defer</Link>
+        <Link onClick={() => {
+          sessionStorage.clear()
+          navigate("/")
+        }}>Logout</Link>
       </div>
       <Outlet />
     </div>

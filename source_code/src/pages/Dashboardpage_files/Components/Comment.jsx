@@ -4,6 +4,7 @@ import "./Comment.css"
 function Comment({comment,user, text}) {
     console.log("comment: ", comment)
     console.log(user, text);
+
     return (
         <div className="comment-container">
             <div className="comment-profile-pic">
@@ -20,6 +21,7 @@ function Comment({comment,user, text}) {
                 </div>
                 <div className="comment-time">
                     6:48 PM | January 18, 2025
+
                 </div>
             </div>
         </div>

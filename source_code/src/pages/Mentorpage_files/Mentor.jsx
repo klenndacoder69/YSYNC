@@ -92,9 +92,9 @@ export default function Mentor(){
                         <div className={`mentor-main ${animate ? "slideDown" : ""}`}>   {/* main div for the top 3 mentors with bounce functionality */}
                             <div className="mentor-top-picks">
                                 <div className="mentor-top-components">
-                                    {topMentors.map((mentor) => (
+                                    {topMentors.map((mentor, index) => (
                                         <CardMentor
-                                            key = {mentor.userId}
+                                            key = {index}
                                             image = {mentor.userId.image}
                                             name={`${mentor.userId.firstName} ${mentor.userId.lastName}`}
                                             batch={mentor.orgBatch}
@@ -117,9 +117,9 @@ export default function Mentor(){
                 <div className={`other-mentors-container ${animate ? "slideDown" : ""}`}>
                 {/* <div className="other-mentors-container"> */}
                     <div className="other-mentors">
-                            {mentors.map((mentor) => (
+                            {mentors.map((mentor, index) => (
                                 <CardMentor
-                                    key = {mentor.userId}
+                                    key = {index}
                                     image = {mentor.userId.image}
                                     name={`${mentor.userId.firstName} ${mentor.userId.lastName}`}
                                     batch={mentor.orgBatch}

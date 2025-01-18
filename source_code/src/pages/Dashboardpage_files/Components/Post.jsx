@@ -3,6 +3,8 @@ import heartIcon from '/assets/heart.png';
 import heartRedIcon from '/assets/heart-red.png';
 import React, { useState } from 'react';
 import api from "../../../api/axios.js";
+import pinIcon from '/assets/pin-2.png';
+import pinFilledIcon from '/assets/pin-filled.png';
 import Comment from "./Comment.jsx";
 
 const Post = ({ post, userId, onPostsUpdate }) => {

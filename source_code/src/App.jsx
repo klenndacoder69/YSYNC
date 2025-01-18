@@ -20,7 +20,8 @@ import TraineeNavBar from "./components/TraineeNavBar.jsx";
 import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
 import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
 import ResmemNavBar from "./components/ResmemNavbar.jsx";
-
+import Profile from "./pages/AccountMan_files/profile/Profile.jsx";
+import Trainee from "./pages/Traineepage_files/Trainee.jsx";
 function App() {
   const routes = [
     {
@@ -33,10 +34,6 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register/>
-    },
-    {
-      path: "/new-register",
       element: <NewRegister/>
     },
     // {
@@ -72,8 +69,16 @@ function App() {
         element: <Dashboard/>
       },
       {
-        path: "chat",
-        element: <Chat/>
+        path: "profile",
+        element: <Profile/>
+      },
+      {
+        path: "report",
+        element: <Report/>
+      },
+      {
+        path: "defer",
+        element: <Defer/>
       }
       ]
     },
@@ -87,10 +92,23 @@ function App() {
         },
         {
           path: "trainees",
+          element: <Trainee/>
         },
         {
           path: "residentMembers",
           element: <ResMem/>
+        },
+        {
+          path: "profile",
+          element: <Profile/>
+        },
+        {
+          path: "report",
+          element: <Report/>
+        },
+        {
+          path: "defer",
+          element: <Defer/>
         }
       ]
     },
@@ -115,6 +133,11 @@ function App() {
       }
       ]
     },
+
+    {
+      path:"/testing",
+      element: <Profile/>
+    }
   ]
   const router = createBrowserRouter(routes)
   return (

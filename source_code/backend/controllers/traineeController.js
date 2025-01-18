@@ -30,8 +30,8 @@ const deferRequest = async (req, res) => {
 
 const getTrainee = async (req, res) => {
     try {
-        const traineeId = req.params.id; // Get user ID from request parameters
-        const trainee = await Trainee.findById(traineeId); // Find the user by their ID
+        const userId = req.params.id; // Get user ID from request parameters
+        const trainee = await Trainee.findOne({userId}); // Find the user by their ID
         if (!trainee) {
             return res.status(404).json({ error: "Trainee not found." });
         }

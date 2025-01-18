@@ -116,8 +116,10 @@ function Dashboard() {
           <div className="dashboard-upcoming-container">
             <Upcoming posts={posts} />
           </div>
+          <div className="dashboard-chatbox-container">
+            <Chat/>
+          </div>
         </div>
-        <div className="dashboard-chatbox-container"></div>
       </div>
       <Chat />
     </div>
