@@ -23,7 +23,6 @@
   background-color: #132b41;
   overflow: auto;
   gap: 1rem;
-  position: fixed;
   top: 0;
   z-index: 100;
 }
