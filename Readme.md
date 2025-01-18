@@ -9,7 +9,8 @@ YSYNC is a web-based application designed to streamline the application process 
 TRAINEE’S VIEW
 
 START PAGE  
-![][image1]
+![Screenshot 2025-01-18 at 12-01-44 YSYNC](https://github.com/user-attachments/assets/095e4ea9-03b0-42c8-b46f-d275fb397609)
+
 
 LOG-IN PAGE  
 ![][image2]
