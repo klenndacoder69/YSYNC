@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
+import './Report.css';
 
 export default function Report() {
     const [user, setUser] = useState(null);
@@ -61,15 +62,16 @@ export default function Report() {
     };
 
     return (
-        <div>
-            <p>Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p> 
-            <h1>Report Page</h1>
-            {errorMessage && <p className="error">{errorMessage}</p>}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Report Reason:</label>
+        <div className="report-container">
+            <p className="report-logged-in">Logged in as: {user && `${user.firstName} ${user.lastName} - ${user.email}`}</p> 
+            <h1 className="report-header">Report Page</h1>
+            {errorMessage && <p className="report-error">{errorMessage}</p>}
+            <form className="report-form" onSubmit={handleSubmit}>
+                <div className="report-reason-container">
+                    <label className="report-label">Report Reason:</label>
                     <br />
                     <textarea
+                        className="report-textarea"
                         value={reportReason}
                         onChange={handleTextChange}
                         rows="4"
@@ -77,9 +79,9 @@ export default function Report() {
                         placeholder="State your reasons here..."
                     />
                 </div>
-                <button type="submit">Submit</button>
+                <button className="report-submit-button" type="submit">Submit</button>
                 <br />
-                {submitError && <p className="error">{submitError}</p>}
+                {submitError && <p className="report-error">{submitError}</p>}
             </form>
         </div>
     );

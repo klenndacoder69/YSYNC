@@ -73,13 +73,17 @@ function App() {
         element: <Dashboard/>
       },
       {
-        path: "chat",
-        element: <Chat/>
+        path: "profile",
+        element: <Profile/>
       },
-      // {
-      //   path:"testing",
-      //   element: <Profile/>
-      // }
+      {
+        path: "report",
+        element: <Report/>
+      },
+      {
+        path: "defer",
+        element: <Defer/>
+      }
       ]
     },
     {
@@ -97,6 +101,18 @@ function App() {
         {
           path: "residentMembers",
           element: <ResMem/>
+        },
+        {
+          path: "profile",
+          element: <Profile/>
+        },
+        {
+          path: "report",
+          element: <Report/>
+        },
+        {
+          path: "defer",
+          element: <Defer/>
         }
       ]
     },

@@ -1,14 +1,40 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "./ResmemNavbar.css";
-import { useEffect, useState } from "react";
+import "./ResmemNavBar.css";
+import { useEffect, useState, useRef } from "react";
 
 function ResmemNavBar() {
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [indicatorPosition, setIndicatorPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  });
+  const navButtonsRef = useRef({});
+
   useEffect(() => {
     navigate(`/resmem/${activeMenu}`);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    updateIndicatorPosition(activeMenu);
+  }, [activeMenu]);
+
+  const updateIndicatorPosition = (menu) => {
+    if (navButtonsRef.current[menu]) {
+      const button = navButtonsRef.current[menu];
+      const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = button;
+      setIndicatorPosition({
+        top: offsetTop,
+        left: offsetLeft,
+        width: offsetWidth,
+        height: offsetHeight,
+      });
+    }
+  };
+
   return (
     <div className="container-resmem-navbar">
       <div className="parentNav-resmem-navbar">
@@ -21,63 +47,49 @@ function ResmemNavBar() {
         </div>
         <nav className="navButtons-resmem-navbar">
           <div
-            className={`button-resmem-navbar ${
-              activeMenu === "dashboard" ? "active" : ""
-            }`}
+            className="active-indicator-resmem-navbar"
+            style={{
+              top: `${indicatorPosition.top}px`,
+              left: `${indicatorPosition.left}px`,
+              width: `${indicatorPosition.width}px`,
+              height: `${indicatorPosition.height}px`,
+            }}
+          />
+          <Link
+            to="dashboard"
+            className="button-resmem-navbar"
             onClick={() => {
               setActiveMenu("dashboard");
             }}
+            ref={(element) => (navButtonsRef.current["dashboard"] = element)}
           >
-            <Link
-              to="dashboard"
-              className={`button-resmem-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
-              Dashboard
-            </Link>
-          </div>
-          <div
-            className={`button-resmem-navbar ${
-              activeMenu === "mentors" ? "active" : ""
-            }`}
+            <span className="button-resmem-navbar-content">Dashboard</span>
+          </Link>
+          <Link
+            to="trainees"
+            className="button-resmem-navbar"
             onClick={() => {
-              setActiveMenu("mentors");
+              setActiveMenu("trainees");
             }}
+            ref={(element) => (navButtonsRef.current["trainees"] = element)}
           >
-            <Link
-              to="trainees"
-              className={`button-resmem-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
-              Trainees
-            </Link>
-          </div>
-          <div
-            className={`button-resmem-navbar ${
-              activeMenu === "resmem" ? "active" : ""
-            }`}
+            <span className="button-resmem-navbar-content">Trainees</span>
+          </Link>
+          <Link
+            to="residentMembers"
+            className="button-resmem-navbar"
             onClick={() => {
               setActiveMenu("resmem");
             }}
+            ref={(element) => (navButtonsRef.current["resmem"] = element)}
           >
-            <Link
-              to="residentMembers"
-              className={`button-resmem-navbar-dashboard ${
-                activeMenu === "acc-info" ? "active" : ""
-              }`}
-            >
+            <span className="button-resmem-navbar-content">
               Resident Members
-            </Link>
-          </div>
+            </span>
+          </Link>
         </nav>
         <button
-          onClick={() => {
-            console.log("Dropdown visible before toggle:", dropdownVisible);
-            setDropdownVisible(!dropdownVisible);
-            console.log("Dropdown visible after toggle:", !dropdownVisible);
-          }}
+          onClick={() => setDropdownVisible(!dropdownVisible)}
           className="profile-button-resmem-navbar"
         >
           <img
@@ -92,9 +104,9 @@ function ResmemNavBar() {
           dropdownVisible ? "visible" : "hidden"
         }`}
       >
-        <a href="#">Profile</a>
-        <a href="#">Report</a>
-        <a href="#">Defer</a>
+        <Link to="profile">Profile</Link>
+        <Link to="report">Report</Link>
+        <Link to="defer">Defer</Link>
         <a href="#">Log Out</a>
       </div>
       <Outlet />
