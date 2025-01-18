@@ -24,10 +24,26 @@
 }
 
 .regis-logo {
-    padding: 10px;
-    width: 200px;
-    height: auto;
+    padding: 3%;
+    width: 70%;
     filter: drop-shadow(0px 4px 4px rgba(19, 43, 65, 0.16));
+}
+
+.regis-logo-subtext {
+    font-size: 110%;
+    animation: logoAnimation 1s ease-in-out 0s 1 normal forwards;
+}
+
+@keyframes logoAnimation {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 .regis-left-panel p {
@@ -101,17 +117,18 @@
 .regis-checkbox-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5%;
+    gap: 5px;
 }
 
 .regis-checkbox-group label {
-    font-size: 90%;
+    font-size: 80%;
     font-weight: lighter;
     color: #565656;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 input[type="checkbox"] {
@@ -120,7 +137,10 @@ input[type="checkbox"] {
     appearance: none;
     background-color: #D6DBEA;
     border: none;
-    cursor: pointer;
+    border-radius: 2px;
+    padding-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 input[type="checkbox"]:hover {
