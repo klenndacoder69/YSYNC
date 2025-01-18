@@ -1,31 +1,31 @@
 .chat-container {
   position: fixed;
+  border-radius: 20px;
   bottom: 0;
-  right: 2.5vw;
-  width: 400px;
+  width: 22.5%;
   z-index: 1000;
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
 }
 
 .chat-bar {
-  font-size: 21px;
+  font-size: 20px;
   align-items: center;
   background-color: #132b41;
   font-family: "Segoe UI", Arial;
   font-weight: 350;
-  color: white;
+  color:  #F2F5FF;
   padding: 20px;
   text-align: left;
   cursor: pointer;
-  border-radius: 10px 10px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 
 .chat-box {
   font-family: "Segoe UI";
-  background-color: #e6f2ff;
+  background-color: #F2F5FF;
   border: 1px solid #ccc;
   border-top: none;
-  height: 400px;
+  height: 370px;
   padding: 10px;
 }
 
@@ -45,11 +45,11 @@
 .send-chat {
   width: 80%;
   margin-right: 10px;
-  border: 1px solid #132b41;
+  border: 0.3px solid #132b413e;
   padding: 10px;
-  border-radius: 200px;
+  border-radius: 10px;
   outline: none;
-  background-color: rgba(30, 144, 255, 0.1);
+  background-color: #d6dbea50;
 }
 
 .send-button {
@@ -59,7 +59,7 @@
   background-color: #132b41;
   color: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: ease-in-out 0.1s;
 }
 
@@ -67,5 +67,9 @@
     transform: scale(1.05);
 }
 .user-count {
-    font-family: "Segoe UI"
+    font-family: "Segoe UI", Arial;
+    font-size: 12px;
+    color: gray;
+    margin-left: 10px;
+    margin-top: 2px;
 }
