@@ -96,19 +96,16 @@ function Dashboard() {
           <div className="dashboard-solution-container">
             <div className="dashboard-post-container">
               {posts.map((post) => {
-                if (!post.isPinned) {
+                if (!post.isPinned && !post.isEvent) {
                   return (
                     <Post
                       key={post._id}
                       post={post}
                       userId={userId}
                       onPostsUpdate={(updatedPost) =>
-                      {
-                        console.log("The updated post is: ", updatedPost);
-                        setPosts(updatedPost);
-                        console.log("The posts are: ", posts);
-                      }
-                        
+                        {
+                          setPosts(updatedPost);
+                        }
                       }
                     />
                   );

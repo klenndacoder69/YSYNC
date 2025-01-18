@@ -6,6 +6,7 @@ import heartRedIcon from '/assets/heart-red.png';
 // import pinFilledIcon from '/assets/pin-filled.png';
 import React, { useState, useEffect } from 'react';
 import api from "../../../api/axios.js"
+import Comment from "./Comment.jsx";
 
 // function Post({ post, onPostUpdate, onPinToggle }) {
 
@@ -190,6 +191,17 @@ const Post = ({ post, userId, onPostsUpdate }) => {
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="post-comment">
+                {post.comments.map((comment) => {
+                    return (
+                        <Comment
+                            key={comment._id}
+                            user={comment.userId}
+                            text={comment.text}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
