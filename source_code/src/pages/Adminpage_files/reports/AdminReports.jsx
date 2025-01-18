@@ -65,7 +65,7 @@ const AdminReports = () => {
   // Handle Decline button click
   const handleDecline = async (reportId) => {
     try {
-      const response = await api.patch(`/deleteReport/${reportId}`);
+      const response = await api.patch(`/declineReport/${reportId}`);
       if (response) {
         alert("Report declined successfully.");
         setReports((prev) => prev.filter((report) => report._id !== reportId));

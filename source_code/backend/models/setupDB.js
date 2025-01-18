@@ -5,6 +5,9 @@ import ResidentMember from "./residentMemberSchema.js";
 import Admin from "./adminSchema.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import RequestApplication from "./requestApplicationSchema.js";
+import RequestDeferral from "./requestDeferralSchema.js";
+import Posts from "./postSchema.js";
 
 dotenv.config({
   path: "../.env",
@@ -161,6 +164,9 @@ const populateDatabase = async () => {
     await Trainee.deleteMany({});
     await ResidentMember.deleteMany({});
     await Admin.deleteMany({});
+    await RequestApplication.deleteMany({});
+    await RequestDeferral.deleteMany({});
+    await Posts.deleteMany({});
     console.log("Existing data cleared.");
 
     // Hash passwords
