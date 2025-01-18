@@ -1,5 +1,5 @@
 /* para sa card css */
-.mentor-card-maincontainer {
+.trainee-card-maincontainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   perspective: 1000px; /* 3D effect */
 }
 
-.mentor-card {
+.trainee-card {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -21,15 +21,15 @@
   cursor: pointer;
 }
 
-/* .mentor-card:hover {
+/* .trainee-card:hover {
     transform: scale(1);
 } */
 
-.mentor-card-flipped {
+.trainee-card-flipped {
   transform: rotateY(180deg);
 }
 
-.mentor-card-front {
+.trainee-card-front {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -41,19 +41,22 @@
   flex-direction: column;
 }
 
-.mentor-card-back {
+.trainee-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: #d9d9d9;
-  color: #132b41;
+  background: #D9D9D9;
+  color: #132B41;
   border-radius: 15px;
   transform: rotateY(180deg);
+  overflow-y: auto;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #132B41 #d9d9d9; /* For Firefox */
 }
 
 /* para sa front ng card css */
-.mentor-card-image-wrapper {
+.trainee-card-image-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,14 +66,14 @@
   overflow: hidden;
 }
 
-.mentor-card-image {
+.trainee-card-image {
   width: 250px;
   height: 247px;
   object-fit: cover;
   display: block;
 }
 
-.mentor-card-front-info-wrapper {
+.trainee-card-front-info-wrapper {
   background: #f2f5ff;
   width: 100%;
   height: 40%;
@@ -84,7 +87,7 @@
   flex-direction: column;
 }
 
-.mentor-card-name {
+.trainee-card-name {
   padding-top: 7%;
   margin-top: 0%;
   padding-bottom: 0.1rem;
@@ -97,7 +100,7 @@
   font-size: 20px;
 }
 
-.mentor-card-batch {
+.trainee-card-batch {
   margin: 0;
   font-family: "Nirmala UI";
   white-space: nowrap;
@@ -105,7 +108,7 @@
   text-overflow: ellipsis;
 }
 
-.mentor-card-dept {
+.trainee-card-dept {
   margin-top: 1%;
   margin-bottom: 2rem;
   font-family: "Nirmala UI";
@@ -116,38 +119,35 @@
 }
 
 /* para sa back ng card css */
-.mentor-card-bio {
+.trainee-card-bio {
   margin-left: 1rem;
   margin-right: 1rem;
   font-family: "Nirmala UI";
   font-size: 15px;
   height: 50%;
-  overflow: hidden;
-  /* overflow: visible; 
+  /* overflow: hidden; 
     white-space: normal; 
     word-wrap: break-word; */
 }
 
-.mentor-card-exp {
+.trainee-card-exp {
   margin-left: 1rem;
   margin-right: 1rem;
   font-family: "Nirmala UI";
   font-size: 15px;
   height: 25%;
-  overflow: hidden;
-  /* overflow: visible; 
+  /* overflow: hidden; 
     white-space: normal; 
     word-wrap: break-word; */
 }
 
-.mentor-card-interests {
+.trainee-card-interests {
   margin-left: 1rem;
   margin-right: 1rem;
   font-family: "Nirmala UI";
   font-size: 15px;
   height: 25%;
-  overflow: hidden;
-  /* overflow: visible; 
+  /* overflow: hidden; 
     white-space: normal; 
     word-wrap: break-word; */
 }

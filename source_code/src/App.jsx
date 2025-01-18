@@ -34,10 +34,6 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register/>
-    },
-    {
-      path: "/new-register",
       element: <NewRegister/>
     },
     // {
