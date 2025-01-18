@@ -2,7 +2,7 @@ import "./Login.css";
 import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthProvider.jsx";
 import api from "../../api/axios.js";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -146,6 +146,7 @@ export default function Login() {
                 <p>
                   Having trouble? <a href="mailto:info@yses.org">Contact us</a>
                 </p>
+                  <p>Don't have an account? <Link to="/register">Register here.</Link></p>
                 <div className="contact-login-page">
                   <a href="mailto:info@yses.org">
                     <img src="./assets/Email Icon.png" alt="Email Icon" />
