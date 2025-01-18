@@ -107,7 +107,10 @@ function ResmemNavBar() {
         <Link to="profile">Profile</Link>
         <Link to="report">Report</Link>
         <Link to="defer">Defer</Link>
-        <a href="#">Log Out</a>
+        <Link onClick={() => {
+          sessionStorage.clear()
+          navigate("/")
+        }}>Logout</Link>
       </div>
       <Outlet />
     </div>
