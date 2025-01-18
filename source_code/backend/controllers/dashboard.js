@@ -8,6 +8,7 @@ dotenv.config({
 // Create a new post
 const createPost = async (req, res) => {
     try {
+        console.log(req.body)
         const { isEvent, eventDate, ...rest } = req.body;
 
         if (isEvent && !eventDate) {
@@ -42,7 +43,8 @@ const addComment = async (req, res) => {
         const newComment = { userId, text };
         post.comments.push(newComment);
         await post.save();
-        res.status(200).send({ message: 'Comment added successfully', data: post });
+        const posts = await Posts.find();
+        res.status(200).send({ message: 'Comment added successfully', data: posts });
     } catch (error) {
         res.status(400).send({ message: 'Error adding comment', error: error.message });
     }
@@ -75,7 +77,7 @@ const toggleHeart = async (req, res) => {
 
         res.status(200).send({
             message: heartIndex === -1 ? 'Heart added successfully' : 'Heart removed successfully',
-            hearts: post.hearts.length,
+            hearts: post.hearts,
         });
     } catch (error) {
         console.error("Error in toggleHeart:", error.message);
@@ -88,8 +90,8 @@ const toggleHeart = async (req, res) => {
 const fetchPosts = async (req, res) => {
     try {
         const userId = req.query.userId;
-        const posts = await Posts.find().sort({ createdAt: -1 });
-
+        const posts = await Posts.find().sort({ createdAt: -1 }).populate('userId').populate({path: 'comments.userId', model: 'User'});
+        console.log("Posts", posts)
         const fetchedPosts = posts.map(post => ({
             ...post.toObject(),
             hasReacted: post.hearts.includes(userId)

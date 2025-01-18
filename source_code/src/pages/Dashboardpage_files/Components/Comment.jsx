@@ -1,7 +1,10 @@
 import React from 'react';
 import "./Comment.css"
 
-function Comment() {
+function Comment({comment,user, text}) {
+    console.log("comment: ", comment)
+    console.log(user, text);
+
     return (
         <div className="comment-container">
             <div className="comment-profile-pic">
@@ -10,14 +13,15 @@ function Comment() {
             <div className="comment-content">
                 <div className="comment-text">
                     <div className="comment-name">
-                       Ana Lovelace
+                       {user.firstName} {user.middleName} {user.lastName}
                     </div>
                     <div className="comment-body">
-                        Placeholder placeholder placeholder placeholder placeholder placeholder placeholder
+                        {text}
                     </div>
                 </div>
                 <div className="comment-time">
-                    9:00 PM | January 17, 2025
+                    6:48 PM | January 18, 2025
+
                 </div>
             </div>
         </div>

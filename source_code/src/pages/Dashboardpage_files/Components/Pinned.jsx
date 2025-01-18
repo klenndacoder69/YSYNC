@@ -3,7 +3,7 @@ import './Pinned.css';
 import pin from '/assets/pin.png';
 import Post from "./Post";
 
-function Pinned({ pinnedPosts, onPostUpdate, onPinToggle }) {
+function Pinned({ pinnedPosts, onPostsUpdate, onPinToggle, userId }) {
     return (
         <div className="pinnedContainer">
             <div className="pinnedHeader">
@@ -11,12 +11,13 @@ function Pinned({ pinnedPosts, onPostUpdate, onPinToggle }) {
                 Pinned Announcements
             </div>
            <div className="pinnedPost">
-                {pinnedPosts.map((post) => (
+                {pinnedPosts.map((post, index) => (
                     <Post
-                         key={post.id}
+                         key={index}
                          post={post}
-                          onPostUpdate={onPostUpdate}
-                           onPinToggle={onPinToggle}
+                         userId={userId}
+                          onPostsUpdate={onPostsUpdate}
+                        //    onPinToggle={onPinToggle}
                     />
                     ))}
              </div>

@@ -6,15 +6,15 @@ function Upcoming({ posts }) {
     <div className="dashboard-upcomingContainer">
       <div className="dashboard-upcomingHeader">Upcoming</div>
       <div className="dashboard-upcomingContent">
-        {posts.map((post, index) => {
+        {posts.map((post) => {
           if (post.isEvent) {
             return (
-              <div className="dashboard-upcomingTasks" key={post.id}>
+              <div className="dashboard-upcomingTasks" key={post._id}>
                 <div className="dashboard-task">
                   <h2 className="dashboard-taskDate">
-                    {post.date.toString()}
+                    {post.eventDate.toString()}
                   </h2>
-                  <h2 className="dashboard-taskName">PAD Event {post.id}</h2>
+                  <h2 className="dashboard-taskName">{post.content}</h2>
                 </div>
               </div>
             );
