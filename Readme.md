@@ -13,60 +13,64 @@ START PAGE
 
 
 LOG-IN PAGE  
-![Uploading Screenshot 2025-01-18 at 12-03-16 YSYNC.png…]()
 
+![Screenshot 2025-01-18 at 12-03-16 YSYNC](https://github.com/user-attachments/assets/63af3997-ce86-4eba-981c-4a2e74f6eeae)
 
 
 DASHBOARD 
+
+
 
 DASHBOARD CHAT  
 
 
 
+
+
 MENTORS PAGE
 
-![][image5]
+![Screenshot 2025-01-18 at 12-07-32 YSYNC](https://github.com/user-attachments/assets/92f7ce52-12bd-43cf-835c-be578c61d230)
 
-RESIDENT MEMBERS PAGE  
-![][image6]
+RESIDENT MEMBERS PAGE
+
+![Screenshot 2025-01-18 at 12-08-30 YSYNC](https://github.com/user-attachments/assets/99fda568-f311-4c9a-9e76-501d4f482c25)
+
 
 PROFILE PAGE
 
-![][image7]  
-![][image8]
 
 REPORT PAGE
 
-![][image9]
+![Screenshot 2025-01-18 at 12-09-39 YSYNC](https://github.com/user-attachments/assets/ab2ab56a-4ca9-408b-833a-2b30ed159947)
+
 
 DEFER PAGE  
-![][image10]
+![Screenshot 2025-01-18 at 12-10-17 YSYNC](https://github.com/user-attachments/assets/2bbca146-c933-49fb-b5b1-f2d6bae3115e)
+
+
 
 RESIDENT MEMBER’S VIEW  
 DASHBOARD  
-![][image11]
+![Screenshot 2025-01-18 at 12-10-51 YSYNC](https://github.com/user-attachments/assets/cf2d5b97-d29e-482a-a12f-a383e3a5ea97)
 
 TRAINEES PAGE  
-![][image12]
+![Screenshot 2025-01-18 at 12-11-39 YSYNC](https://github.com/user-attachments/assets/60c13e8e-d328-4c99-99b9-04eb41c5db32)
 
-RESIDENT MEMBERS PAGE  
-![][image13]
-
-![][image14]
 
 ADMIN’S VIEW
 
 Account Information
 
-![][image15]
+![Screenshot 2025-01-18 at 12-12-42 YSYNC](https://github.com/user-attachments/assets/bb6cf291-8edd-4091-8aba-1dfeb6f4ddb3)
+
 
 Requests
+![Screenshot 2025-01-18 at 12-12-59 YSYNC](https://github.com/user-attachments/assets/316626a3-862d-4ef6-b9b0-f260998564a8)
 
-![][image16]
 
 Reports
 
-![][image17]
+![Screenshot 2025-01-18 at 12-13-14 YSYNC](https://github.com/user-attachments/assets/c8327b40-2161-4166-9616-697283a5b2aa)
 
 \#\# Key Features
 
