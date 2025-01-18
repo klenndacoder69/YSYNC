@@ -13,13 +13,15 @@ START PAGE
 
 
 LOG-IN PAGE  
-![][image2]
+![Uploading Screenshot 2025-01-18 at 12-03-16 YSYNC.png…]()
 
-DASHBOARD (MALI PA TO MAY MAKE ANNOUNCEMENTS PA)  
-![][image3]
+
+
+DASHBOARD 
 
 DASHBOARD CHAT  
-![][image4]
+
+
 
 MENTORS PAGE
 
