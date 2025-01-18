@@ -19,9 +19,11 @@ LOG-IN PAGE
 
 DASHBOARD 
 
+![Screenshot 2025-01-18 at 16-00-21 YSYNC](https://github.com/user-attachments/assets/4196955f-4a32-4748-a4b0-21bf5f8f76ab)
 
 
 DASHBOARD CHAT  
+![Screenshot 2025-01-18 at 16-01-54 YSYNC](https://github.com/user-attachments/assets/326eddcb-93dc-4566-b4b9-c4e25768b5a8)
 
 
 MENTORS PAGE
