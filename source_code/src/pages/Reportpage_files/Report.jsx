@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
 import {jwtDecode} from "jwt-decode";
 import './Report.css';
+import { toast } from "sonner";
 
 export default function Report() {
     const [user, setUser] = useState(null);
@@ -47,7 +48,7 @@ export default function Report() {
                 reason: reportReason
             });
             if (response) {
-                alert("Submitted successfully!");
+                toast.success("Submitted successfully!");
                 return response.data;
             }
         } catch (error) {

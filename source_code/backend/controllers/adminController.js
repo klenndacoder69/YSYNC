@@ -11,6 +11,14 @@ const editUser = async (req, res) => {
     const { user, userType, userId } = req.body;
     console.log(user, userType, userId);
 
+    // if we are only editing the user details, then we directly go to it
+    if (!user.traineeId && !user.userId) {
+      const userDoc = await User.findById(userId);
+      if (userDoc) {
+        Object.assign(userDoc, user);
+        await userDoc.save();
+      }
+    }
     // check whether it has a userId then we update the contents associated with the User schema
     if (user.userId && typeof user.userId === "object") {
       const userDoc = await User.findById(user.userId._id);
@@ -62,7 +70,7 @@ const editUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { user, userType } = req.body;
-    const userId = user.userId;
+    const userId = user.userId._id;
     // we delete all database collections associated with the user (this can be changed later if needed)
     console.log("Deleting all reports with userId:", userId);
     await Report.deleteMany({ userId });
@@ -71,14 +79,12 @@ const deleteUser = async (req, res) => {
     await Posts.deleteMany({ userId });
 
     console.log("Deleting all defers with userId:", userId);
-    await DeferTrainee.deleteMany({ userId });
+    await RequestDeferral.deleteMany({ userId });
+    await RequestApplication.deleteMany({ userId });
 
     console.log("Deleting user with ID:", userId);
 
-    if (user.userId && typeof user.userId === "object") {
-      await User.findByIdAndDelete(userId);
-    }
-
+    const response = await User.findByIdAndDelete(userId);
     if (userType === "trainee") {
       await Trainee.findByIdAndDelete(user._id);
     } else if (userType === "residentMember") {

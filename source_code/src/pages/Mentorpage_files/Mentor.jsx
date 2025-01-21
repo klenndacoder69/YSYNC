@@ -3,6 +3,7 @@ import "./Mentor.css"
 import api from "../../api/axios.js"
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
+import { toast } from "sonner";
 
 const fetchMentors = async () => {
     try {
@@ -58,16 +59,13 @@ export default function Mentor(){
     }, []); 
 
     useEffect(() => {
-        const decodedToken = jwtDecode(sessionStorage.getItem("accessToken"));
-        console.log(decodedToken)
-        setUserId(decodedToken.id);
-        console.log("The user id is: ", userId)
         const loadMentors = async () => {
-            
             try {
-                const fetchedMentors = await fetchMentors();
+                const [fetchedMentors, fetchedTopMentors] = await Promise.all([
+                    mentorPromise,
+                    topMentorPromise,
+                ]);
                 setMentors(fetchedMentors);
-                const fetchedTopMentors = await fetchTopMentors(userId);
                 setTopMentors(fetchedTopMentors);
             } catch (err) {
                 console.error('Error loading mentors:', err);
@@ -117,7 +115,7 @@ export default function Mentor(){
                 <div className={`other-mentors-container ${animate ? "slideDown" : ""}`}>
                 {/* <div className="other-mentors-container"> */}
                     <div className="other-mentors">
-                            {mentors.map((mentor, index) => (
+                            {mentors.length > 0 ? (mentors.map((mentor, index) => (
                                 <CardMentor
                                     key = {index}
                                     image = {mentor.userId.image}
@@ -128,7 +126,7 @@ export default function Mentor(){
                                     exp={mentor.whatToExpect}
                                     interests={mentor.traineeId.interests.join(", ")}
                                 />
-                            ))}
+                            ))) : <p className="no-available-mentors">There are currently no mentors available...</p>}
                     </div>
                 </div>
 

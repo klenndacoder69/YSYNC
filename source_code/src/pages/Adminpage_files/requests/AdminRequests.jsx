@@ -59,7 +59,7 @@ const AdminRequests = () => {
         if (response) {
           console.log("Application accepted successfully.");
           fetchRequests();
-          alert("Application accepted successfully.");
+          toast.success("Application accepted successfully.");
         }
       } else if (type === "deferral") {
         console.log(requestId);
@@ -67,7 +67,7 @@ const AdminRequests = () => {
         if (response) {
           console.log("Deferral accepted successfully.");
           fetchRequests();
-          alert("Deferral accepted successfully.");
+          toast.success("Deferral accepted successfully.");
         }
       }
     } catch (error) {
@@ -83,14 +83,14 @@ const AdminRequests = () => {
         if (response) {
           console.log("Application declined successfully.");
           fetchRequests();
-          alert("Application declined successfully.");
+          toast.success("Application declined successfully.");
         }
       } else if (type === "deferral") {
         const response = await api.post(`/declineDeferral/${requestId}`);
         if (response) {
           console.log("Deferral declined successfully.");
           fetchRequests();
-          alert("Deferral declined successfully.");
+          toast.success("Deferral declined successfully.");
         }
       }
     } catch (error) {

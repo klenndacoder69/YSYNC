@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import "../Adminpage.css";
 import api from "../../../api/axios";
+import { toast } from "sonner";
+import AdminEditFormComponent from "./AdminEditFormComponent";
 
 const AdminAccountInfo = () => {
   const [trainees, getTrainees] = useState([]);
   const [residentMembers, getResidentMembers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [activeButton, setActiveButton] = useState("trainees");
   //for edit form
   const [firstName, setFirstName] = useState("");
@@ -26,13 +29,15 @@ const AdminAccountInfo = () => {
   useEffect(() => {
     if (popup.visible && popup.user) {
       const { userId, traineeId } = popup.user;
-      setFirstName(userId.firstName || "");
-      setMiddleName(userId.middleName || "");
-      setLastName(userId.lastName || "");
-      setEmail(userId.email || "");
+      setFirstName(userId?.firstName || popup.user.firstName || "");
+      setMiddleName(userId?.middleName || popup.user.middleName || "");
+      setLastName(userId?.lastName || popup.user.lastName || "");
+      setEmail(userId?.email || popup.user.email || "");
       setBatch(traineeId?.univBatch || popup.user.univBatch || "");
       setInterests(
-        traineeId?.interests?.join(", ") || (popup.user.interests?.join(", ") || "")
+        traineeId?.interests?.join(", ") ||
+          popup.user.interests?.join(", ") ||
+          ""
       );
     } else {
       // Reset the form fields when popup is closed
@@ -48,85 +53,90 @@ const AdminAccountInfo = () => {
     setActiveButton(buttonId);
   };
 
+  const handleEditUser = async (user) => {
+    // Logic for handling edit
+    // When handling the edit, we must first check if the user is a trainee or not since they have different properties
+    // The server must only receive the json object (user w/ updated details), and the userType for easier processing
 
-const handleEditUser = async (user) => {
-  // Logic for handling edit
-  // When handling the edit, we must first check if the user is a trainee or not since they have different properties
-  // The server must only receive the json object (user w/ updated details), and the userType for easier processing
+    event.preventDefault();
+    
+    // check whether user is a resident member (which consists of a traineeId and userId)
+    if (user.traineeId && user.userId) {
+        user.traineeId.interests = interests.split(",");
+        user.userId.firstName = firstName;
+        user.userId.middleName = middleName;
+        user.userId.lastName = lastName;
+        user.userId.email = email;
+        user.traineeId.univBatch = batch;
+        // if user does not have a traineeId, then it might be a trainee
+    } else if (user.userId) {
+        user.userId.firstName = firstName;
+        user.userId.middleName = middleName;
+        user.userId.lastName = lastName;
+        user.userId.email = email;
+        user.univBatch = batch;
+        user.interests = interests.split(",");
+    }
+        // if user does not have a traineeId or userId, then we just edit the user details
+      else if (user) {
+        user.firstname = firstName;
+        user.middleName = middleName;
+        user.lastName = lastName;
+        user.email = email;
+        user.univBatch = batch;
+      }
+      else {
+        throw new Error("Invalid user data.");
+    }
+    try {
+      const response = await api.put("/editUser", {
+        user: { ...user, updatedAt: new Date() },
+        userType: user.traineeId && user.userId ? "residentMember" : "trainee",
+        userId: user._id,
+      });
 
-  event.preventDefault();
-  console.log("Editing user:", user.userId);
+      if (response) {
+        console.log("User updated successfully.");
 
-  if (user.traineeId && user.userId) {
-    user.traineeId.interests = interests.split(",");
-    user.userId.firstName = firstName;
-    user.userId.middleName = middleName;
-    user.userId.lastName = lastName;
-    user.userId.email = email;
-    user.traineeId.univBatch = batch;
-    console.log("Sending resident member details...", user);
-  } else if (user.userId) {
-    user.userId.firstName = firstName;
-    user.userId.middleName = middleName;
-    user.userId.lastName = lastName;
-    user.userId.email = email;
-    user.univBatch = batch
-    user.interests = interests.split(",");
-    console.log("Sending trainee details...", user);
-  } else {
-    throw new Error("Invalid user data.");
-  }
-
-  try {
-    const response = await api.put("/editUser", {
-      user: { ...user, updatedAt: new Date() },
-      userType: user.traineeId && user.userId ? "residentMember" : "trainee",
-      userId: user._id,
-    });
-
-    if (response) {
-      console.log("User updated successfully.");
-
-      // Update state with the edited user
-      if (user.traineeId) {
-        getResidentMembers((prev) =>
-          prev.map((member) =>
-            member._id === user._id ? { ...member, ...user } : member
-          )
-        );
+        // Update state with the edited user
+        if (user.traineeId) {
+          getResidentMembers((prev) =>
+            prev.map((member) =>
+              member._id === user._id ? { ...member, ...user } : member
+            )
+          );
+        } else {
+          getTrainees((prev) =>
+            prev.map((trainee) =>
+              trainee._id === user._id ? { ...trainee, ...user } : trainee
+            )
+          );
+        }
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log("Error response status: ", error.response.status);
       } else {
-        getTrainees((prev) =>
-          prev.map((trainee) =>
-            trainee._id === user._id ? { ...trainee, ...user } : trainee
-          )
-        );
+        console.log("Cannot retrieve response.");
       }
     }
-  } catch (error) {
-    if (error.response) {
-      console.log("Error response status: ", error.response.status);
-    } else {
-      console.log("Cannot retrieve response.");
-    }
-  }
 
-  hidePopup();
-};
+    hidePopup();
+    toast.success("User updated successfully.");
+  };
 
   const handleDeleteUser = async (user) => {
     // Logic for handling delete
     event.preventDefault();
-    console.log("Deleting user:", user.userId);
-  
+
     try {
       const response = await api.post("/deleteUser", {
         user,
         userType: user.traineeId && user.userId ? "residentMember" : "trainee",
       });
-  
+
       if (response) {
-        console.log("User deleted successfully.");
-  
+
         // Remove user from the state
         if (user.traineeId) {
           getResidentMembers((prev) =>
@@ -145,8 +155,9 @@ const handleEditUser = async (user) => {
         console.log("Cannot retrieve response.");
       }
     }
-  
+
     hidePopup();
+    toast.success("User deleted successfully.");
   };
 
   const fetchTrainees = async () => {
@@ -171,9 +182,21 @@ const handleEditUser = async (user) => {
     }
   };
 
+  const fetchUsers = async () => {
+    try {
+      const response = await api.get("/getAllUsers");
+      if (response) {
+        setUsers(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchTrainees();
     fetchResidentMembers();
+    fetchUsers();
   }, []);
   // here everytime changes are made, we refetch the table (this useEffect is kind of inefficient...)
   // useEffect(() => {
@@ -209,14 +232,17 @@ const handleEditUser = async (user) => {
 
   const renderTraineeTable = () => {
     return filteredTrainees.map((trainee) => {
-      const { firstName, middleName, lastName, email, userType } = trainee.userId;
+      const { firstName, middleName, lastName, email, userType, image } =
+        trainee.userId;
       const { univBatch } = trainee;
       if (userType === "residentMember" || userType === "admin") return null;
       return (
         <tr key={trainee._id} className="table-row-values-admin-dashboard">
           <td>
             <div className="table-align-picture-admin-dashboard">
-              <div className="circle"></div>
+              <div className="circle">
+              <img src={image}/>
+              </div>
               {`${firstName} ${middleName} ${lastName}`}
             </div>
           </td>
@@ -244,37 +270,74 @@ const handleEditUser = async (user) => {
     });
   };
 
-  const renderResidentMemberTable = () => {
-    return filteredResidentMembers.map((residentMember) => {
-      const { firstName, middleName, lastName, email, userType } =
-        residentMember.userId;
-      const { univBatch } = residentMember.traineeId;
-      if (userType === "trainee" || userType === "admin") return null;
+
+  const renderUsersTable = () => {
+    return users.map((user, index) => {
+      const { firstName, middleName, lastName, email, image } =
+      user;
       return (
-        <tr key={residentMember._id}>
+        <tr key={index}>
           <td>
             <div className="table-align-picture-admin-dashboard">
-              <div className="circle"></div>
+              <div className="circle">
+                <img src={image}/>
+              </div>
               {`${firstName} ${middleName} ${lastName}`}
             </div>
           </td>
           <td>{email}</td>
-          <td>{univBatch}</td>
           <td>
-            {residentMember.traineeId.interests
+            <button
+              className="vert-ellipsis"
+              onClick={(e) => showPopup(e, user, "edit")}
+            >
+              ⋮
+            </button>
+            <button
+              className="vert-ellipsis"
+              onClick={(e) => showPopup(e, user, "delete")}
+            >
+              🗑️
+            </button>
+          </td>
+          <td></td>
+        </tr>
+      );
+    });
+  };
+
+  const renderResidentMemberTable = () => {
+    return filteredResidentMembers.map((user) => {
+      const { firstName, middleName, lastName, email, userType, userId } = user;
+      const {image} = userId;
+      if (userType === "trainee" || userType === "admin") return null;
+      return (
+        <tr key={user._id}>
+          <td>
+            <div className="table-align-picture-admin-dashboard">
+              <div className="circle">
+              <img src={image}/>
+              </div>
+              {`${firstName} ${middleName} ${lastName}`}
+            </div>
+          </td>
+          <td>{email}</td>
+          <td>{user.univBatch}</td>
+          <td>
+            {user.interests
               .map((interest) => `${interest}`)
               .join(", ")}
           </td>
           <td>
             <button
               className="vert-ellipsis"
-              onClick={(e) => showPopup(e, residentMember, "edit")}
+              onClick={(e) => showPopup(e, user, "edit")}
             >
               ⋮
             </button>
             <button
               className="vert-ellipsis"
-              onClick={(e) => showPopup(e, residentMember, "delete")}
+              onClick={(e) => showPopup(e, user, "delete")}
             >
               🗑️
             </button>
@@ -293,7 +356,12 @@ const handleEditUser = async (user) => {
               Account Information
             </span>
             <span className="header-main-secondary-admin-dashboard">
-              / {activeButton === "trainees" ? "Trainees" : "Members"}
+              /{" "}
+              {activeButton === "trainees"
+                ? "Trainees"
+                : activeButton === "members"
+                ? "Members"
+                : "Users"}
             </span>
           </h1>
         </header>
@@ -340,6 +408,17 @@ const handleEditUser = async (user) => {
             >
               Members
             </button>
+            <button
+              className={
+                activeButton === "users"
+                  ? "tab-admin-dashboard active"
+                  : "tab-admin-dashboard"
+              }
+              onClick={() => handleButtonClick("users")}
+              id="members-tab-admin-dashboard"
+            >
+              Users
+            </button>
           </div>
 
           <div className="table-textfields-admin-dashboard">
@@ -351,9 +430,10 @@ const handleEditUser = async (user) => {
                 <tr>
                   <th>NAME</th>
                   <th>EMAIL</th>
-                  <th>BATCH</th>
-                  <th>INTERESTS</th>
-                  <th> </th>
+                  {activeButton !== "users" && (<><th>BATCH</th> <th>INTERESTS</th></>)}
+                  {activeButton === "users" && <th></th>}
+                  <th></th>
+
                 </tr>
               </thead>
               <tbody id="table-values-admin-dashboard">
@@ -365,13 +445,17 @@ const handleEditUser = async (user) => {
                       <td colSpan="5">No data available</td>
                     </tr>
                   )
-                ) : filteredResidentMembers &&
+                ) : activeButton === "members" ? (
+                  filteredResidentMembers &&
                   filteredResidentMembers.length > 0 ? (
-                  renderResidentMemberTable()
+                    renderResidentMemberTable()
+                  ) : (
+                    <tr>
+                      <td colSpan="5">No data available</td>
+                    </tr>
+                  )
                 ) : (
-                  <tr>
-                    <td colSpan="5">No data available</td>
-                  </tr>
+                  renderUsersTable()
                 )}
               </tbody>
             </table>
@@ -380,73 +464,27 @@ const handleEditUser = async (user) => {
 
         {popup.visible && (
           <div className="modal-overlay">
-            {popup.action === "edit" && (
-              <div className="edit-user-modal">
-                <div className="modal-header">
-                  <h2>Edit User</h2>
-                  <button className="close-modal" onClick={hidePopup}>
-                    &times;
-                  </button>
-                </div>
-                <form className="edit-user-modal-form">
-                  <label>
-                    First Name
-                    <input type="text" placeholder="First Name" value={firstName} onChange={(e) => {setFirstName(e.target.value); console.log(firstName)}}/>
-                  </label>
-                  <label>
-                    Middle Name
-                    <input type="text" placeholder="Middle Name" value={middleName} onChange={(e) => setMiddleName(e.target.value)}/>
-                  </label>
-
-                  <label>
-                    Last Name
-                    <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-                  </label>
-                  <label>
-                    Email
-                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                  </label>
-                  <label>
-                    Batch
-                    <input type="text" placeholder="Batch" value={batch} onChange={(e) => setBatch(e.target.value)}/>
-                  </label>
-                  <label>
-                    Interests
-                    <input
-                      type="text"
-                      placeholder="Interests"
-                      value={
-                        interests
-                      }
-                      onChange={(e) => setInterests(e.target.value)}
-                    />
-                  </label>
-                  <div className="edit-user-modal-buttons">
-                    <button type="submit" onClick={() => handleEditUser(popup.user)}>
-                      Edit
-                    </button>
-                    <button type="button" onClick={hidePopup}>
-                      Cancel
-                    </button>
-                  </div>
-                  
-                </form>
-              </div>
-            )}
-            {popup.action === "delete" && (
-              <div className="delete-user-modal">
-                <h2>Are you sure you want to delete this user?</h2>
-                <button
-                  className="delete-confirm-button"
-                  onClick={() => handleDeleteUser(popup.user)}
-                >
-                  Delete
-                </button>
-                <button className="cancel-button" onClick={hidePopup}>
-                  Cancel
-                </button>
-              </div>
-            )}
+            {
+              <AdminEditFormComponent
+                firstName={firstName}
+                middleName={middleName}
+                lastName={lastName}
+                email={email}
+                batch={batch}
+                interests={interests}
+                popup={popup}
+                hidePopup={hidePopup}
+                setFirstname={setFirstName}
+                setMiddleName={setMiddleName}
+                setLastName={setLastName}
+                setEmail={setEmail}
+                setBatch={setBatch}
+                setInterests={setInterests}
+                handleEditUser={handleEditUser}
+                handleDeleteUser={handleDeleteUser}
+                action={popup.action}
+              />
+            }
           </div>
         )}
       </main>

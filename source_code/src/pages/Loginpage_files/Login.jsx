@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthProvider.jsx";
 import api from "../../api/axios.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Login() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -79,7 +80,7 @@ export default function Login() {
         console.log("Invalid role: ", role);
         throw new Error("Invalid role.");
         }
-        alert("Login successful!");
+        toast.success("Login successful!");
       }
     } catch (error) {
       if (error.response) {
@@ -146,6 +147,7 @@ export default function Login() {
                     type="submit"
                     value="Login with UPmail"
                     id="submit-btn-login-page"
+                    style={{cursor: "pointer"}}
                   />
                 </form>
                 <p>

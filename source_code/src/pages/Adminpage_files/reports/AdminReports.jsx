@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../Adminpage.css";
 import api from "../../../api/axios";
+import { toast } from "sonner";
 
 const AdminReports = () => {
   const [reports, setReports] = useState([]); // All reports
@@ -49,8 +50,7 @@ const AdminReports = () => {
     try {
       const response = await api.patch(`/resolveReport/${reportId}`);
       if (response) {
-        console.log("Report resolved successfully.");
-        alert("Report resolved successfully.");
+        toast.success("Report resolved successfully.");
         setReports((prev) =>
           prev.map((report) =>
             report._id === reportId ? { ...report, status: "resolved" } : report
@@ -67,7 +67,7 @@ const AdminReports = () => {
     try {
       const response = await api.patch(`/declineReport/${reportId}`);
       if (response) {
-        alert("Report declined successfully.");
+        toast.success("Report declined successfully.");
         setReports((prev) => prev.filter((report) => report._id !== reportId));
       }
     } catch (error) {
@@ -79,7 +79,7 @@ const AdminReports = () => {
     try {
       const response = await api.delete(`/deleteReport/${reportId}`);
       if (response) {
-        alert("Report deleted successfully.");
+        toast.success("Report deleted successfully.");
         setReports((prev) => prev.filter((report) => report._id !== reportId));
       }
     } catch (error) {

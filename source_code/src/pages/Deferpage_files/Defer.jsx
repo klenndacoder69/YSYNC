@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios.js";
 import {jwtDecode} from "jwt-decode";
 import './Defer.css';
+import { toast } from "sonner";
 
 export default function Defer() {
     const [user, setUser] = useState(null);
@@ -48,7 +49,7 @@ export default function Defer() {
                 reason: deferReason,
             });
             if (response) {
-                alert("Submitted successfully!");
+                toast.success("Submitted successfully!");
                 return response.data;
             }
         } catch (error) {

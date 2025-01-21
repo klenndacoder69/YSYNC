@@ -1,9 +1,12 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const AdminDashboard = () => {
-  const [activeMenu, setActiveMenu] = useState("acc-info");
+  const location = useLocation();
+  const pathname = location.pathname.split("/").pop();
+  const [activeMenu, setActiveMenu] = useState(`${pathname}`);
   const navigate = useNavigate();
   return (
     <div className="container-admin-dashboard">
@@ -82,6 +85,7 @@ const AdminDashboard = () => {
         <div className="admin-account">
         <Link onClick={() => {
           sessionStorage.clear()
+          toast.success("Logout successful!")
           navigate("/")
         }}>Logout</Link>
           <p>ADMIN ACCOUNT</p>

@@ -3,6 +3,7 @@ import "./Createtriggered.css";
 import uploadIcon from "/assets/upload.png";
 import linkIcon from "/assets/link.png";
 import api from "../../../api/axios";
+import { toast } from "sonner";
 function Createtriggered({ onCancel, userId, fetchPosts }) {
   const fileInputRef = useRef(null);
   const linkInputRef = useRef(null);
@@ -32,7 +33,7 @@ function Createtriggered({ onCancel, userId, fetchPosts }) {
     if (file) {
       console.log("Selected file:", file);
       // Handle file upload logic here
-      alert("File uploaded");
+      toast.success("File uploaded");
     }
   };
 
@@ -40,7 +41,7 @@ function Createtriggered({ onCancel, userId, fetchPosts }) {
     const link = event.target.value;
     if (link) {
       console.log("Input link:", link);
-      alert("Link added");
+      toast.success("Link added");
     }
   };
 
@@ -54,7 +55,7 @@ function Createtriggered({ onCancel, userId, fetchPosts }) {
         content: content,
       });
       if (response) {
-        alert("Post created successfully!");
+        toast.success("Post created successfully!");
         fetchPosts();
       }
     } catch (error) {

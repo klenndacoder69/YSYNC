@@ -1,11 +1,15 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./TraineeNavBar.css";
 import { useEffect, useState, useRef } from "react";
+import { toast } from "sonner";
 
 function TraineeNavBar() {
-  const [activeMenu, setActiveMenu] = useState("dashboard");
+  const location = useLocation();
   const navigate = useNavigate();
+  const pathname = location.pathname.split("/").pop();
+  const [activeMenu, setActiveMenu] = useState(pathname);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
   const [indicatorPosition, setIndicatorPosition] = useState({
       top: 0,
       left: 0,
@@ -20,6 +24,24 @@ function TraineeNavBar() {
     useEffect(() => {
         updateIndicatorPosition(activeMenu)
     }, [activeMenu]);
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target) &&
+          !event.target.classList.contains("profile-button-traineee-navbar")
+        ) {
+          setDropdownVisible(false);
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
 
     const updateIndicatorPosition = (menu) => {
         if(navButtonsRef.current[menu]){
@@ -77,9 +99,9 @@ function TraineeNavBar() {
             to="residentMembers"
             className={`button-traineee-navbar`}
              onClick={() => {
-                setActiveMenu("resmem");
+                setActiveMenu("residentMembers");
             }}
-            ref={(element) => (navButtonsRef.current['resmem'] = element)}
+            ref={(element) => (navButtonsRef.current['residentMembers'] = element)}
           >
             <span className="button-traineee-navbar-content">
               Resident Members
@@ -102,16 +124,18 @@ function TraineeNavBar() {
         </button>
       </div>
       <div
+      ref={dropdownRef}
         className={`acc-parentNav-traineee-navbar ${
           dropdownVisible ? "visible" : "hidden"
         }`}
       >
-        <Link to="profile">Profile</Link>
-        <Link to="report">Report</Link>
-        <Link to="defer">Defer</Link>
+        <Link to="profile" className={pathname === "profile" ? "profile-active-buttons" : ""}>Profile</Link>
+        <Link to="report" className={pathname === "report" ? "profile-active-buttons" : ""}>Report</Link>
+        <Link to="defer" className={pathname === "defer" ? "profile-active-buttons" : ""}>Defer</Link>
         <Link onClick={() => {
           sessionStorage.clear()
           navigate("/")
+          toast.success("Logout successful!")
         }}>Logout</Link>
       </div>
       <Outlet />

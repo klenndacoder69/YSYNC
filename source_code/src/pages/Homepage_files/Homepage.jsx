@@ -34,7 +34,7 @@ export default function Homepage() {
                         </div>
                         <div className="login">
                         <Link to ="/login">
-                            <button>Login with UPmail</button>
+                            <button style={{cursor: "pointer"}}>Login with UPmail</button>
                         </Link>
                         <p>
                             Having trouble? <a href="mailto:info@yses.org">Contact us</a>

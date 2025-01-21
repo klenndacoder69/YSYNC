@@ -90,3 +90,8 @@
     justify-content: space-evenly;
     gap: 5%;
 }
+
+.no-available-mentors {
+  font-family: "Segoe UI";
+  font-size: 30px;
+}

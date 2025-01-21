@@ -127,6 +127,11 @@
   text-align: left;
 }
 
+.profile-active-buttons {
+  background-color: #e1e5f22a;
+  border-radius: 10px;
+}
+
 .acc-parentNav-traineee-navbar a:hover {
   background-color: #e1e5f22a;
   transition: all 0.3s ease;

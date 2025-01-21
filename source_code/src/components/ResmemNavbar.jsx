@@ -1,10 +1,13 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./ResmemNavBar.css";
 import { useEffect, useState, useRef } from "react";
+import { toast } from "sonner";
 
 function ResmemNavBar() {
-  const [activeMenu, setActiveMenu] = useState("dashboard");
+  const location = useLocation();
+  const pathname = location.split("/").pop();
   const navigate = useNavigate();
+  const [activeMenu, setActiveMenu] = useState(pathname);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [indicatorPosition, setIndicatorPosition] = useState({
     top: 0,
@@ -79,9 +82,9 @@ function ResmemNavBar() {
             to="residentMembers"
             className="button-resmem-navbar"
             onClick={() => {
-              setActiveMenu("resmem");
+              setActiveMenu("residentMembers");
             }}
-            ref={(element) => (navButtonsRef.current["resmem"] = element)}
+            ref={(element) => (navButtonsRef.current["residentMembers"] = element)}
           >
             <span className="button-resmem-navbar-content">
               Resident Members
@@ -110,6 +113,7 @@ function ResmemNavBar() {
         <Link onClick={() => {
           sessionStorage.clear()
           navigate("/")
+          toast.success("Logout successful!")
         }}>Logout</Link>
       </div>
       <Outlet />

@@ -2,12 +2,9 @@ import "./App.css"
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage_files/Homepage.jsx"
 import Login from "./pages/Loginpage_files/Login.jsx";
-import Register from "./pages/Registerpage_files/Register.jsx";
-// import Connect from "./pages/Connectpage_files/Connectpage.jsx";
-// import ConnectPost from "./pages/Connectpage_files/Connectpost.jsx";
 import Defer from "./pages/Deferpage_files/Defer.jsx";
 import Report from "./pages/Reportpage_files/Report.jsx";
-import Chat from "./utilities/Chatbox.jsx";
+import { Toaster } from 'sonner';
 import Unauthorized from "./components/Unauthorized.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
@@ -18,7 +15,7 @@ import Mentor from "./pages/Mentorpage_files/Mentor.jsx";
 import ResMem from "./pages/ResMempage_files/Resmem.jsx";
 import TraineeNavBar from "./components/TraineeNavBar.jsx";
 import Dashboard from "./pages/Dashboardpage_files/Dashboard.jsx"
-import NewRegister from "./pages/NewRegisterpage_files/Register.jsx";
+import Register from "./pages/Registerpage_files/Register.jsx";
 import ResmemNavBar from "./components/ResmemNavbar.jsx";
 import Profile from "./pages/AccountMan_files/profile/Profile.jsx";
 import Trainee from "./pages/Traineepage_files/Trainee.jsx";
@@ -34,16 +31,8 @@ function App() {
     },
     {
       path: "/register",
-      element: <NewRegister/>
+      element: <Register/>
     },
-    // {
-    //   path: "/connect",
-    //   element: <Connect/>
-    // },
-    // {
-    //   path: "/connect-post",
-    //   element: <ConnectPost/>
-    // }
     {
       path: "/defer",
       element: <Defer/>
@@ -132,16 +121,12 @@ function App() {
         element: <AdminReports/>
       }
       ]
-    },
-
-    {
-      path:"/testing",
-      element: <Profile/>
     }
   ]
   const router = createBrowserRouter(routes)
   return (
     <>
+    <Toaster position="top-right" richColors toastOptions={{duration: 1000}}/>
       <RouterProvider router={router} />
     </>
   )

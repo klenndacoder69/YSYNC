@@ -207,7 +207,6 @@ const populateDatabase = async () => {
     await RequestDeferral.deleteMany({});
     await Posts.deleteMany({});
     console.log("Existing data cleared.");
-
     // Hash passwords
     for (const user of sampleData.users) {
       user.password = bcrypt.hashSync(user.password, 10);
