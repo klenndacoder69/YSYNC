@@ -1,12 +1,23 @@
 // function for handling unauthorized access
+import "./Unauthorized.css";
 const Unauthorized = () => {
   return (
-    <div>
-      <h1>Not Authorized (401)</h1>
+    <div className="unauthorized-container">
+      <img src="assets/pikachu-unauthorized.png" alt="unauthorized" />
+      <h1>NOT AUTHORIZED.</h1>
       <p>You do not have permission to view this page.</p>
-      <p><a href="/">Go back to the homepage.</a></p>
+      <p>
+        <a
+          href="/"
+          onClick={() => {
+            sessionStorage.clear();
+          }}
+        >
+          Go back to the homepage.
+        </a>
+      </p>
     </div>
   );
-}
+};
 
 export default Unauthorized;

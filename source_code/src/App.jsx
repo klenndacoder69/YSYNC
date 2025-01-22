@@ -19,6 +19,7 @@ import Register from "./pages/Registerpage_files/Register.jsx";
 import ResmemNavBar from "./components/ResmemNavbar.jsx";
 import Profile from "./pages/AccountMan_files/profile/Profile.jsx";
 import Trainee from "./pages/Traineepage_files/Trainee.jsx";
+import Migrate from "./pages/Migrate_files/Migrate.jsx";
 function App() {
   const routes = [
     {
@@ -121,6 +122,10 @@ function App() {
         element: <AdminReports/>
       }
       ]
+    },
+    {
+      path: "/migrate",
+      element: <Migrate/>
     }
   ]
   const router = createBrowserRouter(routes)

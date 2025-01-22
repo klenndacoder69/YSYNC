@@ -307,12 +307,13 @@ const AdminAccountInfo = () => {
   };
 
   const renderResidentMemberTable = () => {
-    return filteredResidentMembers.map((user) => {
-      const { firstName, middleName, lastName, email, userType, userId } = user;
-      const {image} = userId;
+    return filteredResidentMembers.map((user, index) => {
+      const { userId, traineeId } = user;
+      const {firstName, middleName, lastName, email, userType, image} = userId;
+      const {univBatch, interests} = traineeId;
       if (userType === "trainee" || userType === "admin") return null;
       return (
-        <tr key={user._id}>
+        <tr key={index}>
           <td>
             <div className="table-align-picture-admin-dashboard">
               <div className="circle">
@@ -322,9 +323,9 @@ const AdminAccountInfo = () => {
             </div>
           </td>
           <td>{email}</td>
-          <td>{user.univBatch}</td>
+          <td>{univBatch}</td>
           <td>
-            {user.interests
+            {interests
               .map((interest) => `${interest}`)
               .join(", ")}
           </td>
