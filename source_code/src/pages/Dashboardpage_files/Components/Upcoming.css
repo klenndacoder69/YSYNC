@@ -1,11 +1,11 @@
 .dashboard-upcomingContainer {
-  box-shadow: 3px 3px 10px rgb(188, 188, 188);
-  flex-wrap: nowrap;
-    min-height: 250px;
-    max-width: 100%;
+    box-shadow: 3px 3px 10px rgb(188, 188, 188);
+    flex-wrap: nowrap;
     background-color: #F2F5FF;
     border-radius: 20px;
     font-family: 'Segoe UI', Arial;
+    width: 75%;
+    max-width: 100%;
   }
   
   .dashboard-upcomingHeader {

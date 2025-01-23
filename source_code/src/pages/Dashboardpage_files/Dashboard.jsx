@@ -73,7 +73,7 @@ function Dashboard() {
     <div className="dashboard-main-wrapper">
       <div className="dashboard-main">
         <div className="dashboard-left-div">
-          {pinnedPosts.length > 0 && (
+          {pinnedPosts.length > 0 ? (
             <div className="dashboard-pinned-container">
               <Pinned
                 userId={userId}
@@ -81,6 +81,12 @@ function Dashboard() {
                 onPostsUpdate={handlePostUpdate}
                 // onPinToggle={handlePinToggle}
               />
+            </div>
+          ) : (
+            <div className="dashboard-pinned-container">
+              <h2 style={{ fontFamily: "Segoe UI", textAlign: "center", marginTop: "20px" }}>
+                There are currently no pinned announcements.
+              </h2>
             </div>
           )}
           {userType === "residentMember" ? (<div className="dashboard-create-container">
@@ -96,19 +102,25 @@ function Dashboard() {
           </div>
           <div className="dashboard-solution-container">
             <div className="dashboard-post-container">
-              {posts.map((post) => {
-                if (!post.isPinned && !post.isEvent) {
-                  return (
-                    <Post
-                      key={post._id}
-                      post={post}
-                      userId={userId}
-                      onPostsUpdate={handlePostUpdate}
-                    />
-                  );
-                }
-                return null;
-              })}
+              {posts.length === 0 ? (
+                <h2 style={{ fontFamily: "Segoe UI", textAlign: "center", marginTop: "20px" }}>
+                  There are currently no announcements.
+                </h2>
+              ) : (
+                posts.map((post) => {
+                  if (!post.isPinned && !post.isEvent) {
+                    return (
+                      <Post
+                        key={post._id}
+                        post={post}
+                        userId={userId}
+                        onPostsUpdate={handlePostUpdate}
+                      />
+                    );
+                  }
+                  return null;
+                })
+              )}
             </div>
           </div>
         </div>

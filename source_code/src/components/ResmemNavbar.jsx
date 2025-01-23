@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 function ResmemNavBar() {
   const location = useLocation();
-  const pathname = location.split("/").pop();
+  const pathname = location.pathname.split("/").pop();
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState(pathname);
   const [dropdownVisible, setDropdownVisible] = useState(false);
